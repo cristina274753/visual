@@ -25,6 +25,7 @@ body {
     "menu menu"
     "aside content"
     "footer footer";
+  background-color: blanchedalmond; /*TODO cambiar color fondo*/ 
 }
 
 
@@ -66,6 +67,38 @@ main{
     grid-area: content;
 
 }
+
+.promocion::after{
+   content: "";
+
+}
+
+#pPromocion:hover{
+  color: var(--color-1); /*TODO cambiar color al pasar raton*/
+}
+
+
+/*
+main a:hover{
+  /*TODO info destacable o precio llamativo
+}
+*/
+
+main .cartas{ /*TODO 3 filas */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;            
+
+
+}
+
+.cartas img{
+    width: 200px;
+    height: 150px;
+}
+
+
 
 aside{
     grid-area: aside;
