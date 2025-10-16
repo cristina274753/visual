@@ -1,0 +1,33 @@
+
+:root {
+  --color-rojo-principal: #DC143C;
+  --color-2: #F75270;
+  --color-3: #F7CAC9;
+  --color-4: #92A8D1;
+  --color-negro: #181818;
+  --color-negro-puro:rgb(0, 0, 0);
+}
+
+header{
+    background-color: var(--color-negro);
+    color: var(--color-rojo-principal);
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav {
+    background-color: var(--color-negro-puro);
+    padding: 10px;
+    text-align: center;
+}
+
+
+nav ul{
+    list-style-type: none;
+    
+}
+
+nav a{
+    color: var(--color-rojo-principal);
+}
+
