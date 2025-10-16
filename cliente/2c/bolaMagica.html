@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="bolaMagica.js" defer></script>
+    <style>
+        #bola {
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+
+#gris {
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+  margin: 25% auto;
+}
+
+#ocho {
+  font-size: 5em;
+  margin: 20% auto;
+  color: white;
+  text-align: center;
+}
+
+#respuesta {
+  padding: 25px;
+  color: lightblue;
+  letter-spacing: 2px;
+}
+    </style>
+</head>
+<body>
+    
+    <h1>bola magica </h1>
+
+    <div>
+        <label for="txtPregunta">pregunta</label>
+        <input type="text" id="txtPregunta">
+        <button id="btnAzar">Azar</button>
+    </div>
+
+    <div id="divresultado"></div>
+</body>
+</html>

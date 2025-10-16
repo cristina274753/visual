@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+
+
+:root {
+  --color-1: #DC143C;
+  --color-2: #F75270;
+  --color-3: #F7CAC9;
+}
+
+
+
+@font-face {
+    
+    font-family: fuente1;
+    src: url('fuentes/RobotoCondensed-VariableFont_wght.ttf');
+
+
+}
+
+
+body {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu menu"
+    "aside content"
+    "footer footer";
+}
+
+
+
+header{
+    grid-area: header;
+    display: flex;
+    align-items: center;  /*centrados verticalmente */
+    background-color: var(--color-3);
+}
+
+nav{
+    grid-area: menu;
+    /*TODOs position:fixed; /*para que no se mueva al hacer scroll*/
+    background-color: var(--color-2);
+
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+
+}
+
+nav li{
+
+  list-style-type: none;
+  padding: .5em 1em;
+
+
+}
+
+nav li a:hover {
+  background: tomato;
+  color: white;
+}
+
+main{
+    grid-area: content;
+
+}
+
+aside{
+    grid-area: aside;
+}
+
+footer{
+    grid-area: footer;
+
+}
+
+
+
+
+

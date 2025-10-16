@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+
+
+:root {
+  --color-1: #DC143C;
+  --color-2: #F75270;
+  --color-3: #F7CAC9;
+}
+
+
+
+@font-face {
+    
+    font-family: fuente1;
+    src: url('fuentes/RobotoCondensed-VariableFont_wght.ttf');
+
+
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu menu"
+    "aside content"
+    "footer footer";
+}
+
+
+h1{
+    text-align: center;
+    font-family: 'Caprasimo', serif;
+    letter-spacing: 3px;
+    color:var(--color-2);
+    letter-spacing: 3px;
+    
+}
+
+p{
+    font-family: fuente1;
+    letter-spacing: 0,25em;
+}
+
+header{
+    background-color: rgba(255, 109, 109, 0.7);
+    grid-area: header;
+
+}
+
+nav{
+    background-color: rgba(120, 255, 255, 0.5);
+    grid-area: menu;
+
+}
+
+main{
+    background-color: rgba(250, 250, 106, 0.4);
+    grid-area: content;
+
+}
+
+aside{
+    background-color: rgba(250, 144, 250, 0.3);
+    grid-area: aside;
+}
+
+footer{
+    background-color: rgba(132, 251, 132, 0.2);
+    grid-area: footer;
+
+}
+
+/*TODOs falta el grid */
+
