@@ -1,106 +1,118 @@
 <?php
+//código php
+$caracteres = "";
+$password = "";
+$longitud = "";
+$numeros = false;
+$minusculas = false;
+$mayusculas = false;
+$especiales = false;
 
-$frase = "";
+$mensaje = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $frase = $_POST['frase']??'';
-    $posicion = $_POST['posicion']??'';
-
-    $resultado = "";
-
-    //validar los datos
-    if ($frase===''){
-
-        echo "<p>la frase esta vacia</p>";
-        return;
-    }
-
-    if (!is_numeric($posicion)){
-
-        echo "<p>la posicion debe ser un numero</p>";
-        return;
-    }
-
-    if($posicion===0 || $posicion===''){
-
-        echo "<p>no puede ser 0, ni estar vacio/p>";
-        return;
-    }
-
-    //cifrar la frase
-    $resultado =  cifradoCesar($frase, $posicion);
-    
-
-    echo "<p>Frase normal: " . htmlspecialchars($frase) . "</p>";
-    echo "<p>Frase cifrada: " . htmlspecialchars($resultado) . "</p>";
+//funcion que se le pasa una cadena y devuelve un caracter al azar
+function char_aleatorio($cadena)
+{
+    $arr_cadena = str_split($cadena);
+    $caracter = $arr_cadena[array_rand($arr_cadena)];
+    //otra forma
+    //$arr_cadena = str_split($cadena);
+    //$long = count($arr_cadena);
+    //$caracter = $arr_cadena[rand(0, $long - 1)];    
+    return $caracter;
 }
 
+function generar_contrasena($long, $numeros, $minusculas, $mayusculas, $especiales){
 
-function cifradoCesar($frase, $posicion) {
+}
 
-    $resultado = "";
-    $cadenaMinusculas = "abcdefghijklmnopqrstuvwxyz";
-    $cadenaMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['generar'])) {
+    $longitud = intval($_GET['longitud'] ?? "");
+    $numeros = isset($_GET['numeros']) ? true : false;
+    $minusculas = isset($_GET['minusculas']) ? true : false; //no hace falta poner el operador ternario
+    $mayusculas = isset($_GET['mayusculas']);
+    $especiales = isset($_GET['especiales']);
 
-    $arrCadenaMinusculas= mb_str_split($cadenaMinusculas);
-    $arrCadenaMayusculas= mb_str_split($cadenaMayusculas);
-    $arrTexto= mb_str_split($frase);
 
-    foreach ($arrTexto as $caracter){
-        //buscar el índice en el array de minusculas
-        $indice = array_search($caracter, $arrCadenaMinusculas);
-        //aplicamos el desplazamienot
-        $indiceDesplazado = ($indice + $posicion) % count($arrCadenaMinusculas);
-        $resultado .= $arrCadenaMinusculas[$indiceDesplazado];
-    }
-
-    for ($i = 0; $i < strlen($frase); $i++) {
-
-        $letra= $frase[$i];
-
-        if (in_array($letra, $arrCadenaMayusculas)){
-
-            
+    if ($longitud < 8 || $longitud > 16) {
+        $mensaje = "La longitud de la contraseña debe estar comprendida entre 8 y 16 caracteres";
+    } elseif (!($numeros || $minusculas || $mayusculas || $especiales)) {
+        $mensaje = "debes marcar uno de los checkbox para generar la contraseña";
+    } else {
+        if ($numeros) {
+            $caracteres .= "0123456789";
+            $password .= char_aleatorio("0123456789");
         }
-        
+        if ($minusculas) {
+            $caracteres .= "abcdefghijklmnopqrstuvwxyz";
+            $password .= char_aleatorio("abcdefghijklmnopqrstuvwxyz");
+        }
+        if ($mayusculas) {
+            $caracteres .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            $password .= char_aleatorio("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        }
+        if ($especiales) {
+            $caracteres .= "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+            $password .= char_aleatorio("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+        }
+        //$arr_caracteres = str_split($caracteres);
+        //$num_caracteres = count($arr_caracteres);
+        //shuffle($arr_caracteres);
+        for ($i = strlen($password); $i < $longitud; $i++) {
+            $password .= char_aleatorio($caracteres);
+        }
+        //reordenamos aleatoriamente la cadena ya que siempre en primer lugar poníamos
+        //un tipo de cada uno.
+        $password=str_shuffle($password);
+        $mensaje = "La contraseña elegida es:  <b>$password</b>";//<br> Caracteres elegidos ($caracteres)";
     }
-
-   /* for ($i = 0; $i < strlen($frase); $i++) {
-
-        $letra = $frase[$i];
-        $nuevaletra = chr((ord($letra) + $posicion));
-        $resultado .= $nuevaletra;
-    }*/
-    return $resultado;
 }
 
 ?>
-
-
-
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang='es'>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Cifrado Julio cesar</title>
-    
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>P.Lluyot</title>
+    <link rel='stylesheet' href='https://cdn.simplecss.org/simple.min.css'>
 </head>
 
 <body>
+    <header>
+        <h2>Generador de Contraseñas</h2>
+    </header>
+    <main>
+        <!-- código php -->
 
-    <h2>Cifrado</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get">
+            <p>
+                <label for="longitud">Longitud</label>
+                <input type="number" name="longitud" id="longitud" min="8" max="16" value="<?= $longitud ?>">
+                </p>
+<p>
+                <input type="checkbox" name="minusculas" id="minusculas" <?php echo ($minusculas ? 'checked' : ''); ?>>
+            <label for="minusculas">Minúsculas</label>
+</p><p> 
+            <input type="checkbox" name="mayusculas" id="mayusculas" <?php echo ($mayusculas ? 'checked' : ''); ?>>
+            <label for="mayusculas">Mayúsculas</label>
+</p><p>
+            <input type="checkbox" name="numeros" id="numeros" <?php echo ($numeros ? 'checked' : ''); ?>>
+            <label for="numeros">Números</label>
+       </p><p>     
+            <input type="checkbox" name="especiales" id="especiales" <?php echo ($especiales ? 'checked' : ''); ?>>
+            <label for="especiales">Caracteres Especiales</label>
+</p>
+            <input type="submit" value="generar" name="generar">
+        </form>
 
-    <form method="post">
-
-        <input type="text" id="frase" name="frase"><br>
-        <input type="number" id="posicion" name="posicion" ><br>
-
-
-
-        <input type="submit" name="agregar" value="AgregarArchivo">
-    </form>
-
+        <p class='notice'><?php echo $mensaje; ?></p>
+       
+    </main>
+    <footer>
+        <p>P.Lluyot</p>
+    </footer>
 </body>
+
 </html>
