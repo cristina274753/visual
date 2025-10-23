@@ -10,7 +10,7 @@
     
     <header>
         <div>
-            <img src="paris.jpg" alt="logo">
+            <img src="img/hamburguesaSinFondo.png" alt="logo">
         </div>
         <div>
             <h1>nombre empresa</h1>
@@ -27,56 +27,75 @@
     </nav>
 
     <main>
+        
         <section class="promocion">  <!-- TODO promocion, pasar raton cambiar precio-->
-            <h2 id="pPromocion">Producto en promocion</h2>
+            <h2>Producto en promocion</h2>
             <h3>hamburguesa especial</h3> <!--TODO pasar raton cambiar raton-->
-            <img src="paris.jpg" alt=""> <!-- TODO parte cental de la zona, click: precio pormocion-->
+            <img src="img/hamburguesaSinFondo.png" alt=""> <!-- TODO parte cental de la zona, click: precio pormocion-->
             <p id="precioPromocion">precio: 2</p>
         </section>
 
 
-        <section>
+        <section class="destacados">
             <h2>Producto destacados</h2>
             <div class="cartas">  <!-- TODO modo carta, pasar raton: filtro, flex, sombras impares !=sombras pares-->
-                <h3>hamburguesa especial</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
 
-                <h3>hamburguesa magica</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta"> 
+                    <img src="img/hamburguesaSinFondo.png" alt="Hamburguesa mágica">
+                    <h3>Hamburguesa mágica</h3>
+                    <p>Carne jugosa, queso fundido y pan artesanal.</p>
+                    <p>Calorías: 500 • Tiempo: 12 min • Precio: 4.5€</p>
+                </div>
+                
 
-                <h3>hamburguesa especial</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                 <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa mágica">
+                    <h3>Hamburguesa mágica</h3>
+                    <p>Carne jugosa, queso fundido y pan artesanal.</p>
+                    <p>Calorías: 500 • Tiempo: 12 min • Precio: 4.5€</p>
+                </div>
 
-                <h3>hamburguesa magica</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa especial 2">
+                    <h3>Hamburguesa especial</h3>
+                    <p>La favorita de la casa, con salsa secreta.</p>
+                    <p>Calorías: 530 • Tiempo: 13 min • Precio: 5.5€</p>
+                </div>
 
-                <h3>hamburguesa especial</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa mágica 2">
+                    <h3>Hamburguesa mágica</h3>
+                    <p>Una experiencia deliciosa e inolvidable.</p>
+                    <p>Calorías: 510 • Tiempo: 14 min • Precio: 4.8€</p>
+                </div>
 
-                <h3>hamburguesa magica</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa especial 3">
+                    <h3>Hamburguesa especial</h3>
+                    <p>Perfecta para los amantes del queso y la carne.</p>
+                    <p>Calorías: 600 • Tiempo: 16 min • Precio: 6€</p>
+                </div>
 
-                <h3>hamburguesa especial</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa mágica 3">
+                    <h3>Hamburguesa mágica</h3>
+                    <p>Con toque de mostaza y pan brioche.</p>
+                    <p>Calorías: 520 • Tiempo: 11 min • Precio: 4.9€</p>
+                </div>
 
-                <h3>hamburguesa magica</h3>
-                <img src="paris.jpg" alt="">
-                <p>descripcion</p>
-                <p>3 datos</p>
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa especial 4">
+                    <h3>Hamburguesa especial</h3>
+                    <p>Ingredientes frescos, sabor garantizado.</p>
+                    <p>Calorías: 560 • Tiempo: 15 min • Precio: 5.2€</p>
+                </div>
+
+                <div class="carta">
+                    <img src="paris.jpg" alt="Hamburguesa mágica 4">
+                    <h3>Hamburguesa mágica</h3>
+                    <p>Receta tradicional con toque moderno.</p>
+                    <p>Calorías: 540 • Tiempo: 14 min • Precio: 5€</p>
+                </div>
             </div>
 
             <div>
@@ -87,7 +106,7 @@
                         <th>3 datos</th>
                         </tr>
                     </thead>
-                    <tfoot>
+                    <tbody>
                         <tr>
                         <td>hamburguesa especial</td>
                         <td>Footer content 2</td>
@@ -120,7 +139,7 @@
                         <td>Footer content 1</td>
                         <td>Footer content 2</td>
                         </tr>
-                    </tfoot>
+                    </tbody>
                     <tbody> 
                         <tr>
                         <td>Body content 1</td>
@@ -133,8 +152,11 @@
     </main> 
 
 
-    <aside>
-        <p>medidas de sostenibilidad</p> <!-- TODO texto en 2 columnas -->
+    <aside><!-- TODO texto en 2 columnas -->
+        <p>
+            En nuestra empresa estamos profundamente comprometidos con la sostenibilidad y la protección del medio ambiente en todas nuestras operaciones. Desde la selección de proveedores hasta la entrega final de nuestros productos, evaluamos cada proceso para minimizar nuestro impacto ecológico. Implementamos estrategias de eficiencia energética, optimización del consumo de agua y reducción de residuos, garantizando que cada recurso se utilice de manera responsable. Fomentamos el uso de materiales reciclables y reciclados, promovemos la educación ambiental entre nuestro equipo y apoyamos iniciativas locales de conservación. Buscamos soluciones innovadoras que permitan un equilibrio entre la rentabilidad y la protección del planeta, asegurando que nuestro modelo de negocio contribuya a un futuro más verde y sostenible para todos.
+        </p>
+    
     </aside>
 
 
