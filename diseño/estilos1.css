@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Luckiest+Guy&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --color-1: #DC143C;
-  --color-2: #F75270;
-  --color-3: #F7CAC9;
+  --resaltar: #DC143C;
+  --rosaFuerte: #F75270;
+  --rosaClaro: #F7CAC9;
+  --azul: #92A8D1;
+  --negro: #181818;
+  --blanco: #efefff  ;
+
 }
 
 
@@ -12,10 +15,14 @@
 @font-face {
     
     font-family: fuente1;
-    src: url('fuentes/RobotoCondensed-VariableFont_wght.ttf');
+    src: url('fuentes/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
 
 
 }
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///BODY
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 body {
   display: grid;
@@ -26,49 +33,69 @@ body {
     "footer footer";
 }
 
-
+/*centrado vertical y horizontal, fuente1, separacion 3px, sombra, color*/ 
 h1{
     text-align: center;
-    font-family: 'Caprasimo', serif;
+    font-family: "Caprasimo";
     letter-spacing: 3px;
-    color:var(--color-2);
-    letter-spacing: 3px;
-    
+    text-shadow: 2px 3px 1px white;
+    color:var(--resaltar);
+
 }
 
+/* fuente2, separacion 0,25rem*/
 p{
     font-family: fuente1;
     letter-spacing: 0,25em;
 }
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///HEADER
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 header{
-    background-color: rgba(255, 109, 109, 0.7);
+    background-color: rgba(27, 27, 27, 0.7);
     grid-area: header;
 
 }
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///NAV
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 nav{
-    background-color: rgba(120, 255, 255, 0.5);
+    background-color: rgba(255, 0, 0, 0.5);
     grid-area: menu;
 
 }
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///MAIN
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 main{
-    background-color: rgba(250, 250, 106, 0.4);
+    background-color: rgba(146, 168, 209, 0.646);
     grid-area: content;
 
 }
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///ASIDE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 aside{
-    background-color: rgba(250, 144, 250, 0.3);
+    background-color: rgba(36, 36, 36, 0.3);
     grid-area: aside;
 }
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///FOOTER
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 footer{
-    background-color: rgba(132, 251, 132, 0.2);
+    background-color: rgba(255, 72, 0, 0.2);
     grid-area: footer;
 
 }
 
-/*TODOs falta el grid */
 
