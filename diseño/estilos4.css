@@ -150,6 +150,7 @@ main{
   margin-left: 25%;
   width: auto;
   height: 70%;
+  
 
 }
 
@@ -334,3 +335,117 @@ footer{
 
 
 
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///RESPONSIVE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+@media screen and (max-width: 576px) {
+
+   /* Botón hamburguesa */
+  .menu-toggle {
+    background-color: var(--rosaFuerte);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.8em;
+    padding: 4px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  /* Mostrar menú cuando está activo */
+  nav.active {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--azul);
+    position: absolute;
+    top: 100px; 
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+
+  nav.active ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav.active li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  /* Ajuste general del header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    position: relative;
+  }
+
+  .logo img {
+    width: 50px;
+    height: auto;
+  }
+
+  .nombreEmpresa h1 {
+    font-size: 1.2em;
+  }
+
+  /* Ajustes visuales del contenido */
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cartas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  table {
+    display: none;
+  }
+
+  aside {
+    margin: 10px;
+    padding: 15px;
+    width: auto;
+  }
+
+  .promocion img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  aside {
+    column-count: 1;
+    height: fit-content;
+    font-size: 12px;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2px;
+  }
+}

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 3</title>
-    <link rel="stylesheet" href="estilos3.css">
+    <title>Ejercicio 4</title>
+    <link rel="stylesheet" href="estilos4.css">
+    
 </head>
 <body>
     
@@ -160,5 +161,19 @@
             <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+
+
+    <script>
+        const menuButton = document.createElement('button');
+        menuButton.className = 'menu-toggle';
+        menuButton.textContent = '☰';
+        document.querySelector('header').appendChild(menuButton);
+
+        const nav = document.querySelector('nav');
+        menuButton.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
