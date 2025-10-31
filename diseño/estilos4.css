@@ -24,7 +24,7 @@
 ///BODY
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 body {
-  display: grid;  /* cuerpo con grid*/
+  display: grid; 
   grid-template-columns: 20% 80%;
 
   grid-template-areas:
@@ -32,7 +32,7 @@ body {
     "menu menu"
     "aside content"
     "footer footer";
-  background-color: var(--negro); /*TODO cambiar color fondo*/ 
+  background-color: var(--negro);
   color: var(--blanco);
   
 }
@@ -50,8 +50,8 @@ h2{
 
 header{
     grid-area: header;
-    display: flex;  /* cabezera con flex*/
-    align-items: center;  /*centrados verticalmente */
+    display: flex;  
+    align-items: center;
     color: var(--rosaClaro);
     height: 130px;
 }
@@ -71,11 +71,10 @@ header{
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///NAV - MENU
 /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/*TODO mirar centrado de la lista*/
 
-nav{ /* centrado horizontal y vertical*/ 
+nav{ 
     grid-area: menu;
-    position: sticky;  /* hacer que se quede arriba siempre*/
+    position: sticky; 
     top: 0;
     background-color: var(--rosaFuerte);
     z-index: 100;
@@ -88,7 +87,7 @@ nav{ /* centrado horizontal y vertical*/
 }
 
 a {
-  text-decoration: none; /* Elimina el subrayado */
+  text-decoration: none;
   color: var(--blanco); 
 }
 
@@ -100,12 +99,12 @@ nav ul{
 nav li{
 
   font-size: x-large;
-  list-style-type: none; /*sin viñeta*/
+  list-style-type: none;
   padding: .5em 1em;
 
 }
 
-nav li a:hover {  /*pasar por encima cambio color*/
+nav li a:hover {  /*pasar por encima cambia color*/
   background: var(--rosaClaro);
   color: black;
   padding: 10%;
@@ -123,7 +122,7 @@ main{
 /*//////////////////////////////////////////////////////////////////////////
 ///1 bloque - PRODUCTO EN PROMOCION
 /////////////////////////////////////////////////////////////////////////*/
-/*TODO mirar centrado de la foto, mirar border fondo*/
+
 .promocion{
   position: relative;
   background-color: var(--rosaFuerte);
@@ -150,7 +149,6 @@ main{
   margin-left: 25%;
   width: auto;
   height: 70%;
-  
 
 }
 
@@ -161,10 +159,12 @@ main{
   top: 15%;
   left: 40%;
   font-size: 3rem;
-  background-color: var(--rosaClaro);  /* poner transparencia en el color*/ 
+  background-color: var(--rosaClaro); 
   padding: 1%;
   border-radius: 40%;
 }
+
+/*activar informacion al hacer click*/
 .promocion:active p{
   opacity: 1;
 
@@ -176,15 +176,15 @@ main{
 /*//////////////////////////////////////////////////////////////////////////
 ///2 bloque - PRODUCTO DESTACADOS
 /////////////////////////////////////////////////////////////////////////*/
-/*TODO mirar p, fondo y bordes //   cambiar color sombra pares y impares*/
 
 
 
-.cartas{ /*TODO 3 filas */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    gap: 20px;
+.cartas{ 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  justify-content: center;
+  gap: 20px;
   color: black;
 
 }
@@ -193,11 +193,9 @@ main{
   background-color: var(--rosaClaro);
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .cartas img{
-    /*TODO poner imagen en el centro*/
     width: auto;
     height: 200px;
     border-radius: 15px;
@@ -217,8 +215,13 @@ main{
   border-radius: 12px;
 }
 
+/*filtro a las cartas*/
+.carta:hover{
+  filter: drop-shadow(10px 10px 10px rgb(255, 255, 255));
+}
 
-.carta:nth-child(odd){   /*sombra pares y impares*/
+/*sombra pares y impares*/
+.carta:nth-child(odd){   
   box-shadow:   6px 10px var(--resaltar);
 }
 
@@ -227,14 +230,11 @@ main{
 
 }
 
-.carta:hover{
-  filter: drop-shadow(10px 10px 10px rgb(255, 255, 255));
-}
+
 
 /*////////////////////////////////////////
 ///2 bloque - TABLA 
 ///////////////////////////////////////*/
-/*TODO estilo tabla */
 
 .destacados table {
   width: 100%;
@@ -244,18 +244,19 @@ main{
   color: var(--negro);
 }
 
-.destacados thead {   /*encabezado tabla*/
+.destacados thead {   /*encabezado*/
   background-color: var(--rosaFuerte);
   color: var(--blanco);
-  font-size: x-large;
+  font-size: 20px;
 }
 
-.destacados th, 
-.destacados td {
+
+.destacados th, .destacados td {
   padding: 1rem;
   text-align: center;
 }
 
+/*pares y impares */
 .destacados tbody tr:nth-child(odd) {
   background-color: var(--azul);
 }
@@ -275,21 +276,32 @@ main{
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///ASIDE - MEDIDAS SOSTENIBLES 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/*TODO cambiar fondo dar estilo y mirar ancho */
-aside{
+
+aside {
   grid-area: aside;
-  column-count: 2;
-  column-rule: 1px solid rgb(0, 0, 0);
+
   background-color: grey;
   padding: 20px;
   margin: 30px;
   border-radius: 20px;
   height: fit-content;
-  
+}
+
+aside h2 {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+aside div {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid rgb(0, 0, 0); 
+  font-size: 17px;
 }
 
 
-  
+
 
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -298,6 +310,7 @@ aside{
 
 footer{
   grid-area: footer;
+  
   background-color: var(--rosaFuerte);
   display: flex;
   align-items: center;
@@ -312,8 +325,6 @@ footer{
 
 .redes{
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 20px; 
 } 
 
@@ -334,16 +345,24 @@ footer{
 
 
 
+/*menu hamburguesa que no se muestre*/
+.menu-toggle {
+  display: none;
+}
+
 
 
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///RESPONSIVE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*TODO aside no se pone en una columna*/
+
 @media screen and (max-width: 576px) {
 
    /* Botón hamburguesa */
-  .menu-toggle {
+  .menu-toggle {  /*TODO cambiar nombre de la clase*/
+    display: block;
     background-color: var(--rosaFuerte);
     color: white;
     border: none;
@@ -391,7 +410,11 @@ footer{
     font-size: 1em;
   }
 
-  /* Ajuste general del header */
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///HEADER
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
   header {
     display: flex;
     align-items: center;
@@ -415,6 +438,21 @@ footer{
     align-items: center;
   }
 
+  .promocion{
+    
+    height:40vh;
+    padding-top: 20px;
+  }
+
+    .promocion img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+  }
+
+
   .cartas {
     display: grid;
     grid-template-columns: 1fr;
@@ -425,27 +463,32 @@ footer{
     display: none;
   }
 
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///ASIDE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
   aside {
-    margin: 10px;
-    padding: 15px;
+    margin: 5px;
+    padding: 5px;
     width: auto;
   }
 
-  .promocion img {
-    width: 100%;
-    height: auto;
-    max-width: 250px;
-    display: block;
-    margin: 0 auto;
+
+  aside h2 {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 15px;
   }
 
-  aside {
+
+  aside DIV{
     column-count: 1;
     height: fit-content;
     font-size: 12px;
     padding: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 2px;
   }
 }
