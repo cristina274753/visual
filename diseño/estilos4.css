@@ -236,7 +236,7 @@ main{
 ///2 bloque - TABLA 
 ///////////////////////////////////////*/
 
-.destacados table {
+.tabla table {
   width: 100%;
   margin-top: 5rem;
   border-radius: 12px;
@@ -244,28 +244,28 @@ main{
   color: var(--negro);
 }
 
-.destacados thead {   /*encabezado*/
+.tabla thead {   /*encabezado*/
   background-color: var(--rosaFuerte);
   color: var(--blanco);
   font-size: 20px;
 }
 
 
-.destacados th, .destacados td {
+.tabla th, .tabla td {
   padding: 1rem;
   text-align: center;
 }
 
 /*pares y impares */
-.destacados tbody tr:nth-child(odd) {
+.tabla tbody tr:nth-child(odd) {
   background-color: var(--azul);
 }
 
-.destacados tbody tr:nth-child(even) {
+.tabla tbody tr:nth-child(even) {
   background-color: var(--rosaClaro);
 }
 
-.destacados tbody tr:hover {
+.tabla tbody tr:hover {
   background-color: var(--resaltar);
   color: var(--blanco);
 
@@ -346,7 +346,7 @@ footer{
 
 
 /*menu hamburguesa que no se muestre*/
-.menu-toggle {
+.menuHamburguesa {
   display: none;
 }
 
@@ -356,20 +356,21 @@ footer{
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///RESPONSIVE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/*TODO aside no se pone en una columna*/
 
 @media screen and (max-width: 576px) {
 
    /* Botón hamburguesa */
-  .menu-toggle {  /*TODO cambiar nombre de la clase*/
+  .menuHamburguesa {
     display: block;
+
     background-color: var(--rosaFuerte);
     color: white;
+
     border: none;
     border-radius: 6px;
+    
     font-size: 1.8em;
     padding: 4px 10px;
-    cursor: pointer;
     margin-left: 10px;
   }
 
@@ -377,36 +378,31 @@ footer{
     display: none;
   }
 
-  /* Mostrar menú cuando está activo */
-  nav.active {
+
+  nav.activo {
     display: flex;
-    flex-direction: row; 
-    justify-content: space-around;
-    align-items: center;
+    
     background-color: var(--azul);
+
     position: absolute;
     top: 100px; 
     left: 0;
     width: 100%;
     padding: 10px 0;
     border-radius: 8px;
-    z-index: 1000;
+    z-index: 100;
   }
 
-  nav.active ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  nav.activo ul {
     width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  nav.active li a {
+  nav.activo li a {
     color: black;
     text-decoration: none;
-    font-weight: bold;
     font-size: 1em;
   }
 
@@ -415,16 +411,9 @@ footer{
 ///HEADER
 /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    position: relative;
-  }
 
   .logo img {
-    width: 50px;
+    width: 60px;
     height: auto;
   }
 
@@ -432,23 +421,14 @@ footer{
     font-size: 1.2em;
   }
 
-  /* Ajustes visuales del contenido */
-  main {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .promocion{
-    
     height:40vh;
     padding-top: 20px;
   }
 
     .promocion img {
-    width: 100%;
+    width: 60%;
     height: auto;
-    max-width: 250px;
-    display: block;
     margin: 0 auto;
   }
 
@@ -456,10 +436,9 @@ footer{
   .cartas {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 15px;
   }
 
-  table {
+  .tabla {
     display: none;
   }
 
@@ -483,7 +462,7 @@ footer{
   }
 
 
-  aside DIV{
+  aside div{
     column-count: 1;
     height: fit-content;
     font-size: 12px;

@@ -28,7 +28,6 @@
     </nav>
 
     <main>
-        <!--TODO cambiar precios-->
         <section class="promocion"> 
             <h2>Hamburguesa Combo Interestelar !!</h2>
             <img src="img/hamburguesa1.png" alt="">
@@ -38,67 +37,67 @@
 
         <section class="destacados">
             <h2>Producto destacados</h2>
-            <div class="cartas">  <!-- TODO modo carta, pasar raton: filtro-->
+            <div class="cartas"> 
 
-                <div class="carta"> 
+                <article class="carta"> 
                     <img src="img/hamburguesa2.png" alt="Hamburguesa mágica">
                     <h3>La Órbita de Bacon</h3>
                     <p>Gira alrededor de tu paladar con bacon crujiente y queso fundido en pan estelar.</p>
                     <p>Calorías: 500 • Sabor: intenso y ahumado • Precio: 4.5€</p>
-                </div>
+                </article>
                 
 
-                 <div class="carta">
+                 <article class="carta">
                     <img src="img/hamburguesa3.png" alt="Hamburguesa mágica">
                     <h3>La Vacuna Galáctica</h3>
                     <p>Inmuniza tu hambre con carne jugosa, cheddar interestelar y salsa secreta de otro planeta.</p>
                     <p>Calorías: 500 • Sabor: especiado y cremoso • Precio: 4.5€</p>
-                </div>
+                 </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa4.png" alt="Hamburguesa especial 2">
                     <h3>La Meteorito Crujiente</h3>
                     <p>Impacto directo de sabor con salsa secreta y textura explosiva.</p>
                     <p>Calorías: 530 • Sabor: crujiente y salado • Precio: 5.5€</p>
-                </div>
+                </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 2">
                     <h3>La Alien Veggie</h3>
                     <p>Verde, misteriosa y deliciosa: una veggie de otro sistema solar.</p>
                     <p>Calorías: 510 • Sabor: fresco y herbal • Precio: 4.8€</p>
-                </div>
+                </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa2.png" alt="Hamburguesa especial 3">
                     <h3>La NASA Deluxe</h3>
                     <p>Diseñada para astronautas del sabor: doble carne, doble queso, doble felicidad.</p>
                     <p>Calorías: 600 • Sabor: potente y cremoso • Precio: 6€</p>
-                </div>
+                </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 3">
                     <h3>La Gravedad Cero</h3>
                     <p>Flota en tu boca con pan brioche, mostaza cósmica y carne ligera.</p>
                     <p>Calorías: 520 • Sabor: suave y equilibrado • Precio: 4.9€</p>
-                </div>
+                </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa2.png" alt="Hamburguesa especial 4">
                     <h3>La Nebulosa</h3>
                     <p>Una nube de sabor con ingredientes frescos y especias estelares.</p>
                     <p>Calorías: 560 • Sabor: cremoso y aromático • Precio: 5.2€</p>
-                </div>
+                </article>
 
-                <div class="carta">
+                <article class="carta">
                     <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 4">
                     <h3>La Satélite con Jalapeños</h3>
                     <p>Receta clásica orbitando con jalapeños picantes y queso fundido.</p>
                     <p>Calorías: 540 • Sabor: picante y tostado • Precio: 5€</p>
-                </div>
+                </article>
             </div>
 
-            <div>
+            <div class="tabla">
                 <table>
                     <thead>
                         <tr>
@@ -173,13 +172,13 @@ En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor de
 
     <script>
         const menuButton = document.createElement('button');
-        menuButton.className = 'menu-toggle';
+        menuButton.className = 'menuHamburguesa';
         menuButton.textContent = '☰';
         document.querySelector('header').appendChild(menuButton);
 
         const nav = document.querySelector('nav');
         menuButton.addEventListener('click', () => {
-            nav.classList.toggle('active');
+            nav.classList.toggle('activo');
         });
     </script>
 </body>
