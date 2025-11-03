@@ -14,8 +14,8 @@
 
 @font-face {
     
-    font-family: fuente1;
-    src: url('fuentes/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
+  font-family: fuente1;
+  src: url('fuentes/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
 
 
 }
@@ -38,8 +38,8 @@ body {
 }
 
 h2{
-      font-family: fuente1;
-        font-size: 2rem;
+  font-family: fuente1;
+  font-size: 2rem;
 
 
 }
@@ -49,16 +49,16 @@ h2{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 header{
-    grid-area: header;
-    display: flex;  
-    align-items: center;
-    color: var(--rosaClaro);
-    height: 130px;
+  grid-area: header;
+  display: flex;  
+  align-items: center;
+  color: var(--rosaClaro);
+  height: 130px;
 }
 
 .logo img{
-    width: auto;
-    height: 150px;
+  width: auto;
+  height: 150px;
 }
 
 .nombreEmpresa {
@@ -73,16 +73,18 @@ header{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 nav{ 
-    grid-area: menu;
-    position: sticky; 
-    top: 0;
-    background-color: var(--rosaFuerte);
-    z-index: 100;
-    border-radius: 30px;
-    height: 50px;
-    display: flex;             
-    align-items: center;      
-    justify-content: center;
+  grid-area: menu;
+  position: sticky; 
+  top: 0;
+
+  background-color: var(--rosaFuerte);
+  z-index: 100;
+  border-radius: 30px;
+  height: 50px;
+
+  display: flex;             
+  align-items: center;      
+  justify-content: center;
 
 }
 
@@ -98,7 +100,7 @@ nav ul{
 
 nav li{
 
-  font-size: x-large;
+  font-size: 30px;
   list-style-type: none;
   padding: .5em 1em;
 
@@ -107,6 +109,7 @@ nav li{
 nav li a:hover {  /*pasar por encima cambia color*/
   background: var(--rosaClaro);
   color: black;
+
   padding: 10%;
   border-radius: 40%;
 }
@@ -126,6 +129,7 @@ main{
 .promocion{
   position: relative;
   background-color: var(--rosaFuerte);
+
   border-radius: 10%;  
   height:65vh;
   padding-top: 60px;
@@ -145,8 +149,10 @@ main{
 
 .promocion img{
   display: block;
+
   margin-top: 5%;
   margin-left: 25%;
+
   width: auto;
   height: 70%;
 
@@ -155,6 +161,7 @@ main{
 .promocion p{ 
   position: absolute;
   opacity: 0; /* para que se muestre oculto*/
+
   color: var(--resaltar);
   top: 15%;
   left: 40%;
@@ -196,21 +203,23 @@ main{
 }
 
 .cartas img{
-    width: auto;
-    height: 200px;
-    border-radius: 15px;
-    margin-left:15%;
+  width: auto;
+  height: 200px;
+
+  border-radius: 15px;
+  margin-left:15%;
 }
 
 .carta h3{
   text-align: center;
   color: var(--rosaFuerte);
-  font-size: 200%;
+  font-size: 30px;
 }
 
 .carta p{
   background-color: var(--azul);
   color: var(--blanco);
+  
   padding: 5%;
   border-radius: 12px;
 }
