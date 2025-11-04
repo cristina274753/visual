@@ -174,6 +174,8 @@ function limpiar($dato)  {
     <link rel='stylesheet' href='https://cdn.simplecss.org/simple.css'>
 </head>
 <body>
+
+        <h1>formulario de usuario</h1>
     <form action="" method="post">
 
     <p>nombre</p>
