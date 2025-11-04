@@ -1,12 +1,20 @@
 <?php 
 
+function limpiar($dato)  {
+    
+    return htmlspecialchars(stripslashes(trim($dato)));
+}
+
+
+/*variables*/
+
     $nombre="";
     $apellidos="";
     $fecha="";
     $genero="";
     $curso="";
 
-    $preferencia="";
+    $preferencias=[];
 
     $email="";
     $contraseña="";
@@ -27,16 +35,16 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
         
         /* recoger datos */
-        $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ""));
-        $apellidos = htmlspecialchars(trim($_POST['apellidos'] ?? ""));
+        $nombre = limpiar($_POST['nombre'] ?? "");
+        $apellidos = limpiar($_POST['apellidos'] ?? "");
         $fecha= $_POST['fecha']??"";
         $genero=$_POST['genero']?? "";
         $curso=$_POST['curso']?? "";
-        $preferencia=$_POST['preferencia']?? [];
-        $email=  htmlspecialchars(trim($_POST['email'] ?? ""));
+        $preferencia=$_POST['preferencias']?? [];
+        $email=  limpiar($_POST['email'] ?? "");
         $contraseña=$_POST['contraseña']?? "";
         $confirmarContraseña=$_POST['confirmarContraseña']?? "";
-        $comentario= htmlspecialchars(trim($_POST['comentario'] ?? ""));
+        $comentario=limpiar($_POST['comentario'] ?? "");
         $terminos= $_POST['terminos']?? "";
 
 
@@ -74,7 +82,19 @@
             $errores['email']= "el email no es valido por el formato";
 
         }else{
-            /*comprobar que no este en el archivo csv*/
+            
+            $archivo=fopen("usuarios.csv", "a+"); /*abre archivo para escritura y lectura*/
+
+            while(($linea=fgetcsv($archivo))!==false){
+                if($linea[4] == $email){
+                    $errores['email']= "este email ya esta registrado";
+                    break;
+                }
+            }
+
+            fclose($archivo);
+
+
         }
         
         if($contraseña===""){
@@ -107,33 +127,36 @@
         if($terminos===""){
             $errores['terminos']= "los terminos son obligatorio";
 
-        }elseif($terminos!=="on"){
+        }elseif(!$terminos){
             $errores['terminos']= "los terminos deben ser aceptados";
 
         }
 
 
-        }
+            // 3)Cuando no hay errores
+            if (empty($errores)) {
 
-        // 3)Cuando no hay errores
-        if (empty($errores)) {
 
-            $archivo=fopen("usuarios.csv", "a+"); /*abre archivo para escritura y lectura*/
-           
-            $usuarios=[
-                $nombre, $apellidos, $fecha, $genero, $email, $contraseña, $curso, $preferencia, $comentario
-            ];
+                $archivo=fopen("usuarios.csv", "a+"); /*abre archivo para escritura y lectura*/
+            
+                $usuarios=[
+                    $nombre, $apellidos, $fecha, $genero, $email, $contraseña, $curso, implode(",", $preferencias), $comentario
+                ];
 
-            if(fputcsv($archivo, $usuarios)){
-                $mensaje.= "registro completado";
-            }else{
-                $errores['guardarDatos']="error al guardar datos";
+                if(fputcsv($archivo, $usuarios)){
+                    $mensaje.= "registro completado";
+                }else{
+                    $errores['guardarDatos']="error al guardar datos";
+                }
+
+                fclose($archivo);
+
+
             }
 
-            fclose($archivo);
-
-
         }
+
+       
 
 
 
@@ -155,59 +178,127 @@
 
     <p>nombre</p>
     <input type="text" name="nombre">
+    <?php
+    if (!empty($errores['nombre'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['nombre']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>apellidos</p>
     <input type="text" name="apellidos">
+    <?php
+    if (!empty($errores['apellidos'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['apellidos']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>fecha de nacimiento</p>
-    <input type="date" name="fecha">
+    <input type="date" name="fecha" >
+    <?php
+    if (!empty($errores['fecha'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['fecha']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>genero</p>
-    <input type="radio"  value="masculino" name="genero" required> Hombre
-    <input type="radio"  value="femenino" name="genero" required> Mujer
-    <input type="radio"  value="otro" name="genero" required> Otro
+    <input type="radio"  value="masculino"  name="genero"> Hombre
+    <input type="radio"  value="femenino" name="genero"> Mujer
+    <input type="radio"  value="otro"  name="genero"> Otro
+    <?php
+    if (!empty($errores['genero'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['genero']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>curso</p>
     <select name="curso">
-        <option value="1">Uno</option>
-        <option value="2" >Dos</option>
-        <option value="3" >Tres</option>
+        <option value="DAW" >DAW</option>
+        <option value="DAM"  >DAM</option>
+        <option value="ASIR" >ASIR</option>
     </select>
+    <?php
+    if (!empty($errores['curso'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['curso']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>preferencia</p>
-    <input type="checkbox" name="preferencia[]">Deportes
-    <input type="checkbox" name="preferencia[]">Musica
-    <input type="checkbox" name="preferencia[]">Viajes
+    <input type="checkbox" name="preferencias[]"  value="HTML" >HTML
+    <input type="checkbox" name="preferencias[]"  value="CSS" >CSS
+    <input type="checkbox" name="preferencias[]"  value="JAVA" >JAVA
+    <?php
+    if (!empty($errores['preferencias'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['preferencias']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>email</p>
     <input type="email" name="email">
+    <?php
+    if (!empty($errores['email'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['email']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>contraseña</p>
     <input type="password" name="contraseña">
+    <?php
+    if (!empty($errores['contraseña'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['contraseña']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>confirmar contraseña</p>
     <input type="password" name="confirmarContraseña">
+    <?php
+    if (!empty($errores['confirmarContraseña'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['confirmarContraseña']) ?>
+        </p>
+    <?php endif; ?>
 
     <p>comentarios</p>
-    <textarea name="comentario" id=""></textarea>
+    <textarea name="comentario"></textarea>
+    <?php
+    if (!empty($errores['comentario'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['comentario']) ?>
+        </p>
+    <?php endif; ?>
 
-    <input type="checkbox" name="terminos">acepto los terminos y condiciones
+    <input type="checkbox" name="terminos" >acepto los terminos y condiciones
+    <?php
+    if (!empty($errores['terminos'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['terminos']) ?>
+        </p>
+    <?php endif; ?>
 
 
     <input type="submit" name="enviar">
-    <input type="reset">
+    <input type="reset" name="limpiar">
     </form>
 
     <?php
-    if (!empty($errores)): ?>
-      <p class='notice'>
-        <?php foreach ($errores as $e): ?>
-          <?= htmlspecialchars($e) ?><br>
-        <?php endforeach; ?>
-      </p>
-    <?php
-    elseif (!empty($mensaje)): ?>
-      <p class='notice'><?= htmlspecialchars($mensaje); ?></p>
+    if (!empty($errores['guardarDatos'])): ?>
+      <p class='notice' style=" background-color: #ff0000;">
+          <?= htmlspecialchars($errores['guardarDatos']) ?>
+        </p>
     <?php endif; ?>
+
+    
+    <?php
+        if (!empty($mensaje)): ?>
+            <p class='notice' style=" background-color: #44ff00ff;"><?= htmlspecialchars($mensaje); ?></p>
+    <?php endif; ?>
+
 </body>
 </html>

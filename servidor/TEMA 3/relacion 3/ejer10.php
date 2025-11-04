@@ -35,7 +35,7 @@
         // 3)Cuando no hay $errores
         if (empty($errores)) {
            
-            $rutaFichero=$ruta.basename($fichero["name"]);
+            $rutaFichero=$ruta.basename($fichero["name"]); /*baesname= foto.png*/
 
             if(move_uploaded_file($fichero["tmp_name"], $rutaFichero)){
                 $mensaje="fichero subido";

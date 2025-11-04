@@ -1,0 +1,5 @@
+conejo
+gato
+perro
+pez
+tortuga
