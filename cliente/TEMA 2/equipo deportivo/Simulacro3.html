@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Equipos Deportivos</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="objetos.js" defer></script>
+    <script src="code.js" defer></script>
+</head>
+<body>
+    <section id="enunciado">
+        <h1>Gestión de Equipos Deportivos</h1>
+        <h2>Enunciado</h2>
+        <p>
+            En este ejercicio, vamos a desarrollar un programa que permita gestionar equipos deportivos.
+            Cada equipo puede tener un entrenador y varios jugadores. Deberás implementar clases para cada entidad
+            (<strong>Equipo</strong>, <strong>Entrenador</strong> y <strong>Jugador</strong>), y gestionar la interacción entre ellas.
+        </p>
+        <h3>Requisitos</h3>
+        <ol>
+            <li>
+                Crear tres clases: <strong>Equipo</strong>, <strong>Entrenador</strong> y <strong>Jugador</strong>.
+                <ul>
+                    <li>
+                        <strong>Equipo:</strong> Cada equipo tiene un ID único, nombre, deporte y puede tener un entrenador y varios jugadores.
+                    </li>
+                    <li>
+                        <strong>Entrenador:</strong> Cada entrenador tiene un ID único, nombre y correo electrónico.
+                    </li>
+                    <li>
+                        <strong>Jugador:</strong> Cada jugador tiene un ID único, nombre, posición y dorsal.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Validar los datos ingresados:
+                <ul>
+                    <li>No permitir IDs duplicados para equipos, entrenadores o jugadores.</li>
+                    <li>Verificar que el ID del entrenador exista antes de asignarlo a un equipo.</li>
+                    <li>Permitir agregar múltiples jugadores a un equipo.</li>
+                </ul>
+            </li>
+            <li>
+                Implementar las siguientes funcionalidades dinámicas:
+                <ul>
+                    <li>Registrar equipos, entrenadores y jugadores mediante formularios.</li>
+                    <li>Asignar un entrenador y jugadores a un equipo.</li>
+                    <li>Mostrar listados dinámicos en tablas para equipos, entrenadores y jugadores registrados.</li>
+                    <li>Mostrar mensajes de error o éxito en tiempo real.</li>
+                </ul>
+            </li>
+        </ol>
+        <h3>Formato</h3>
+        <p>
+            Este programa debe implementarse utilizando clases de JavaScript y debe interactuar dinámicamente con el HTML proporcionado. <strong>(gestorEquipos.js)</strong>
+            Puedes usar las siguientes secciones para implementar tu solución.
+        </p>
+    </section>
+    
+
+    <h2>Registro de Equipos</h2>
+    <form id="formEquipo">
+        <input type="text" id="idEquipo" placeholder="ID Equipo" required>
+        <input type="text" id="nombreEquipo" placeholder="Nombre" required>
+        <input type="text" id="deporteEquipo" placeholder="Deporte" required>
+        <button type="button" id="btnRegistrarEquipo" name="btnRegistrarEquipo">Registrar Equipo</button>
+    </form>
+
+
+    <h2>Registro de Entrenadores</h2>
+    <form id="formEntrenador">
+        <input type="text" id="idEntrenador" placeholder="ID Entrenador" required>
+        <input type="text" id="nombreEntrenador" placeholder="Nombre" required>
+        <input type="email" id="emailEntrenador" placeholder="Email" required>
+        <button type="button" id="btnRegistrarEntrenador" name="btnRegistrarEntrenador">Registrar Entrenador</button>
+    </form>
+
+    <h2>Registro de Jugadores</h2>
+    <form id="formJugador">
+        <input type="text" id="idJugador" placeholder="ID Jugador" required>
+        <input type="text" id="nombreJugador" placeholder="Nombre" required>
+        <input type="text" id="posicionJugador" placeholder="Posición" required>
+        <input type="number" id="dorsalJugador" placeholder="Dorsal" required>
+        <button type="button" id="btnRegistrarJugador" name="btnRegistrarJugador">Registrar Jugador</button>
+    </form>
+
+    <h2>Asignaciones</h2>
+    <form id="formAsignarEntrenador">
+        <input type="text" id="idEquipoAsignar" placeholder="ID Equipo" required>
+        <input type="text" id="idEntrenadorAsignar" placeholder="ID Entrenador" required>
+        <button type="button" name="btnAsignarEntrenador" id="btnAsignarEntrenador">Asignar Entrenador</button>
+    </form>
+
+    <form id="formAsignarJugador">
+        <input type="text" id="idEquipoJugador" placeholder="ID Equipo" required>
+        <input type="text" id="idJugadorAsignar" placeholder="ID Jugador" required>
+        <button type="button" name="btnAsignarJugador" id="btnAsignarJugador">Asignar Jugador</button>
+    </form>
+
+    <h2>Listados</h2>
+    <h3>Equipos Registrados</h3>
+    <table id="tablaEquipos" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Deporte</th>
+            <th>Entrenador</th>
+            <th>Jugadores</th>
+        </tr>
+    </table>
+
+    <h3>Entrenadores Registrados</h3>
+    <table id="tablaEntrenadores" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+    </table>
+
+    <h3>Jugadores Registrados</h3>
+    <table id="tablaJugadores" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Posición</th>
+            <th>Dorsal</th>
+        </tr>
+    </table>
+
+    <h3>Mensajes</h3>
+    <div id="mensajes"></div>
+
+
+</body>
+</html>

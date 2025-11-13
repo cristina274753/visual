@@ -1,7 +1,10 @@
 'use strict';
 
+console.log("✅ objetos.js conectado correctamente");
+
+
 class Vehiculo{  /*clase vehiculo*/
-  constructor(marca,modelo, anyo, precio, stock){
+  constructor(marca,modelo, anyo, precio, stock=true){
     this.marca=marca;
     this.modelo=modelo;
     this.anyo=anyo;
@@ -11,11 +14,11 @@ class Vehiculo{  /*clase vehiculo*/
 
 
   /*metodos*/
-  ObtenerDescripcion(){  /*devuelve la extension*/
+  obtenerDescripcion(){  /*devuelve la extension*/
     return `Vehiculo: ${this.marca}, ${this.modelo}, ${this.anyo}, ${this.precio}, ${this.stock}`;
   }
 
-  Vender(){
+  vender(){ /*comprobar que stock es true*/
 
     this.stock=0;
     return `vehiculo vendido`;
@@ -24,8 +27,9 @@ class Vehiculo{  /*clase vehiculo*/
 
 
 
-class Coche{  /*clase coche*/
-  constructor(numeroPuertas,matricula, tipoCombustible){
+class Coche extends Vehiculo{  /*clase coche*/
+  constructor(marca, modelo, anyo, precio, stock, numeroPuertas, matricula, tipoCombustible) {
+    super(marca, modelo, anyo, precio, stock);
     this.numeroPuertas=numeroPuertas;
     this.matricula=matricula;
     this.tipoCombustible=tipoCombustible;
@@ -38,39 +42,39 @@ class Coche{  /*clase coche*/
 
     let impuesto=0;
 
-    if(this.tipoCombustible=="gasolina"){
+    if(this.tipoCombustible=="Gasolina"){
         impuesto= this.precio*0.10;
         return impuesto;
 
-    }else if(this.tipoCombustible=="diesel"){
+    }else if(this.tipoCombustible=="Diesel"){
         impuesto=this.precio*0.15;
         return impuesto;
 
-    }else if(this.tipoCombustible=="electrico" || this.tipoCombustible=="gas"){
+    }else if(this.tipoCombustible=="Eléctrico" || this.tipoCombustible=="Gas"){
         impuesto= this.precio*0.05;
         return impuesto;
     }
     
   }
 
-  Vender(){
+  /*sobreescribir informacion*/
 
-    this.stock=0;
-    return `vehiculo vendido`;
+    obtenerDescripcion() {
+    return `${super.obtenerDescripcion()}, Puertas: ${this.numeroPuertas}, Matrícula: ${this.matricula}, Combustible: ${this.tipoCombustible}`;
   }
 }
 
 
 
-class Motocicleta extends Coche{  
-  constructor(numeroPuertas,matricula, tipoCombustible, matricula, cilindrada, tipo){
-    super(numeroPuertas, matricula, tipoCombustible);
+class Motocicleta extends Vehiculo{  
+  constructor(marca, modelo, anyo, precio, stock, matricula, cilindrada, tipo) {
+    super(marca, modelo, anyo, precio, stock);
     this.matricula = matricula;
     this.cilindrada = cilindrada;
-    this.tipo=tipo;
+    this.tipo = tipo;
   }
 
-  CalcularImpuesto(){
+  calcularImpuestos(){
 
     let impuesto=0;
 
@@ -85,5 +89,8 @@ class Motocicleta extends Coche{
     }
   }
 
-  /*sobreescribir obtenerDescripcion() para incluir porpiedades de los obj coches y motos*/
+  obtenerDescripcion() {
+    return `${super.obtenerDescripcion()}, Matrícula: ${this.matricula}, Cilindrada: ${this.cilindrada}cc, Tipo: ${this.tipo}`;
+  }
+
 }
