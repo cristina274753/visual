@@ -25,7 +25,7 @@ class Equipo {
 }
 
     altaJugador(jugador){
-       const jugadorNuevo = this.jugadores.find(b => jugador.id === jugadores.id);
+       const jugadorNuevo = this.jugadores.find(b => b === jugador.id);
 
         if (jugadorNuevo) {
             return "Este jugador ya esta en el equipo.";  

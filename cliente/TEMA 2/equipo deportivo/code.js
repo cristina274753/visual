@@ -55,6 +55,8 @@ const equipoNuevo = new Equipo (idEquipo, nombreEquipo, deporteEquipo);
 Equipos.push(equipoNuevo);
 alert("Equipo registrado correctamente.")
 
+pintarTablaEquipos();
+
 
 };
 
@@ -75,6 +77,9 @@ if (Entrenadores.some(entrenador => entrenador.id === idEntrenador)) {
 }
     Entrenadores.push(entrenador);
     alert("Registrado con exito")
+
+    pintarTablaEntrenadores();
+
 }
 
  
@@ -99,6 +104,8 @@ if (Jugadores.some(jugador => jugador.id === idJugador)) {
 }
 
 Jugadores.push(jugador);
+
+pintarTablaJugadores();
 
 };
 
@@ -126,8 +133,11 @@ const idEquipo = parseInt(idEquipotxt);
 const idJugadorTxt = document.querySelector("#idJugadorAsignar").value.trim();
 const idJugador = parseInt(idJugadorTxt);
 
-Equipos[idEquipo].altaJugador(idJugador);
+const jugadorObj = Jugadores.find(j => j.id === idJugador);
+Equipos[idEquipo - 1].altaJugador(jugadorObj);
 
+
+pintarTablaEquipos();
 
 };
 

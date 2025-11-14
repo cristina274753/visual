@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Vehículos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label, input, select {
+      display: block;
+      margin: 8px 0;
+    }
+    input, select {
+      width: 100%;
+      padding: 6px;
+    }
+    button {
+      margin-top: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    hr {
+      margin: 1.5rem 0;
+    }
+    pre {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+
+    .oculto{display:none;}
+  </style>
+   <script src="objetos.js" defer></script>
+  <script src="code.js" defer></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🚗 Sistema de Gestión de Vehículos</h1>
+
+    <h3>Agregar Vehículo</h3>
+    <label>Tipo:</label>
+    <select id="tipoVehiculo">
+      <option value="coche">Coche</option>
+      <option value="motocicleta">Motocicleta</option>
+    </select>
+
+    <label>Marca:</label>
+    <input type="text" id="marca">
+
+    <label>Modelo:</label>
+    <input type="text" id="modelo">
+
+    <label>Año:</label>
+    <input type="number" id="anio">
+
+    <label>Precio:</label>
+    <input type="number" id="precio">
+
+    <label>Matrícula:</label>
+    <input type="text" id="matricula">
+
+    <div id="cocheExtra" class="formularioExtra">
+      <label>Número de Puertas:</label>
+      <input type="number" id="puertas">
+      <label>Tipo de Combustible:</label>
+      <select id="combustible">
+        <option value="Gasolina">Gasolina</option>
+        <option value="Diesel">Diesel</option>
+        <option value="Eléctrico">Eléctrico</option>
+        <option value="Gas">Gas</option>
+      </select>
+    </div>
+
+    <div id="motoExtra" class="formularioExtra oculto">
+      <label>Cilindrada (cc):</label>
+      <input type="number" id="cilindrada">
+      <label>Tipo de Motocicleta:</label>
+      <input type="text" id="tipoMoto">
+    </div>
+
+    <button type="button" id="btnAgregar">Agregar Vehículo</button>
+    <hr>
+
+    <h3>Vehículos Disponibles</h3>
+    <button type="button" id="btnLista">Listar Vehículos</button>
+    <pre id="listaVehiculos"></pre>
+
+    <h3>Vender Vehículo</h3>
+    <label>Matrícula a vender:</label>
+    <input type="text" id="matriculaVenta">
+    <button type="button" id="btnVender" >Vender</button>
+
+    <h3>Calcular Impuestos Totales</h3>
+    <button type="button" id="btnImpuesto">Calcular</button>
+    <pre id="impuestos"></pre>
+  </div>
+
+</body>
+
+</html>

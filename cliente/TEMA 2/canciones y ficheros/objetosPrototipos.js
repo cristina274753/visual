@@ -8,7 +8,7 @@ function Fichero(nombreFichero,tamaño){
 }
 
 Fichero.prototype.extensión=function(){
-  return this.nombreFichero.slice( this.nombreFichero.lastIndexOf(".")+1 );
+  return this.nombreFichero.slice( this.nombreFichero.lastIndexOf(".")+1 ); //devuelve la extension del archivo
 }
 
 Fichero.prototype.getDatos = function(){
