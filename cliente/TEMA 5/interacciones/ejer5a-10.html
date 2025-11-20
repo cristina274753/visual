@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de alimentos</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+.contenedor {
+    display: flex;
+    gap: 50px;
+}
+
+#lista-alimentos, #segunda-division {
+    width: 200px;
+    min-height: 150px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#lista-alimentos ul {
+    list-style: none;
+    padding: 0;
+}
+
+#lista-alimentos li {
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#lista-alimentos li:hover {
+    background-color: #f0f0f0;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Lista de alimentos</h1>
+
+    <div class="contenedor">
+        <div id="lista-alimentos">
+            <ul>
+                <li>Patatas</li>
+                <li>Huevos</li>
+                <li>Leche</li>
+                <li>Uvas pasas</li>
+                <li>Manzanas</li>
+                <li>Pan</li>
+            </ul>
+        </div>
+
+        <div id="segunda-division">
+            <!-- Aquí se añadirán los párrafos -->
+        </div>
+    </div>
+
+    <script src="ejer5a-10.js"></script>
+</body>
+</html>

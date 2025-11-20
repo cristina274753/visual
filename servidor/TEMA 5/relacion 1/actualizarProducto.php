@@ -7,8 +7,9 @@ $nombre="";
 $descripcion="";
 $precio="";
 $mensaje="";
+$consulta="";
 
-//añadir con formulario
+
 
 /* comprobar método del formulario */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
@@ -28,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     }elseif($descripcion==""){
         $descripcion=false;
     }
+
+
+
+
 
     // 3)Cuando no hay errores
     if (empty($errores)) {
@@ -49,33 +54,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
             $mensaje.= "conexion exitosa <br>";
 
-            if($descripcion==false){
-                $consulta= "INSERT INTO productos (nombre, descripcion, precio) VALUES ('$nombre', null, $precio)";
 
+            $producto= $conexion-> query("select * from productos where nombre='$nombre'");
+
+            if($producto-> num_rows>0){
+
+                if($descripcion==false){
+
+
+                        
+                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `nombre` = '$nombre';";
+                    
+
+                }else{
+
+                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `nombre` = '$nombre';";
+
+                    
+
+                }
+              
+              
             }else{
-                $consulta= "INSERT INTO productos (nombre, descripcion, precio) VALUES ('$nombre', '$descripcion', $precio)";
 
-            }
-
-            if(mysqli_query($conexion, $consulta)){              
-                $mensaje.=  "producto insertado correctamente <br>";
-
-            }else{
-                $mensaje.=  "error al insertar el producto <br>". mysqli_error($conexion);
+              $mensaje.= "no se encontro el producto";
             }
 
             
+            if(!$consulta==""){
+                
+                if(mysqli_query($conexion, $consulta)){              
+                $mensaje.=  "producto actualizado correctamente <br>";
 
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])){
-
-              // Redirigir para evitar reenvío del formulario.
-              header("Location: ../tablaProductos.php"); //get --> depurar para ver el funcionamiento
-              exit();
+                }else{
+                    $mensaje.=  "error al actualizar el producto <br>". mysqli_error($conexion);
+                }
             }
+
+
+            
+
+            
+
+             //mostrar datos
+
+            $resultado= $conexion-> query("select * from productos");
+
+            if($resultado-> num_rows>0){
+
+              
+              $mensaje.= "<br><table><caption>lista de productos:</caption>";
+
+              $mensaje.= "<thead> <tr><th>Nombre</th> <th>Descripcion</th> <th>Precio</th></tr> </thead>";
+
+              while($fila= $resultado-> fetch_assoc()){
+                
+                $mensaje.= "<tr> <td>".$fila['nombre']. "</td>";
+                $mensaje.= "<td>".$fila['descripcion']. "</td>";
+
+                
+                $mensaje.= "<td>".$fila['precio']. "</td> </tr>";
+
+              }
+
+              $mensaje.= "</table>";
+            }else{
+
+              $mensaje.= "no se encontro productos";
+            }
+            
+
+           
 
         }
 
         $conexion-> close();
+
+
+
+        // Redirigir para evitar reenvío del formulario.
+        header("Location: tablaProductos.php"); //get --> depurar para ver el funcionamiento
+        exit();
+    
 
     }
 }
@@ -88,12 +148,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>añadir productos</title>
+    <title>actualizar productos</title>
     <link rel='stylesheet' href='https://cdn.simplecss.org/simple.css'>
 </head>
 <body>
     
-    <h1>Añadir producto</h1>
+    <h1>actualizar de datos</h1>
     <form name="myForm" action="" method="post">
 
       <!-- Campos de texto -->
