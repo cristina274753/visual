@@ -6,6 +6,24 @@ $errores=[];
 
 $mensaje="";
 
+/* comprobar método del formulario */
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['eliminar'])) {
+    
+    /* recoger datos */
+    $id = htmlspecialchars(trim($_GET['eliminar'] ?? ""));
+
+    // 2) Validación de datos
+    // Verificamos si los campos están llenos
+    if ($id === "") {
+        $errores[] = "error, id vacio";
+    } 
+
+
+
+
+
+    // 3)Cuando no hay errores
+    if (empty($errores)) {
         
 
         $host= "localhost";
@@ -24,64 +42,116 @@ $mensaje="";
 
             $mensaje.= "conexion exitosa <br>";
 
-        
-            //mostrar datos
 
-            $resultado= $conexion-> query("select * from productos");
+            $producto= $conexion-> query("select * from productos where id_producto='$id'");
 
-            if($resultado-> num_rows>0){
+            if($producto-> num_rows>0){
+
+                $consulta="DELETE FROM `tienda`.`productos` WHERE (`id_producto` = '$id')";
 
               
-              $mensaje.= "<br><table><caption>lista de productos:</caption>";
-
-              $mensaje.= "<thead> <tr><th>ID</th><th>Nombre</th> <th>Descripcion</th> <th>Precio</th> <th>Acciones</th></tr> </thead>";
-
-              while($fila= $resultado-> fetch_assoc()){
-                
-                $mensaje.= "<tr> <td>". $fila['id_producto']. "</td>";
-                $mensaje.= " <td>".$fila['nombre']. "</td>";
-                $mensaje.= "<td>".$fila['descripcion']. "</td>";
-
-                
-                $mensaje.= "<td>".$fila['precio']. "</td>";
-
-                $mensaje.= " <td>  <form method='POST'><!-- Acciones -->
-      
-        <input type='submit' name='actualizar' value='actualizar'>
-       </form>
-      
-       <form method='POST'>
-      <!-- Acciones -->
-      
-        <input type='submit' name='eliminar' value='eliminar'>
-       </form></td></tr>";
-
-              }
-
-              $mensaje.= "</table>";
+              
             }else{
 
-              $mensaje.= "no se encontro productos";
+              $mensaje.= "no se encontro el producto";
             }
 
-        }
+            
+            if(!$consulta==""){
+                
+                if(mysqli_query($conexion, $consulta)){              
+                $mensaje.=  "producto eliminado correctamente <br>";
 
-        $conexion-> close();
+                }else{
+                    $mensaje.=  "error al eliminar el producto <br>". mysqli_error($conexion);
+                }
+            }
+          }
+        }
+    }
+
+        
+
+  $host= "localhost";
+  $user="usuario_tienda";
+  $password="1234";
+  $dataBase="tienda";
+
+  $conexion= new mysqli($host, $user, $password, $dataBase);
+
+
+  if($conexion->connect_error){
+
+    $mensaje.= "error en la conexion. fin!";
+
+  }else{
+
+
+    $mensaje.= "conexion exitosa <br>";
+
+        
+    //mostrar datos
+
+    $resultado= $conexion-> query("select * from productos");
+
+    if($resultado-> num_rows>0){
+
+              
+      $mensaje.= "<br><table><caption>lista de productos:</caption>";
+
+      $mensaje.= "<thead> <tr><th>ID</th><th>Nombre</th> <th>Descripcion</th> <th>Precio</th> <th>Acciones</th></tr> </thead>";
+
+      while($fila= $resultado-> fetch_assoc()){
+                
+        $mensaje.= "<tr> <td>". $fila['id_producto']. "</td>";
+        $mensaje.= " <td>".$fila['nombre']. "</td>";
+        $mensaje.= "<td>".$fila['descripcion']. "</td>";
+
+                  
+        $mensaje.= "<td>".$fila['precio']. "</td>";
+
+        $mensaje.= " <td>  <form method='GET'><!-- Acciones -->
+        
+          <button name='actualizar' value='".$fila['id_producto']."'>actualizar</button>
+
+        </form>
+        
+        <form method='GET'>
+          <!-- Acciones -->
+        
+          <button name='eliminar' value='".$fila['id_producto']."'>eliminar</button>
+
+        </form></td></tr>";
+
+       }
+
+        $mensaje.= "</table>";
+      }else{
+
+        $mensaje.= "no se encontro productos";
+      
+      }
+
+    }
+
+    $conexion-> close();
 
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['actualizar'])){
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['actualizar'])){
 
         // Redirigir para evitar reenvío del formulario.
         header("Location: actualizarProducto.php"); //get --> depurar para ver el funcionamiento
         exit();
     }
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['eliminar'])){
+     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['eliminar'])){
 
         // Redirigir para evitar reenvío del formulario.
         header("Location: eliminar.php"); //get --> depurar para ver el funcionamiento
         exit();
     }
+
+    
 
 
 
