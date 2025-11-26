@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #resultado {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      min-height: 30px;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    .ok {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+
+  <script src="ejer2.js"></script>
+</head>
+<body>
+  <h2>Selecciona opciones</h2>
+  
+  <label><input type="checkbox" id="manana"> Mañana</label><br>
+  <label><input type="checkbox" id="tarde"> Tarde</label><br>
+  <label><input type="checkbox" id="noche"> Noche</label><br><br>
+  
+  <button onclick="comprobar()">Comprobar selección</button>
+  
+  <div id="resultado"></div>
+</body>
+</html>

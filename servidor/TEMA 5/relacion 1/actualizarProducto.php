@@ -8,6 +8,15 @@ $descripcion="";
 $precio="";
 $mensaje="";
 $consulta="";
+$id="";
+
+
+  $id = trim($_GET['id'] ?? "");
+
+   if ($id === "") {
+        $errores[] = "Por favor, rellena el id";
+    } 
+
 
 
 
@@ -55,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             $mensaje.= "conexion exitosa <br>";
 
 
-            $producto= $conexion-> query("select * from productos where nombre='$nombre'");
+            $producto= $conexion-> query("select * from productos where id_producto='$id'");
 
             if($producto-> num_rows>0){
 
@@ -63,12 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
 
                         
-                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `nombre` = '$nombre';";
+                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `id_producto` = '$id';";
                     
 
                 }else{
 
-                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `nombre` = '$nombre';";
+                        $consulta="UPDATE `tienda`.`productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `id_producto` = '$id';";
 
                     
 
@@ -81,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             }
 
             
-            if(!$consulta==""){
+            if($consulta!==""){
                 
                 if(mysqli_query($conexion, $consulta)){              
                 $mensaje.=  "producto actualizado correctamente <br>";
@@ -133,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
 
         // Redirigir para evitar reenvío del formulario.
-        header("Location: tablaProductos.php"); //get --> depurar para ver el funcionamiento
+       header("Location: tablaProductos.php"); //POST --> depurar para ver el funcionamiento
         exit();
     
 
@@ -154,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 <body>
     
     <h1>actualizar de datos</h1>
-    <form name="myForm" action="" method="post">
+    <form name="myForm" action="" method="POST">
 
       <!-- Campos de texto -->
       <div class="row">

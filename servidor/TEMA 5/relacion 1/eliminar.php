@@ -3,24 +3,22 @@
 
 
 $errores=[];
-$nombre="";
+$id="";
 $descripcion="";
 $precio="";
 $mensaje="";
 $consulta="";
 
-
-
 /* comprobar método del formulario */
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['eliminar'])) {
     
     /* recoger datos */
-    $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ""));
+    $id = htmlspecialchars(trim($_GET['eliminar'] ?? ""));
 
     // 2) Validación de datos
     // Verificamos si los campos están llenos
-    if ($nombre === "") {
-        $errores[] = "Por favor, rellena el nombre";
+    if ($id === "") {
+        $errores[] = "error, id vacio";
     } 
 
 
@@ -48,11 +46,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             $mensaje.= "conexion exitosa <br>";
 
 
-            $producto= $conexion-> query("select * from productos where nombre='$nombre'");
+            $producto= $conexion-> query("select * from productos where id_producto='$id'");
 
             if($producto-> num_rows>0){
 
-                $consulta="DELETE FROM `tienda`.`productos` WHERE (`nombre` = '$nombre')";
+                $consulta="DELETE FROM `tienda`.`productos` WHERE (`id_producto` = '$id')";
+
+              
+              
+            }else{
+
+              $mensaje.= "no se encontro el producto <br>";
+            }
+
+            
+            if(!$consulta==""){
+                
+                if(mysqli_query($conexion, $consulta)){              
+                $mensaje.=  "producto eliminado correctamente <br>";
+
+                }else{
+                    $mensaje.=  "error al eliminar el producto <br>". mysqli_error($conexion);
+                }
+            }
+          }
+
+          $host= "localhost";
+        $user="usuario_tienda";
+        $password="1234";
+        $dataBase="tienda";
+
+        $conexion= new mysqli($host, $user, $password, $dataBase);
+
+
+        if($conexion->connect_error){
+
+            $mensaje.= "error en la conexion. fin!";
+        }else{
+
+
+            $mensaje.= "conexion exitosa <br>";
+
+
+            $producto= $conexion-> query("select * from productos where id_producto='$id'");
+
+            if($producto-> num_rows>0){
+
+                $consulta="DELETE FROM `tienda`.`productos` WHERE (`id_producto` = '$id')";
 
               
               
@@ -86,11 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
               
               $mensaje.= "<br><table><caption>lista de productos:</caption>";
 
-              $mensaje.= "<thead> <tr><th>Nombre</th> <th>Descripcion</th> <th>Precio</th></tr> </thead>";
+              $mensaje.= "<thead> <tr><th>id_producto</th> <th>Descripcion</th> <th>Precio</th></tr> </thead>";
 
               while($fila= $resultado-> fetch_assoc()){
                 
-                $mensaje.= "<tr> <td>".$fila['nombre']. "</td>";
+                $mensaje.= "<tr> <td>".$fila['id_producto']. "</td>";
                 $mensaje.= "<td>".$fila['descripcion']. "</td>";
 
                 
@@ -111,12 +151,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
         $conexion-> close();
 
-        // Redirigir para evitar reenvío del formulario.
-        header("Location: tablaProductos.php"); //get --> depurar para ver el funcionamiento
+        
+          // Redirigir para evitar reenvío del formulario.
+       header("Location: tablaProductos.php"); //POST --> depurar para ver el funcionamiento
         exit();
+    
 
+
+
+
+
+        }
     }
-}
+
+
+
+    
+
 
 
 ?>
@@ -132,24 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 <body>
     
     <h1>eliminar de datos</h1>
-    <form name="myForm" action="" method="post">
-
-      <!-- Campos de texto -->
-      <div class="row">
-        <div class="col">
-          <label for="nombre">Nombre</label>
-          <input id="nombre" name="nombre" type="text" placeholder="Ingresa el nombre" >
-        </div>
-        
-      </div>
-
-
-      <!-- Acciones -->
-      <div class="actions" style="margin-top:1rem">
-        <input type="submit" name="enviar" value="Enviar">
-      </div>
-
-    </form>
+    
 
     <?php
     if (!empty($errores)): ?>

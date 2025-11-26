@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 4 - Votación de Helados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .bloque {
+      margin-bottom: 15px;
+    }
+  </style>
+  <script src="ejer4.js"></script>
+</head>
+<body>
+  <h2>Votación de Sabores de Helado</h2>
+  
+  <!-- Select de sabores -->
+  <div class="bloque">
+    <label for="sabor">Elige un sabor:</label>
+    <select id="sabor">
+      <option value="vainilla">Vainilla</option>
+      <option value="fresa">Fresa</option>
+      <option value="chocolate">Chocolate</option>
+      <option value="nata">Nata</option>
+    </select>
+  </div>
+  
+  <!-- Radio buttons de puntuación -->
+  <div class="bloque">
+    <span>Puntuación:</span><br>
+    <label><input type="radio" name="nota" value="1"> 1</label>
+    <label><input type="radio" name="nota" value="2"> 2</label>
+    <label><input type="radio" name="nota" value="3"> 3</label>
+    <label><input type="radio" name="nota" value="4"> 4</label>
+    <label><input type="radio" name="nota" value="5"> 5</label>
+  </div>
+  
+  <!-- Botones -->
+  <div class="bloque">
+    <button onclick="votar()">Votar</button>
+    <button onclick="mostrarResultados()">Mostrar resultados</button>
+  </div>
+  
+  
+</body>
+</html>
