@@ -1,106 +1,95 @@
-<!-- 
-    Página de listado de libros de la Biblioteca Local
-    Autor: P.Lluyot
-    Examen-1 de DWES - Curso 2025-2026
--->
+
 <?php
 /* ############################## CÓDIGO PHP ################################################*/
-$numerosLibrosTotales;
-$archivo=fopen("libros.csv", "r+"); /*abre archivo para escritura y lectura*/
+$numerosLibrosTotales = 0;
+$errores = [];
+
+$numFantasia = 0;
+$numNovela = 0;
+$numFiccion = 0;
 
 
-function tablaArrayHTML($libros)  {
-    
-    if (empty($libros)){
-        return $mensaje="";
+function tablaArrayHTML($libros)
+{
 
-    }else{
-
-        
-        $mensaje="<table> ".
-                    "<tr><th>Titulo</th><th>Autor</th><th>Año</th><th>Genero</th></tr>";
-
-                    foreach($libros as $libro){
-
-                        foreach($libro as $valor){
-                            $mensaje.="<tr><td>{$libro[0]}</td><td>{$libro[1]}</td><td>{$libro[2]}</td><td>{$libro[3]}</td></tr>";
-
-                        }
-                    }
+    if (empty($libros)) {
+        return $mensaje = "<p>No hay libros que mostrar</p>";
+    } else {
 
 
-            }
-        $mensaje.= "</table>";
+        $mensaje = "<table> " .
+            "<tr><th>Titulo</th><th>Autor</th><th>Año</th><th>Genero</th></tr>";
 
-        return $mensaje;
-}
+        foreach ($libros as $libro) {
 
-
-
-function CargarLibros(){
-
-    $archivo=fopen("libros.csv", "r+"); /*abre archivo para escritura y lectura*/
-
-
-
-    while(($linea=fgetcsv($archivo, 0, ";"))!==false){
-
-        $libros[]=$linea;
+            $mensaje .= "<tr>
+                            <td>{$libro[0]}</td>
+                            <td>{$libro[1]}</td>
+                            <td>{$libro[2]}</td>
+                            <td>{$libro[3]}</td>
+                        </tr>";
+        }
     }
+    $mensaje .= "</table>";
 
-
-    return $libros;
-
-
+    return $mensaje;
 }
 
 
-$genero="";
+
+function CargarLibros()
+{
+
+    $archivo = fopen("libros.csv", "r");
+    $libros = [];
+    while (($linea = fgetcsv($archivo, 0, ";")) !== false) {
+        $libros[] = $linea;
+    }
+    fclose($archivo);
+    return $libros; //da un array
+
+}
+
+// Función para filtrar por género
+function filtrarPorGenero($libro, $genero)
+{
+    return $libro[3] == $genero;
+}
+
+
+
+$libros = CargarLibros();
+
+$genero = "";
 
 /* comprobar método del formulario */
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['enviar'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['enviar'])) {
 
-    $genero=$_POST['genero']?? "";
+    $genero = $_GET['genero'] ?? "Todos";
 
-    switch ($genero) {
+    $libros = CargarLibros();
 
-        case 'Todos':
-            
-            tablaArrayHTML(CargarLibros());
-
-            break;
-        
-        case 'Novela':
-            
-            
-            break;
-
-        case 'Ciencia ficción':
-            
-
-            break;
-        
-        case 'Fantasía':
-            
-
-            break;
-        
-    
-        
-        default:
-            $errores['filtro']="error en el filtro";
-            break;
+    if ($genero != "Todos") {
+        $libros = array_values(array_filter($libros, fn($libro) => filtrarPorGenero($libro, $genero)));
     }
-
-
-
-
-    
 }
 
+$numerosLibrosTotales = count($libros);
 
 
-    
+foreach ($libros as $libro) {
+    switch ($libro[3]) {
+        case "Fantasía":
+            $numFantasia++;
+            break;
+        case "Novela":
+            $numNovela++;
+            break;
+        case "Ciencia ficción":
+            $numFiccion++;
+            break;
+    }
+}
 
 
 
@@ -139,34 +128,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['enviar'])) {
                 <option value="Todos" <?= ($genero == "Todos") ? 'selected' : '' ?>>Todos</option>
                 <option value="Novela" <?= ($genero == "Novela") ? 'selected' : '' ?>>Novela</option>
                 <option value="Ciencia ficción" <?= ($genero == "Ciencia ficción") ? 'selected' : '' ?>>Ciencia ficción</option>
-                <option value="Fantasía" <?= ($genero == "Novela") ? 'Fantasía' : '' ?>>Fantasía</option>
+                <option value="Fantasía" <?= ($genero == "Fantasía") ? 'selected' : '' ?>>Fantasía</option>
             </select>
             <button type="submit" name="enviar">Filtrar</button>
         </form>
-        
+
         <!-- ================= Apartado 3: Tabla HTML de libros ============================= -->
         <?php
 
-            $archivo=fopen("libros.csv", "r+"); /*abre archivo para escritura y lectura*/
-
-
-
-                 echo   "<table> ".
-                    "<tr><th>Titulo</th><th>Autor</th><th>Año</th><th>Genero</th></tr>";
-
-
-            while(($linea=fgetcsv($archivo, 0, ";"))!==false){
-
-                $numerosLibrosTotales++;
-                
-
-                echo "<tr><td>{$linea[0]}</td><td>{$linea[1]}</td><td>{$linea[2]}</td><td>{$linea[3]}</td></tr>";
-
-            }
-        echo "</table>";
-
-
-            fclose($archivo);
+        echo tablaArrayHTML($libros);
 
 
 
@@ -174,17 +144,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['enviar'])) {
         <!-- Mensaje de notificación o resultado -->
         <p class='notice'>
             <?php
-                    if (!empty($errores['archivo'])): ?>
-                        <?= htmlspecialchars($errores['archivo']) ?>
-                        </p>
-                    <?php endif; ?>
+            if (!empty($errores['archivo'])): ?>
+                <?= htmlspecialchars($errores['archivo']) ?>
         </p>
+    <?php endif; ?>
+    </p>
 
-        <!-- ================= Apartado 6: Estadísticas de libros ========================== -->
-        <!--<p class='notice'><strong>Total de libros registrados</strong>: 34<br>
-            - NombreGénero: 10<br>
-            - NombreGénero: 24</p>
-        -->
+    <!-- ================= Apartado 6: Estadísticas de libros ========================== -->
+    <p class='notice'><strong>Total de libros registrados</strong>: <?php echo $numerosLibrosTotales ?><br>
+        - Fantasia: <?php echo $numFantasia ?><br>
+        - Novela: <?php echo $numNovela ?><br>
+        - Ciencia Ficcion: <?php echo $numFiccion ?><br>
+    </p>
+
     </main>
     <!-- Pie de página con información del examen y autor -->
     <footer>

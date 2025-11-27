@@ -6,83 +6,80 @@
 <?php
 /* ############################## CÓDIGO PHP ################################################*/
 
-$titulo="";
-$autor="";
-$anio="";
-$genero="";
+$titulo = "";
+$autor = "";
+$anio = "";
+$genero = "";
 
-$errores=[];
-$mensaje="";
+$errores = [];
+$mensaje = "";
 
 
 
 /* comprobar método del formulario */
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
-    
-
-        /* recoger datos */
-        
-        $titulo = htmlspecialchars(trim($_POST['titulo'] ?? ""));
-        $autor = htmlspecialchars(trim($_POST['autor'] ?? ""));
-        $anio = trim($_POST['anio'] ?? "");
-        $genero=$_POST['genero']?? "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
 
 
+    /* recoger datos */
 
-        // 2) Validación de datos
-        // Verificamos si los campos están llenos
-        if ($titulo === "" ) {
-            $errores['titulo']= "titulo es obligatorio";
+    $titulo = htmlspecialchars(trim($_POST['titulo'] ?? ""));
+    $autor = htmlspecialchars(trim($_POST['autor'] ?? ""));
+    $anio = trim($_POST['anio'] ?? "");
+    $genero = $_POST['genero'] ?? "";
+
+
+
+    // 2) Validación de datos
+    // Verificamos si los campos están llenos
+    if ($titulo === "") {
+        $errores['titulo'] = "titulo es obligatorio";
+    }
+
+    if ($autor === "") {
+        $errores['autor'] = "autor es obligatorio";
+    }
+
+    if ($anio === "") {
+        $errores['anio'] = "anio es obligatorio";
+    } elseif ($anio > 2100 || $anio < 1800) {
+        $errores['anio'] = "el anio tiene que estar entre 1800 y 2100";
+    }
+
+    if ($genero === "") {
+        $errores['genero'] = "el genero es obligatorio";
+    } elseif (!in_array($genero, ["Novela", "Ciencia ficción", "Fantasía"])) {
+        $errores['genero'] = "opcion invalida";
+    }
+
+    // 3)Cuando no hay errores
+    if (empty($errores)) {
+        $mensaje = "registro realizado con exito<br>";
+
+
+        /*apartado 2*/
+
+        $archivo = fopen("libros.csv", "a+"); /*abre archivo para escritura y lectura*/
+
+        $libros = [
+            $titulo,
+            $autor,
+            $anio,
+            $genero
+        ];
+
+
+        if (fputcsv($archivo, $libros, ";")) {
+            $mensaje .= "registro completado";
+        } else {
+            $errores['guardarDatos'] = "error al guardar datos";
         }
 
-        if ($autor === "" ) {
-            $errores['autor']= "autor es obligatorio";
-        }
-
-        if ($anio === "" ) {
-            $errores['anio']= "anio es obligatorio";
-
-        }elseif($anio>2100 || $anio<1800){
-            $errores['anio']="el anio tiene que estar entre 1800 y 2100";
-        }
-
-        if($genero===""){
-            $errores['genero']= "el genero es obligatorio";
-
-        }elseif(!in_array($genero, ["Novela", "Ciencia ficción", "Fantasía"])){
-            $errores['genero']= "opcion invalida";
-
-        }
-
-        // 3)Cuando no hay errores
-        if (empty($errores)) {
-            $mensaje = "registro realizado con exito<br>";
-
-
-            /*apartado 2*/
-
-            $archivo=fopen("libros.csv", "a+"); /*abre archivo para escritura y lectura*/
-            
-            $libros=[
-                $titulo, $autor, $anio, $genero
-            ];
-
-
-            if(fputcsv($archivo, $libros, ";")){
-                $mensaje.= "registro completado";
-            }else{
-                $errores['guardarDatos']="error al guardar datos";
-            }
-
-            fclose($archivo);
-        }
-
-
-
+        fclose($archivo);
+    }
 }
 
 
- 
+
 
 ?>
 <!DOCTYPE html>
@@ -119,54 +116,54 @@ $mensaje="";
                     <?php
                     if (!empty($errores['titulo'])): ?>
                         <?= htmlspecialchars($errores['titulo']) ?>
-                        </p>
-                    <?php endif; ?>
-                </span>
-
-                 
-
-                <!-- Campo para el autor del libro -->
-                <label for="autor">Autor</label>
-                <input type="text" id="autor" name="autor" size="40" value="<?= htmlspecialchars($autor ?? '') ?>">
-                <span class="error">
-                    <?php
-                    if (!empty($errores['autor'])): ?>
-                        <?= htmlspecialchars($errores['autor']) ?>
-                        </p>
-                    <?php endif; ?>
-                </span>
-
-                <!-- Campo para el año de publicación -->
-                <label for="anio">Año de publicación</label>
-                <input type="number" id="anio" name="anio" value="<?= htmlspecialchars($anio ?? '') ?>">>
-                <span class="error">
-                    <?php
-                    if (!empty($errores['anio'])): ?>
-                        <?= htmlspecialchars($errores['anio']) ?>
-                        </p>
-                    <?php endif; ?>
-                </span>
-
-                <!-- Campo para el género del libro -->
-                <label for="genero">Género</label>
-                <select id="genero" name="genero">
-                    <option value="">Selecciona un género</option>
-                    <option value="Novela" <?= ($genero == "Novela") ? 'selected' : '' ?>>Novela</option>
-                    <option value="Ciencia ficción" <?= ($genero == "Ciencia ficción") ? 'selected' : '' ?>>Ciencia ficción</option>
-                    <option value="Fantasía" <?= ($genero == "Fantasía") ? 'selected' : '' ?>>Fantasía</option>
-                </select>
-                <span class="error">
-                    <?php
-                    if (!empty($errores['genero'])): ?>
-                        <?= htmlspecialchars($errores['genero']) ?>
-                        </p>
-                    <?php endif; ?>
-                </span>
             </p>
-            <!-- Botón para enviar el formulario -->
-            <button type="submit" name="registrar">
-                💾 Registrar Libro
-            </button>
+        <?php endif; ?>
+        </span>
+
+
+
+        <!-- Campo para el autor del libro -->
+        <label for="autor">Autor</label>
+        <input type="text" id="autor" name="autor" size="40" value="<?= htmlspecialchars($autor ?? '') ?>">
+        <span class="error">
+            <?php
+            if (!empty($errores['autor'])): ?>
+                <?= htmlspecialchars($errores['autor']) ?>
+                </p>
+            <?php endif; ?>
+        </span>
+
+        <!-- Campo para el año de publicación -->
+        <label for="anio">Año de publicación</label>
+        <input type="number" id="anio" name="anio" value="<?= htmlspecialchars($anio ?? '') ?>">
+        <span class="error">
+            <?php
+            if (!empty($errores['anio'])): ?>
+                <?= htmlspecialchars($errores['anio']) ?>
+                </p>
+            <?php endif; ?>
+        </span>
+
+        <!-- Campo para el género del libro -->
+        <label for="genero">Género</label>
+        <select id="genero" name="genero">
+            <option value="">Selecciona un género</option>
+            <option value="Novela" <?= ($genero == "Novela") ? 'selected' : '' ?>>Novela</option>
+            <option value="Ciencia ficción" <?= ($genero == "Ciencia ficción") ? 'selected' : '' ?>>Ciencia ficción</option>
+            <option value="Fantasía" <?= ($genero == "Fantasía") ? 'selected' : '' ?>>Fantasía</option>
+        </select>
+        <span class="error">
+            <?php
+            if (!empty($errores['genero'])): ?>
+                <?= htmlspecialchars($errores['genero']) ?>
+                </p>
+            <?php endif; ?>
+        </span>
+        </p>
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" name="registrar">
+            💾 Registrar Libro
+        </button>
         </form>
 
 
@@ -175,7 +172,7 @@ $mensaje="";
         <!-- Mensaje de notificación o resultado -->
         <p class='notice'>
             <?php
-                if (!empty($mensaje)): ?>
+            if (!empty($mensaje)): ?>
                 <?= ($mensaje); ?>
             <?php endif; ?>
         </p>

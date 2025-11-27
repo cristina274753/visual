@@ -1,5 +1,70 @@
 <?php
 // ¡AQUÍ session_start() y require_once 'dataset.php';!
+    session_start();
+    require_once '../dataset.php';
+
+    $cartasDinamicas="";
+    $id=1;
+    $visto="";
+
+    //si existe y comprueba si es un array
+    if (!isset($_SESSION['viajes_vistos']) || !is_array($_SESSION['viajes_vistos'])) {
+        $_SESSION['viajes_vistos'] = [];
+    }
+
+    //comprobar mensaje flash
+    if(isset($_SESSION['flash_message'])){
+        echo $_SESSION['flash_message'];
+        unset($_SESSION['flash_message']);
+    }
+
+    //generar cartas viajes y poner id para pagina stats
+    foreach($viajes as $viaje){
+
+        if(in_array($id, $_SESSION['viajes_vistos'])){
+
+            $visto=  "<article class='trip-card visited'>";
+
+        }else{
+            $visto=  "<article class='trip-card'>";
+        }
+
+         $cartasDinamicas.= 
+
+                $visto
+                ."<div class='trip-img'>
+                    <img src=".$viaje['imagen']." alt='Foto de ".$viaje['destino']."'>
+                </div>
+                <div class='trip-info'>
+                    <h2>".$viaje['destino']."</h2>
+                    <span class='meta'>".$viaje['duracion']." dias | ".$viaje['pais']."</span>
+                    <p>Valoración: ⭐ ".$viaje['valoracion']."/5</p>
+                </div>
+                <div class='trip-action'>
+                    <span class='price'>450,00€</span>
+                    <a href='stats.php?id=".$id."' class='btn-select'>Ver Análisis</a>
+                </div>
+            </article>
+        
+        ";
+
+        $id++;
+    }
+
+    
+    //cabezera viajes reservados
+    $reservados="
+    
+        Viajes reservados: ". count($_SESSION['reservas']) ."
+    ";
+
+
+
+
+
+
+   
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,25 +82,17 @@
         <p>Selecciona un viaje para ver las estadísticas comparativas.</p>
 
         <div class="counter">
-            Viajes reservados: **2**
+            <?php
+                echo $reservados
+            ?>
         </div>
     </header>
     <!-- <div class='mensaje-flash'>Ejemplo de mensaje</div> -->
     <main class="travel-grid">
-        <article class="trip-card visited">
-            <div class="trip-img">
-                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80" alt="Foto de París">
-            </div>
-            <div class="trip-info">
-                <h2>París</h2>
-                <span class="meta">5 días | Francia</span>
-                <p>Valoración: ⭐ 4.5/5</p>
-            </div>
-            <div class="trip-action">
-                <span class="price">450,00€</span>
-                <a href="stats.php?id=1" class="btn-select">Ver Análisis</a>
-            </div>
-        </article>
+        
+        <?php
+            echo $cartasDinamicas;
+        ?>
 
     </main>
 </body>

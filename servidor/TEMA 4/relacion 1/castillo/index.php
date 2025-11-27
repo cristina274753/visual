@@ -2,6 +2,8 @@
 
     session_start();
 
+    
+
 
     $nombre="";
     $errores=[];
@@ -15,20 +17,28 @@
 
         // 2) Validación de datos
         // Verificamos si los campos están llenos
-        if ($nombre === "" || $apellidos === "") {
+        if ($nombre === "" ) {
             $errores['nombre']= "Por favor, rellena el campo nombre";
         }
 
 
+         // 3)Cuando no hay errores
+        if (empty($errores)) {
+            
+            $_SESSION['nombre']=$nombre;
+            $_SESSION['puntos']=0;
+            $_SESSION['aciertos']=0;
+            $_SESSION['fallos']=0;
+            $_SESSION['turno']=1;
+
+            header("Location: juego.php");
+            exit();
+
+        }
         
     }
 
-    // 3)Cuando no hay errores
-    if (empty($errores)) {
-        
-        $_SESSION['nombre']=$nombre;
-
-    }
+   
 
 ?>
 
@@ -42,12 +52,25 @@
 </head>
 <body>
     
+
         <h1>Bienvenido a las Puertas del Castillo</h1>
-    <form action="juego.php">
-        <label>Tu nombre:</label>
-        <input type="text" name="nombre">
-        <button type="submit">Entrar en servicio</button>
-    </form>
+        <form name="myForm" action="" method="post">
+    
+          <!-- Campos de texto -->
+          <div class="row">
+            <div class="col">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Ingresa tu nombre" required>
+            </div>
+          </div>
+    
+          <!-- Acciones -->
+          <div class="actions" style="margin-top:1rem">
+            <input type="submit" name="enviar" value="Enviar">
+          </div>
+    
+        </form>
+    
     
 </body>
 </html>
