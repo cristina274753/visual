@@ -12,6 +12,15 @@
         $_SESSION['viajes_vistos'] = [];
     }
 
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    if(!isset($_SESSION['reservas'])) {
+        $_SESSION['reservas'] = [];
+    }
+
     //comprobar mensaje flash
     if(isset($_SESSION['flash_message'])){
         echo $_SESSION['flash_message'];
@@ -56,6 +65,9 @@
     $reservados="
     
         Viajes reservados: ". count($_SESSION['reservas']) ."
+                <div>
+                    <a href='carrito.php?id=".$id."' class='btn-select'>Total reservas</a>
+                </div>
     ";
 
 

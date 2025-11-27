@@ -1,8 +1,7 @@
-
 <?php
+session_start();
 
-    session_start();
-
-echo print_r($_SESSION);
-
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>

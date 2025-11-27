@@ -46,7 +46,9 @@
                 </div>
                 <div class='big-price'>".$viajes[$id]['precio']."€</div>
 
-                <a href='' class='btn-reserve'>Reservar este viaje</a>
+                <a href='reserva.php?id=$id' class='btn-reserve'>Reservar este viaje</a>
+
+
 
         ";
 
@@ -78,9 +80,7 @@
 
         }
 
-        //reserva
-        $_SESSION['reservas'][]=$id;
-        $_SESSION['flash_message']="Viaje a ".$viajes[$id]['destino']." reservado con exito";
+        
        
     }
 

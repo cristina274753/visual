@@ -70,7 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['enviar'])) {
     $libros = CargarLibros();
 
     if ($genero != "Todos") {
-        $libros = array_values(array_filter($libros, fn($libro) => filtrarPorGenero($libro, $genero)));
+        $libros = array_values(array_filter($libros, function($libro) {
+            global $genero;
+            return filtrarPorGenero($libro, $genero);
+        }));
     }
 }
 
@@ -150,6 +153,7 @@ foreach ($libros as $libro) {
     <?php endif; ?>
     </p>
 
+    
     <!-- ================= Apartado 6: Estadísticas de libros ========================== -->
     <p class='notice'><strong>Total de libros registrados</strong>: <?php echo $numerosLibrosTotales ?><br>
         - Fantasia: <?php echo $numFantasia ?><br>
