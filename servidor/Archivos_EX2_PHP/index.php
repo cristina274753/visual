@@ -1,0 +1,77 @@
+<?php
+
+session_start();
+require_once 'datos.php';
+
+$errores=[];
+$mensaje="";
+$nombre="";
+
+
+/* comprobar método del formulario */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    /* recoger datos */
+    $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ""));
+
+    // 2) Validación de datos
+    // Verificamos si los campos están llenos
+    if ($nombre === "") {
+        $errores[]= "Por favor, rellena el campo de nombre";
+    } 
+
+    // 3) Cuando no hay errores
+    if (empty($errores)) {
+       
+       
+        $_SESSION['usuario'] = $nombre;
+        header("Location: equipo.php"); // Redirigir a la página principal
+        exit();
+    }
+        
+
+    
+    
+}
+
+/* comprobar método del formulario */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
+    
+    header("Location: loginAgregar.php");
+    exit();
+}
+
+?>
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWES - Acceso a Equipos de Héroes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <div class="bg-white shadow-lg rounded-xl p-8">
+            <h1 class="text-4xl font-bold text-center text-slate-800 mb-2">Generador de Equipos</h1>
+            <p class="text-center text-slate-500 mb-8">Introduce tu nombre para comenzar la selección</p>
+            <!-- FORMULARIO PRINCIPAL: completa/cambia las propiedades del formulario -->
+            <form action="" method="post">
+                <div>
+                    <label for="estratega" class="block text-sm font-medium text-slate-700">Nombre del Jugador</label>
+                    <div class="mt-1">
+                        <input type="text" name="nombre" id="nombre" class="block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border" placeholder="Tu nombre...">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Comenzar
+                    </button>
+                </div>
+            </form>
+            <!-- mostramos un mensaje de error si existe -->
+            <div class='mt-4 text-red-600 text-sm text-center'>Mensaje de error</div>
+        </div>
+    </div>
+</body>
+</html>
