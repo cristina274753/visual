@@ -66,6 +66,26 @@ header{
   font-family: "Caprasimo";
 }
 
+/* BOTÓN FIJO PARA VOLVER ARRIBA */
+.volverArriba {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--resaltar);
+    color: white;
+    padding: 12px 15px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 0 10px black;
+    z-index: 999;
+}
+
+.volverArriba:hover {
+    background-color: var(--rosaFuerte);
+}
+
+
 
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -241,44 +261,71 @@ main{
 
 
 
-/*////////////////////////////////////////
-///2 bloque - TABLA 
-///////////////////////////////////////*/
-
-.destacados table {
-  width: 100%;
-  margin-top: 5rem;
-  border-radius: 12px;
-  overflow: hidden;   
-  color: var(--negro);
+/* ==============================
+   FORMULARIO COMPLETO SIMPLIFICADO
+============================== */
+.formulario {
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
 }
 
-.destacados thead {   /*encabezado*/
-  background-color: var(--rosaFuerte);
-  color: var(--blanco);
-  font-size: 20px;
+fieldset {
+    border: 1px solid var(--rosaClaro);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--rosaFuerte);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--azul);
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 
-.destacados th, .destacados td {
-  padding: 1rem;
-  text-align: center;
+
+/* ==============================
+   BOTONES DEL FORMULARIO
+============================== */
+.formulario button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--resaltar); /* color inicial */
+    color: var(--blanco);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
-/*pares y impares */
-.destacados tbody tr:nth-child(odd) {
-  background-color: var(--azul);
+.actions input:hover,
+.actions input:focus {
+    background-color: var(--rosaFuerte);
+    outline: none;
 }
 
-.destacados tbody tr:nth-child(even) {
-  background-color: var(--rosaClaro);
-}
-
-.destacados tbody tr:hover {
-  background-color: var(--resaltar);
-  color: var(--blanco);
-
-}
 
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,6 +353,7 @@ aside div {
   column-gap: 30px;
   column-rule: 1px solid rgb(0, 0, 0); 
   font-size: 17px;
+  margin-bottom: 30px;
 }
 
 
@@ -342,7 +390,16 @@ footer{
 }
 
 /*//////////////////////////////////////////////////////////////////////////
-///2 bloque - DERECHOS DE AUTOR 
+///2 bloque - ACCESIBILIDAD
+/////////////////////////////////////////////////////////////////////////*/
+
+.accesibilidad, .accesibilidad a{
+  color: var(--rosaClaro);
+} 
+
+
+/*//////////////////////////////////////////////////////////////////////////
+///3 bloque - DERECHOS DE AUTOR 
 /////////////////////////////////////////////////////////////////////////*/
 
 .derechosAutor{

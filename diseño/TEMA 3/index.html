@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="css/estilo.css">
     
 </head>
-<body>
+<body id="inicio">
     
+  
     <header>
         <div class="logo">
             <a href="index.html"><img src="img/Burgernautas.png" alt="logo"></a> <!--link logo a index-->
@@ -16,6 +17,10 @@
         <div class="nombreEmpresa">
             <h1>Burgernautas</h1>
         </div>
+
+        <!-- Botón hamburguesa accesible -->
+        <button class="menuHamburguesa" aria-label="Abrir o cerrar menú" aria-expanded="false">☰</button>
+    
     </header>
 
     <nav>
@@ -29,6 +34,10 @@
 
         </ul>
     </nav>
+
+    <!-- BOTÓN FIJO PARA VOLVER ARRIBA --> 
+        <a href="#inicio" class="volverArriba" aria-label="Volver al inicio">⬆</a>
+
 
     <main>
         <section class="promocion"> 
@@ -99,75 +108,94 @@
                     <p>Calorías: 540 • Sabor: picante y tostado • Precio: 5€</p>
                 </article>
             </div>
-                <!--TODO quitar tabla y poner formulario-->
+                
+
+
             <div class="formulario">
-                    <h1>Título del formulario</h1>
+                    <h2>Solicitud de Información</h2>
                     <form name="myForm" action="" method="post">
                 
                       <!-- Campos de texto -->
-                      <div class="row">
-                        <div class="col">
-                          <label for="nombre">Nombre</label>
-                          <input id="nombre" name="nombre" type="text" placeholder="Ingresa tu nombre" required>
-                        </div>
-                        <div class="col">
-                          <label for="apellidos">Apellidos</label>
-                          <input id="apellidos" name="apellidos" type="text" placeholder="Ingresa tu apellido" required>
-                        </div>
-                        <div class="col">
-                          <label for="telefono">Telefono</label>
-                          <input id="telefono" name="telefono" type="number" placeholder="Ingresa tu telefono" required>
-                        </div>
-                        <div class="col">
-                          <label for="nacimiento">fecha de nacimiento</label>
-                          <input id="nacimiento" name="nacimiento" type="date" placeholder="Ingresa tu telefono" required>
-                        </div>
-                      </div>
+                      <fieldset>
+                          <legend>Datos personales</legend>
+
+                          <div class="row">
+                            <div class="col">
+                              <label for="nombre">Nombre: </label>
+                              <input id="nombre" name="nombre" type="text" maxlength="15" placeholder="Ingresa tu nombre" required>
+                            </div>
+                            <div class="col">
+                              <label for="apellidos">Apellidos: </label>
+                              <input id="apellidos" name="apellidos" type="text" maxlength="30" placeholder="Ingresa tu apellido" required>
+                            </div>
+                            <div class="col">
+                              <label for="telefono">Telefono: </label>
+                              <input id="telefono" name="telefono" type="tel" placeholder="Ingresa tu telefono" pattern="[0-9]{9}" required>
+                            </div>
+                            <div class="col">
+                              <label for="nacimiento">fecha de nacimiento: </label>
+                              <input id="nacimiento" name="nacimiento" type="date"  required>
+                            </div>
+                          </div>
+                      </fieldset>
                 
                       
                       <!-- Select -->
-                      <div>
-                        <label for="hamburguesa">tipo hamburguesa</label>
-                        <select id="hamburguesa" name="hamburguesa" required>
-                          <option value="">Selecciona un tipo</option>
-                          <option value="es">cremoso y aromático</option>
-                          <option value="mx">picante y tostado</option>
-                          <option value="ar">suave y equilibrado</option>
-                        </select>
+                      <fieldset>
+                        <legend>ProductoS</legend>
+                        <div>
+                          <label for="hamburguesa">tipo hamburguesa</label>
+                          <select id="hamburguesa" name="hamburguesa" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="cremoso y aromático">cremoso y aromático</option>
+                            <option value="picante y tostado">picante y tostado</option>
+                            <option value="suave y equilibrado">suave y equilibrado</option>
+                          </select>
 
-                        <label for="hamburguesa">restaurantes</label>
-                        <select id="restaurante" name="restaurante" required>
-                          <option value="">Selecciona un restaurante</option>
-                          <option value="es">alcala de guadaira</option>
-                          <option value="mx">dos hermanas</option>
-                        </select>
+                          <label for="hamburguesa">restaurantes</label>
+                          <select id="restaurante" name="restaurante" required>
+                            <option value="">Selecciona un restaurante</option>
+                            <option value="alcala de guadaira">alcala de guadaira</option>
+                            <option value="dos hermanas">dos hermanas</option>
+                          </select>
 
-                        <label for="hamburguesa">precio</label>
-                        <select id="precio" name="precio" required>
-                          <option value="">Selecciona un precio</option>
-                          <option value="es">menos de 8</option>
-                          <option value="mx">mas de 8</option>
-                        </select>
-                      </div>
+                          <label for="hamburguesa">precio</label>
+                          <select id="precio" name="precio" required>
+                            <option value="">Selecciona un precio</option>
+                            <option value="menos de 8">menos de 8</option>
+                            <option value="mas de 8">mas de 8</option>
+                          </select>
+                        </div>
+                    </fieldset>
                 
                       <!-- Radios / Checkboxes -->
                       <fieldset >
                         <legend>deseas suscribirse</legend>
-                        <label><input type="radio" name="susbs" value="si " checked> si</label>
-                        <label><input type="radio" name="susbs" value="no"> no</label>
+                        <label class="radio-label">
+                            <input type="radio" name="suscripcion" value="si" checked> Sí
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="suscripcion" value="no"> No
+                        </label>
                   
                       </fieldset>
                 
                 
                       <!-- Textarea -->
-                      <div>
-                        <label for="observaciones">observaciones</label>
-                        <textarea id="observaciones" name="observaciones" rows="15" placeholder="Escribe tu observacion..."></textarea>
-                      </div>
+
+                      <fieldset >
+                        <legend>observacion</legend>
+                        <div>
+                          <label for="observaciones">observaciones</label>
+                          <textarea id="observaciones" name="observaciones" rows="15" placeholder="Escribe tu observacion..."></textarea>
+                        </div>
+                  
+                      </fieldset>
+                      
                      
                 
                       <!-- Acciones -->
-                      <div class="actions" style="margin-top:1rem">
+                      <div class="actions">
                         <input type="submit" name="enviar" value="Enviar">
                         <input type="reset" name="reset" value="cancelar">
                       </div>
@@ -190,19 +218,32 @@ Nuestros envases son biodegradables y reciclables, eliminando el uso de plástic
 Además, aplicamos medidas de ahorro energético y de agua en nuestros locales, y fomentamos la separación y reciclaje de residuos en cada etapa de producción.
 
 En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor del espacio con un impacto terrenal cada vez más verde.</div>
+
+        <div>At Burgernautas, we believe that enjoying a delicious burger should not come at the expense of taking care of the planet. 
+        That is why we work every day to reduce our environmental impact and promote a responsible business model. 
+        We use local and seasonal ingredients, supporting sustainable producers and reducing transportation emissions. 
+        Our packaging is biodegradable and recyclable, eliminating single-use plastics. 
+        Additionally, we implement energy and water-saving measures in our locations and encourage waste separation and recycling at every stage of production. 
+        At Burgernautas, every burger is part of a commitment: delivering cosmic flavor with an increasingly green earthly impact.</div>
     </aside>
 
 
     <footer>
-        <div class="redes">
-            <img src="img/instagram.png" alt="">
-            <img src="img/tiktok.png" alt="">
-            <img src="img/facebook.png" alt="">
-        </div>
-        <div class="derechosAutor">
-            <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+      <div class="redes">
+          <img src="img/instagram.png" alt="Instagram">
+          <img src="img/tiktok.png" alt="TikTok">
+          <img src="img/facebook.png" alt="Facebook">
+      </div>
+
+      <div class="accesibilidad">
+          <a href="accesibilidad.html">Declaración de Accesibilidad</a>
+          <img src="img/wcag22.png" alt="Nivel de conformidad WCAG 2.2">  <!--TODO logo del nivel de conformidad WCAG 2.2 -->
+      </div>
+
+      <div class="derechosAutor">
+          <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
+      </div>
+  </footer>
 
     <script>
         const menuButton = document.createElement('button');
