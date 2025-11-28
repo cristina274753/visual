@@ -18,28 +18,34 @@
             <h1>Burgernautas</h1>
         </div>
 
-        <!-- Botón hamburguesa accesible -->
-        <button class="menuHamburguesa" aria-label="Abrir o cerrar menú" aria-expanded="false">☰</button>
+        
     
     </header>
 
-    <nav>
+    <nav id="mainNav"> 
         <ul>
-            <li><a href="https://www.lacalleburger.com/carta">Carta</a></li>
-            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/">Reserva</a></li>
-            <li><a href="https://www.lacalleburger.com/restaurantes2">Ubicacion</a></li>
-            <li><a href="accesibilidad.html">Accesibilidad</a></li> <!--pagina de accesibilidad-->
-            <li><a href="https://www.loccoburger.es/contacto/">Contacto</a></li>
-
-
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c">Carta</a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="r">Reserva</a></li>
+            <li><a href="https://www.lacalleburger.com/restaurantes2" accesskey="u">Ubicación</a></li>
+            <li><a href="accesibilidad.html" accesskey="a">Accesibilidad</a></li>
+            <li><a href="https://www.loccoburger.es/contacto/" accesskey="o">Contacto</a></li>
         </ul>
     </nav>
 
-    <!-- BOTÓN FIJO PARA VOLVER ARRIBA --> 
+    <!-- boton para ir hacia arriba --> 
         <a href="#inicio" class="volverArriba" aria-label="Volver al inicio">⬆</a>
+        
+
+        
 
 
     <main>
+
+      <div class="saltar">
+        <a href="#mainProductos" class="salto">Saltar a los productos</a>
+        <a href="#mainNav" class="salto">Saltar navegación</a>
+      </div>
+
         <section class="promocion"> 
             <h2>Hamburguesa Combo Interestelar !!</h2>
             <img src="img/hamburguesa1.png" alt="">
@@ -47,7 +53,7 @@
         </section>
 
 
-        <section class="destacados">
+        <section class="destacados" id="mainProductos">
             <h2>Producto destacados</h2>
             <div class="cartas"> 
 
@@ -115,7 +121,7 @@
                     <h2>Solicitud de Información</h2>
                     <form name="myForm" action="" method="post">
                 
-                      <!-- Campos de texto -->
+                      <!-- datos -->
                       <fieldset>
                           <legend>Datos personales</legend>
 
@@ -123,24 +129,28 @@
                             <div class="col">
                               <label for="nombre">Nombre: </label>
                               <input id="nombre" name="nombre" type="text" maxlength="15" placeholder="Ingresa tu nombre" required>
+                              <p class="error">El nombre es obligatorio</p>
                             </div>
                             <div class="col">
                               <label for="apellidos">Apellidos: </label>
                               <input id="apellidos" name="apellidos" type="text" maxlength="30" placeholder="Ingresa tu apellido" required>
+                              <p class="error">El apellido es obligatorio</p>
                             </div>
                             <div class="col">
                               <label for="telefono">Telefono: </label>
                               <input id="telefono" name="telefono" type="tel" placeholder="Ingresa tu telefono" pattern="[0-9]{9}" required>
+                              <p class="error">El telefono es obligatorio</p>
                             </div>
                             <div class="col">
                               <label for="nacimiento">fecha de nacimiento: </label>
                               <input id="nacimiento" name="nacimiento" type="date"  required>
+                              <p class="error">La fecha de nacimiento es obligatorio</p>
                             </div>
                           </div>
                       </fieldset>
                 
                       
-                      <!-- Select -->
+                      <!-- elecciones -->
                       <fieldset>
                         <legend>ProductoS</legend>
                         <div>
@@ -151,31 +161,35 @@
                             <option value="picante y tostado">picante y tostado</option>
                             <option value="suave y equilibrado">suave y equilibrado</option>
                           </select>
+                          <p class="error">Debes elegir uno</p>
 
-                          <label for="hamburguesa">restaurantes</label>
-                          <select id="restaurante" name="restaurante" required>
+                          <label for="restaurante">Restaurante</label>
+                        <select id="restaurante" name="restaurante" required>
                             <option value="">Selecciona un restaurante</option>
-                            <option value="alcala de guadaira">alcala de guadaira</option>
-                            <option value="dos hermanas">dos hermanas</option>
-                          </select>
+                            <option value="alcala de guadaira">Alcalá de Guadaira</option>
+                            <option value="dos hermanas">Dos Hermanas</option>
+                        </select>
+                        <p class="error">Debes elegir uno</p>
 
-                          <label for="hamburguesa">precio</label>
+                          <label for="precio">Precio</label>
                           <select id="precio" name="precio" required>
                             <option value="">Selecciona un precio</option>
-                            <option value="menos de 8">menos de 8</option>
-                            <option value="mas de 8">mas de 8</option>
+                            <option value="menos de 8">Menos de 8</option>
+                            <option value="mas de 8">Más de 8</option>
                           </select>
+                          <p class="error">Debes elegir uno</p>
                         </div>
                     </fieldset>
                 
-                      <!-- Radios / Checkboxes -->
+                      <!-- si o no-->
                       <fieldset >
                         <legend>deseas suscribirse</legend>
-                        <label class="radio-label">
-                            <input type="radio" name="suscripcion" value="si" checked> Sí
+                        <label for="susSi">
+                          <input id="susSi" type="radio" name="suscripcion" value="si" checked> Sí
                         </label>
-                        <label class="radio-label">
-                            <input type="radio" name="suscripcion" value="no"> No
+
+                        <label for="susNo">
+                          <input id="susNo" type="radio" name="suscripcion" value="no"> No
                         </label>
                   
                       </fieldset>
@@ -187,17 +201,17 @@
                         <legend>observacion</legend>
                         <div>
                           <label for="observaciones">observaciones</label>
-                          <textarea id="observaciones" name="observaciones" rows="15" placeholder="Escribe tu observacion..."></textarea>
+                          <textarea id="observaciones" name="observaciones" rows="15" maxlength="1200" placeholder="Escribe tu observación..."></textarea>
                         </div>
                   
                       </fieldset>
                       
                      
                 
-                      <!-- Acciones -->
+                      <!-- botones -->
                       <div class="actions">
-                        <input type="submit" name="enviar" value="Enviar">
-                        <input type="reset" name="reset" value="cancelar">
+                        <input type="submit" name="enviar" value="Enviar" title="Enviar formulario">
+                        <input type="reset" name="reset" value="cancelar" title="Borrar formulario">
                       </div>
                 
                     </form>
@@ -219,7 +233,7 @@ Además, aplicamos medidas de ahorro energético y de agua en nuestros locales, 
 
 En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor del espacio con un impacto terrenal cada vez más verde.</div>
 
-        <div>At Burgernautas, we believe that enjoying a delicious burger should not come at the expense of taking care of the planet. 
+        <div lang="en">At Burgernautas, we believe that enjoying a delicious burger should not come at the expense of taking care of the planet. 
         That is why we work every day to reduce our environmental impact and promote a responsible business model. 
         We use local and seasonal ingredients, supporting sustainable producers and reducing transportation emissions. 
         Our packaging is biodegradable and recyclable, eliminating single-use plastics. 
@@ -237,16 +251,20 @@ En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor de
 
       <div class="accesibilidad">
           <a href="accesibilidad.html">Declaración de Accesibilidad</a>
-          <img src="img/wcag22.png" alt="Nivel de conformidad WCAG 2.2">  <!--TODO logo del nivel de conformidad WCAG 2.2 -->
+          <img src="img/wcag2.2AA.png" alt="Nivel de conformidad WCAG 2.2">  
       </div>
 
       <div class="derechosAutor">
           <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
       </div>
+
+      
+
   </footer>
 
     <script>
         const menuButton = document.createElement('button');
+        menuButton.setAttribute("aria-label", "Abrir o cerrar menú");
         menuButton.className = 'menuHamburguesa';
         menuButton.textContent = '☰';
         document.querySelector('header').appendChild(menuButton);
@@ -256,5 +274,7 @@ En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor de
             nav.classList.toggle('activo');
         });
     </script>
+
+   
 </body>
 </html>

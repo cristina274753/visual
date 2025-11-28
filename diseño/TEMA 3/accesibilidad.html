@@ -20,79 +20,70 @@
 
     <nav>
         <ul>
-            <li><a href="https://www.lacalleburger.com/carta">Carta</a></li>
-            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/">Reserva</a></li>
-            <li><a href="https://www.lacalleburger.com/restaurantes2">Ubicacion</a></li>
-            <li><a href="accesibilidad.html">Accesibilidad</a></li> <!--pagina de accesibilidad-->
-            <li><a href="https://www.loccoburger.es/contacto/">Contacto</a></li>
-
-
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c">Carta</a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="r">Reserva</a></li>
+            <li><a href="https://www.lacalleburger.com/restaurantes2" accesskey="u">Ubicación</a></li>
+            <li><a href="accesibilidad.html" accesskey="a">Accesibilidad</a></li>
+            <li><a href="https://www.loccoburger.es/contacto/" accesskey="o">Contacto</a></li>
         </ul>
     </nav>
 
     <main>
+
+        <!--apartado a-->
         <section>
             <h2>A) Nivel de conformidad alcanzado</h2>
             <p>
-                Esta página cumple con el nivel <strong>AA de WCAG 2.2</strong>, asegurando contraste adecuado, navegación accesible mediante teclado y textos alternativos en imágenes.
+                El sitio web Burgernautas cumple con el nivel de conformidad 
+                WCAG 2.2 – Nivel AA
             </p>
         </section>
 
+        <!--apartado b-->
         <section>
             <h2>B) Accesibilidad en la navegación</h2>
-            <p>Medidas implementadas en la navegación de la web:</p>
+            <p>A continuación se indican tres medidas aplicadas en la navegación del sitio:</p>
+
             <ul>
-                <li>Botón de menú hamburguesa accesible con <code>aria-label</code> y <code>aria-expanded</code>.</li>
-                <li>Enlaces con contraste suficiente y cambio de color al pasar el cursor (<code>hover</code>), para identificar foco visual.</li>
-                <li>Botón “Volver arriba” con <code>aria-label</code> y posición fija para navegación rápida.</li>
+                <li>Inclusión de enlaces de salto al contenido principal y a la zona de navegación (saltar a los productos, saltar navegación).   
+                </li>
+                <li>Implementación de un botón fijo que permite volver al inicio de la página en cualquier momento.
+                </li>
+                <li>Menú de navegación estructurado en una lista dentro de la etiqueta semántica nav, con atajos de teclado (accesskey) para acceder rápidamente a las opciones.
+                </li>
             </ul>
         </section>
 
+        <!--apartado d-->
         <section>
             <h2>D) Criterios de conformidad o éxito</h2>
-            <ul>
-                <li>
-                    <strong>Decisión:</strong> Uso de textos alternativos en todas las imágenes.<br>
-                    <strong>Criterio WCAG:</strong> 1.1.1 Contenido no textual.<br>
-                    <strong>Técnica:</strong> Uso de atributo <code>alt</code> en todas las imágenes.
-                </li>
-                <li>
-                    <strong>Decisión:</strong> Contraste adecuado entre texto y fondo.<br>
-                    <strong>Criterio WCAG:</strong> 1.4.3 Contraste (mínimo).<br>
-                    <strong>Técnica:</strong> Uso de colores con suficiente contraste en CSS (<code>var(--rosaFuerte)</code> sobre <code>var(--negro)</code>).
-                </li>
-            </ul>
+            <p>Las siguientes son las decisiones más importantes tomadas para cumplir la accesibilidad:</p>
+
+            <p>Se ha utilizado HTML semántico para estructurar el contenido (criterio de conformidad: estructura semántica, técnica: uso de etiquetas header, main, aside, footer).</p>
+            <p>Los formularios incluyen etiquetas asociadas a cada campo (criterio de conformidad: formularios accesibles, técnica: uso de label for).</p>
         </section>
 
+        <!--apartado e-->
         <section>
             <h2>E) Principios de Jakob Nielsen</h2>
-            <ul>
-                <li>
-                    <strong>Visibilidad del estado del sistema:</strong> El usuario siempre sabe qué menú está abierto (botón hamburguesa con <code>aria-expanded</code> dinámico).<br>
-                    <strong>Captura de código:</strong>
-                    <pre>
-                        menuButton.addEventListener('click', () => {
-                            nav.classList.toggle('activo');
-                        });
-                    </pre>
-                </li>
-                <li>
-                    <strong>Consistencia y estándares:</strong> Todos los enlaces usan estilos similares y etiquetas claras, siguiendo buenas prácticas de accesibilidad.<br>
-                    <strong>Captura de código:</strong>
-                    <pre>
-                        nav li a:hover {
-                            background: var(--rosaClaro);
-                            color: black;
-                        }
-                    </pre>
-                </li>
-                <li>
-                    <strong>Prevención de errores:</strong> Formularios con validación HTML5 (required, pattern) para evitar envío de datos incompletos.<br>
-                    <strong>Captura de código:</strong>
-                    <pre>
-<input id="telefono" name="telefono" type="tel" placeholder="Ingresa tu telefono" pattern="[0-9]{9}" required></pre>
-                </li>
-            </ul>
+            <article>
+                <h3>Prevención de errores</h3>
+                <p>El formulario incluye restricciones en los campos (maxlength, pattern, required) que evitan que el usuario introduzca datos inválidos. Por ejemplo, el campo teléfono solo acepta 9 dígitos gracias al atributo pattern</p>
+                <pre><code>
+                    label for="telefono" Teléfono:/label
+                    input id="telefono" name="telefono" type="tel" pattern="[0-9]{9}" required
+                </code></pre>
+            </article>
+            <article>
+                <h3>Consistencia y estándares</h3>
+                <p>Se emplean etiquetas estándar y convenciones comunes en formularios.</p>
+                <pre><code>label for="nombre"Nombre:/label</code></pre>
+            </article>
+            <article>
+                <h3>Control y libertad del usuario</h3>
+                <p>El formulario incluye un botón de reset que permite cancelar y borrar datos.</p>
+                <pre><code>input type="reset" value="cancelar"</code></pre>
+            </article>
         </section>
     </main>
 
@@ -108,19 +99,32 @@ Nuestros envases son biodegradables y reciclables, eliminando el uso de plástic
 Además, aplicamos medidas de ahorro energético y de agua en nuestros locales, y fomentamos la separación y reciclaje de residuos en cada etapa de producción.
 
 En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor del espacio con un impacto terrenal cada vez más verde.</div>
+
+        <div lang="en">At Burgernautas, we believe that enjoying a delicious burger should not come at the expense of taking care of the planet. 
+        That is why we work every day to reduce our environmental impact and promote a responsible business model. 
+        We use local and seasonal ingredients, supporting sustainable producers and reducing transportation emissions. 
+        Our packaging is biodegradable and recyclable, eliminating single-use plastics. 
+        Additionally, we implement energy and water-saving measures in our locations and encourage waste separation and recycling at every stage of production. 
+        At Burgernautas, every burger is part of a commitment: delivering cosmic flavor with an increasingly green earthly impact.</div>
     </aside>
 
 
     <footer>
-        <div class="redes">
-            <img src="img/instagram.png" alt="">
-            <img src="img/tiktok.png" alt="">
-            <img src="img/facebook.png" alt="">
-        </div>
-        <div class="derechosAutor">
-            <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+      <div class="redes">
+          <img src="img/instagram.png" alt="Instagram">
+          <img src="img/tiktok.png" alt="TikTok">
+          <img src="img/facebook.png" alt="Facebook">
+      </div>
+
+      <div class="accesibilidad">
+          <a href="accesibilidad.html">Declaración de Accesibilidad</a>
+          <img src="img/wcag2.2AA.png" alt="Nivel de conformidad WCAG 2.2"> 
+      </div>
+
+      <div class="derechosAutor">
+          <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
+      </div>
+  </footer>
 
     <script>
         const menuButton = document.createElement('button');

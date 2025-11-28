@@ -44,6 +44,24 @@ h2{
 
 }
 
+/* botones de saltar contenido*/
+.saltar {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.salto{
+  background-color: var(--rosaFuerte); 
+  color: var(--rosaClaro);    
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///HEADER - LOGO-NOMBRE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -261,9 +279,9 @@ main{
 
 
 
-/* ==============================
-   FORMULARIO COMPLETO SIMPLIFICADO
-============================== */
+/*//////////////////////////////////////////////////////////////////////////
+//FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
 .formulario {
     background-color: var(--negro);
     color: var(--blanco);
@@ -303,21 +321,39 @@ label {
     box-sizing: border-box;
 }
 
+/*//////////////////////////////////////////////////////////////////////////
+//VALIDACION DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+/* Campos válidos */
+.formulario input:valid,
+.formulario select:valid,
+.formulario textarea:valid {
+  border: 2px solid green;
+  background-color: #e6ffe6;
+  
+}
+
+/* Campos no validos */
+.formulario input:invalid,
+.formulario select:invalid,
+.formulario textarea:invalid {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+/* Mensajes de error en el formulario */
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
 
 
-/* ==============================
-   BOTONES DEL FORMULARIO
-============================== */
-.formulario button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--resaltar); /* color inicial */
-    color: var(--blanco);
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-    margin-top: 10px;
+/*//////////////////////////////////////////////////////////////////////////
+//BOTONES DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+
+.actions input{
+  background-color: var(--azul);
 }
 
 .actions input:hover,
@@ -366,7 +402,6 @@ aside div {
 
 footer{
   grid-area: footer;
-  
   background-color: var(--rosaFuerte);
   display: flex;
   align-items: center;
@@ -397,6 +432,13 @@ footer{
   color: var(--rosaClaro);
 } 
 
+.accesibilidad img{
+
+  width: 100px;
+  height: auto;
+  margin-left: 10px;
+}
+
 
 /*//////////////////////////////////////////////////////////////////////////
 ///3 bloque - DERECHOS DE AUTOR 
@@ -414,6 +456,9 @@ footer{
 .menuHamburguesa {
   display: none;
 }
+
+
+
 
 
 
