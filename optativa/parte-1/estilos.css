@@ -1,0 +1,108 @@
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #e6f0ff;
+  color: #333;
+}
+
+
+
+.contenedor {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffd8d8;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.titulo {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #000000;
+  text-align: center;
+}
+
+.contador {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 15px 0;
+  color: #ff0000;
+}
+
+.botonesContador {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.botonesContador button {
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #ff9090;
+  color: #fff;
+}
+
+.botonesContador button:hover {
+  background: #fd4848;
+}
+
+
+
+
+
+
+
+.total {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #ff0000;
+}
+
+.input {
+  width: 90%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+
+.botonTareas {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #ff9090;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.botonTareas:hover {
+  background: #fd4848;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tarea {
+  padding: 10px;
+  background:white;
+  border-radius: 8px;
+}
+
+.tarea:hover {
+  background: #fd4848;
+  color: #fff;
+}

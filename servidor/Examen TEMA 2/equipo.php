@@ -10,28 +10,28 @@ session_start();
 require_once 'datos.php';
 $errores=[];
 
-//comproaciones previa
-if (!isset($_SESSION['equipo'])) {
-    $_SESSION['equipo'] = [];
-}
+
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: index.php");
     exit();
 }
 
+if (!isset($_SESSION['coste'])) {
+    $_SESSION['coste'] = 0;
+}
+
 
 
 /* comprobar método del formulario */
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-
-    if(isset($_GET['reclutar'])){
+    if(isset($_POST['reclutar'])){
 
         /* recoger datos */
-        $id = htmlspecialchars(trim($_GET['reclutar'] ?? ""));
+        $id = htmlspecialchars(trim($_POST['reclutar'] ?? ""));
         
 
         // 2) Validación de datos
@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                    //restar coste al presupuesto
                     
                 $_SESSION['presupuesto']-=HEROES[$index]['coste']; 
+                $_SESSION['coste']+=HEROES[$index]['coste'];
                 
                 
             }
@@ -69,10 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
 
-    if(isset($_GET['eliminar'])){
+    if(isset($_POST['eliminar'])){
 
         /* recoger datos */
-        $id = htmlspecialchars(trim($_GET['eliminar'] ?? ""));
+        $id = htmlspecialchars(trim($_POST['eliminar'] ?? ""));
         
 
         // 2) Validación de datos
@@ -109,8 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                    //restar coste al presupuesto
                     
                 $_SESSION['presupuesto']+=HEROES[$index]['coste']; 
+                $_SESSION['coste']-=HEROES[$index]['coste'];
             }
         }
+
+        // Después de procesar POST (reclutar/eliminar)
+        header("Location: ".$_SERVER['PHP_SELF']);
+        exit();
     }
     
     
@@ -156,12 +162,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 </div>
                 <div class="text-center bg-white shadow-md rounded-lg p-3">
                     <span class="text-sm font-semibold text-slate-500">Coste Total</span>
-                    <p class="text-2xl font-bold text-indigo-600">500 Puntos</p>
+                    <p class="text-2xl font-bold text-indigo-600"><?php echo $_SESSION['coste'] ?> Puntos</p>
                 </div>
                 <!-- Acciones principales -->
                 <div class="flex flex-col gap-2">
                     <a href="analisis.php" class="text-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">Ver Análisis</a>
-                    <a href="index.php" name="reiniciar" class="text-center py-2 px-4 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700">Reiniciar</a>
+                    <a href="reiniciar.php" name="reiniciar" class="text-center py-2 px-4 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700">Reiniciar</a>
                 </div>
 
             </div>
@@ -200,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
 
                 <?php foreach(HEROES as $heroe):?>
-                <?php if(!in_array($heroe['id'], $_SESSION['equipo']) && $_SESSION['presupuesto']>$heroe['coste']): ?>
+                <?php if(!in_array($heroe['id'], $_SESSION['equipo']) && $_SESSION['presupuesto']>=$heroe['coste']): ?>
 
                 
                 <!-- Tarjeta de héroe (ejemplo1 - héroe sin incluir en la lista) -->
@@ -211,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <div class='p-2 rounded-lg bg-black/40 group-hover:bg-black/50 transition duration-300'>
                             <div>
                                 <h3 class='text-xl font-extrabold border-b-2 border-indigo-400 pb-1 mb-1'><?php echo $heroe['nombre'] ?></h3>
-                                <p class='text-base font-medium text-indigo-200 mb-2'>/<?php echo $heroe['clase'] ?></p>
+                                <p class='text-base font-medium text-indigo-200 mb-2'><?php echo $heroe['clase'] ?></p>
                             </div>
                             <div class='text-xs space-y-1 mb-3'>
                                 <p><strong>Ataque: </strong><?php echo $heroe['ataque'] ?></p>
@@ -219,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <p><strong>Magia: </strong><?php echo $heroe['magia'] ?></p>
                             </div>
                             <p class='text-center font-bold text-indigo-300 text-lg mb-2'>Coste: <?php echo $heroe['coste'] ?></p>
-                            <form action="" method="get"> <!--completa el formulario (puedes cambiarlo si quieres pasar el id_heroe en el botón)-->
+                            <form action="" method="post"> <!--completa el formulario (puedes cambiarlo si quieres pasar el id_heroe en el botón)-->
                                 
                                 <button type="submit" name="reclutar" class="w-full py-1 px-3 text-white text-sm font-semibold rounded-lg shadow-md transition duration-150 bg-indigo-600 hover:bg-indigo-700" value="<?php echo $heroe['id'] ?>">Reclutar</button>
                             </form>
@@ -239,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 <!-- Tarjeta de héroe (ejemplo, héroe reclutado, se cambia el botón y borde de la card) -->
                 <div class='rounded-lg shadow-xl overflow-hidden relative h-[420px] group ring-4 ring-offset-2 ring-indigo-500'>
                     <!--  -->
-                    <img class='w-full h-full object-cover' src='img//<?php echo $heroe['imagen'] ?>' alt='<?php echo $heroe['nombre'] ?>'>
+                    <img class='w-full h-full object-cover' src='img/<?php echo $heroe['imagen'] ?>' alt='<?php echo $heroe['nombre'] ?>'>
                     <div class='absolute inset-0 p-3 flex flex-col justify-end text-white transition duration-300 ease-in-out'>
                         <div class='p-2 rounded-lg bg-black/40 group-hover:bg-black/50 transition duration-300'>
                             <div>
@@ -252,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <p><strong>Magia: </strong><?php echo $heroe['magia'] ?></p>
                             </div>
                             <p class='text-center font-bold text-indigo-300 text-lg mb-2'>Coste: <?php echo $heroe['coste'] ?></p>
-                            <form> <!--completa el formulario (puedes cambiarlo si quieres pasar el id_heroe en el botón)-->
+                            <form  action="" method="post"> <!--completa el formulario (puedes cambiarlo si quieres pasar el id_heroe en el botón)-->
                                 <!--<input type='hidden' name='id_heroe' value='ID01'> -->
                                 <button type="submit" name="eliminar" class="w-full py-1 px-3 bg-red-600 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-red-700 transition duration-150" value="<?php echo $heroe['id'] ?>">Eliminar</button>
 
@@ -265,12 +271,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 <?php endif; ?>
                 
 
-                <?php if(!in_array($heroe['id'], $_SESSION['equipo']) && $_SESSION['presupuesto']<$heroe['coste']): ?>
+                <?php if(!in_array($heroe['id'], $_SESSION['equipo']) && $_SESSION['presupuesto']<=$heroe['coste']): ?>
 
                 <!-- Tarjeta de héroe (ejemplo, sin reclutar y sin presupuesto -> deshabilitado) -->
                 <div class='rounded-lg shadow-xl overflow-hidden relative h-[420px] group'>
                     <!-- ring-4 ring-offset-2 ring-indigo-500 -->
-                    <img class='w-full h-full object-cover' src='img//<?php echo $heroe['imagen'] ?>' alt='<?php echo $heroe['nombre'] ?>'>
+                    <img class='w-full h-full object-cover' src='img/<?php echo $heroe['imagen'] ?>' alt='<?php echo $heroe['nombre'] ?>'>
                     <div class='absolute inset-0 p-3 flex flex-col justify-end text-white transition duration-300 ease-in-out'>
                         <div class='p-2 rounded-lg bg-black/40 group-hover:bg-black/50 transition duration-300'>
                             <div>
