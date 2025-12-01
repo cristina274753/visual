@@ -1,1 +1,0 @@
-perro, gato, huron, pajaro, raton 
