@@ -1,5 +1,8 @@
 <?php
 
+require_once "config/sesiones.php";
+require_once "config/db.php";
+
 $errores = [];
 $mensaje = "";
 
@@ -89,32 +92,7 @@ if ($conexion->connect_error) {
 
 $conexion->close();
 
+include "views/index_vista.php";
+
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista productos</title>
-    <link rel='stylesheet' href='https://cdn.simplecss.org/simple.css'>
-</head>
-<body>
 
-<h1>Base de datos</h1>
-
-<?php if (!empty($errores)): ?>
-    <p class="notice">
-        <?php foreach ($errores as $e) echo htmlspecialchars($e) . "<br>"; ?>
-    </p>
-<?php endif; ?>
-
-<?php if (!empty($mensaje)): ?>
-    <p class="notice"><?= $mensaje ?></p>
-<?php endif; ?>
-
-<form method="GET">
-    <button name="anadir" value="1">Añadir producto</button>
-</form>
-
-</body>
-</html>
