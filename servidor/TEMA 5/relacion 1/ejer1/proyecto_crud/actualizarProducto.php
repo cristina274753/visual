@@ -1,7 +1,8 @@
 <?php
 
-require_once "config/sesiones.php";
-require_once "config/db.php";
+session_start();
+require_once __DIR__ . "/config/sesiones.php";
+require_once __DIR__ . "/models/ProductosModel.php";
 
 $errores = [];
 $nombre = "";
@@ -10,6 +11,15 @@ $precio = "";
 $mensaje = "";
 $consulta = "";
 $id = "";
+
+
+//comprobar sesion de usuario
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
 
 /* ======================
     1. RECIBIR ID
@@ -21,46 +31,30 @@ if ($id === "") {
     $errores[]=("Error: no se recibió un ID válido.");
 }
 
-
-/* ======================
-   2. CARGAR DATOS DEL PRODUCTO
-====================== */
-
-$conexion = new mysqli("localhost", "usuario_tienda", "1234", "tienda");
-
-if ($conexion->connect_error) {
-    $errores[]=("Error de conexión: " . $conexion->connect_error);
-}
-
-$producto = $conexion->query("SELECT * FROM productos WHERE id_producto='$id'");
-
-if ($producto->num_rows === 0) {
-    $errores[]=("Producto no encontrado.");
-}
-
-$datos = $producto->fetch_assoc();
-
 // 3) Cuando no hay errores
+if (empty($errores)) {
+    
+    //usamos el modelo para que nos de el producto
+    $modelo= new ProductosModel();
+    $producto = $modelo->obtenerPorId($id); //nos devuelve el producto con ese id para poner valores en el form
+
+
+
+    // 3) Cuando no hay errores
 if (empty($errores)) {
    
     // Si NO se ha enviado el formulario, rellenamos campos con valores actuales
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      $nombre = $datos["nombre"];
-      $descripcion = $datos["descripcion"];
-      $precio = $datos["precio"];
+      $nombre = $producto["nombre"];
+      $descripcion = $producto["descripcion"];
+      $precio = $producto["precio"];
   }
-}
 
 
-
-/* ======================
-    3. PROCESAR FORMULARIO
-====================== */
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
     $nombre = htmlspecialchars(trim($_POST['nombre']));
-    $descripcion = htmlspecialchars(trim($_POST['descripcion'] ?? ""));
+    $descripcion = htmlspecialchars(trim($_POST['descripcion'] ?? null));
     $precio = trim($_POST['precio']);
 
     // Validaciones
@@ -76,33 +70,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     // Si no hay errores → actualizar
     if (empty($errores)) {
 
-      if($descripcion==""){
+       $resultado = $modelo->actualizarProducto($id,$nombre, $descripcion, $precio);
 
-        $consulta = "UPDATE productos SET nombre='$nombre', descripcion=null, precio='$precio' WHERE id_producto='$id'";
-
-      }else{
-
-        $consulta = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio='$precio' WHERE id_producto='$id'";
-      }
-
-      if($consulta!==""){
-                
-          if(mysqli_query($conexion, $consulta)){              
-          $mensaje.=  "producto actualizado correctamente <br>";
-
-          }else{
-              $mensaje.=  "error al actualizar el producto <br>". mysqli_error($conexion);
-          }
-      }
         
 
-        // Redirigir
-        header("Location: tablaProductos.php");
-        exit();
+        if(!$resultado){
+
+            $errores['actualizar']="error al actualizar el producto";
+        }
+
+        // 3) Cuando no hay errores
+        if (empty($errores)) {
+            header("Location: tablaProductos.php");
+            exit();
+        }
+        
+
+       
     }
 }
 
-$conexion->close();
+}
+
+}
+
 
 include "views/modificar_vista.php";
 

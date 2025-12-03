@@ -1,19 +1,20 @@
 <?php
+require_once __DIR__. '/config.php';
 
 
 define('BD_HOST', 'localhost'); 
-define('BD_NAME', 'tienda');
-define('BD_USER', 'usuario_tienda'); 
-define('BD_PASS', '1234');
+define('BD_NAME', 'tienda'); //nombre base de datos
+define('BD_USER', 'usuario_tienda');   // usuario BD
+define('BD_PASS', '1234');  //contraseña del usuario
 
 class Database{
 
-    private $conn;
+    private $conn;  //conexion
     public $error;
 
     public function __construct(){
 
-        $this->conn= new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
+        $this->conn= new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME); //intenta conectarse a BD
 
         if($this->conn->connect_error){
             diel("error fatal de conexion". $this->conn->connect_error);
@@ -22,7 +23,7 @@ class Database{
         $this->conn->set_charset("utf8");
     }
 
-    public function executeQuery($sql, $params=[]){
+    public function executeQuery($sql, $params=[]){  //para consulta que devuelven datos  --   params= valores de ? 
 
         $stmt= $this->conn->prepare($sql);
 
@@ -31,15 +32,15 @@ class Database{
             $stmt->bind_param($types, ...$params);
         }
 
-        $stmt->execute();
-        $result=$stmt->get_result();
-        $data=$result->fetch_all(MYSQLI_ASSOC);
+        $stmt->execute();  //ejecuta la consulta
+        $result=$stmt->get_result(); //obtiene los resultados
+        $data=$result->fetch_all(MYSQLI_ASSOC); //devuelve array asociativo con las filas
         $stmt->close();
-        return $data;
+        return $data;  //devuelve un array de filas
 
     }
 
-    public function executeUpdate($sql, $params=[]){
+    public function executeUpdate($sql, $params=[]){  //para consultas que modifican la BD
 
         $stmt=$this->conn->prepare($sql);
 
@@ -60,7 +61,7 @@ class Database{
 
         $filas= $stmt->affected_rows;
         $stmt->close();
-        return $filas;
+        return $filas;   //da el numero de filas afectadas
 
     }
     

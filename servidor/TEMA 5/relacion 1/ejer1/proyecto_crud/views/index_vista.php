@@ -1,7 +1,7 @@
 <?php include "layout/header.php"; ?>
 
-
-<h1>Lista de Productos</h1>
+<h1>Bienvenido <?php echo $_SESSION['usuario']; ?></h1>
+<h2>Lista de Productos</h2>
 
 <?php if (!empty($errores)): ?>
     <p class="notice">
@@ -9,7 +9,7 @@
     </p>
 <?php endif; ?>
 
-<?php if (!empty($mensaje)): ?>
+<?php if (!empty($mensaje)): ?>  <!--tabla -->
     <p class="notice"><?= $mensaje ?></p>
 <?php endif; ?>
 

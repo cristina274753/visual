@@ -1,10 +1,19 @@
 <?php
 
-require_once "config/sesiones.php";
-require_once "config/db.php";
+session_start();
+require_once __DIR__ . "/config/sesiones.php";
+require_once __DIR__ . "/models/ProductosModel.php";
+
 
 $errores = [];
 $mensaje = "";
+
+//comprobar sesion de usuario
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+
 
 /* ---- PROCESAR ACCIONES (ANTES DE MOSTRAR NADA) ---- */
 
@@ -43,54 +52,55 @@ if (isset($_GET['anadir'])) {
 
 /* ---- MOSTRAR TABLA DE PRODUCTOS ---- */
 
-$conexion = new mysqli("localhost", "usuario_tienda", "1234", "tienda");
+$modelo= new ProductosModel();
+$productos = $modelo->obtenerTodos(); //nos devuelve un array con todos los productos 
 
-if ($conexion->connect_error) {
-    $mensaje .= "Error en la conexión. Fin.";
-} else {
+if(empty($productos)){
+    $mensaje="tabla vacia de productos";
 
-    $resultado = $conexion->query("SELECT * FROM productos");
+}else{
 
-    if ($resultado->num_rows > 0) {
+    //pintar tabla con array
+    $mensaje="<table>";
 
-        $mensaje .= "<br><table><caption>Lista de productos:</caption>";
-        $mensaje .= "<thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>";
+    $mensaje .= "<thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>";
 
-        while ($fila = $resultado->fetch_assoc()) {
 
-            $mensaje .= "<tr>
-                <td>{$fila['id_producto']}</td>
-                <td>{$fila['nombre']}</td>
-                <td>{$fila['descripcion']}</td>
-                <td>{$fila['precio']}</td>
-                <td>
-                    <form method='GET' style='display:inline'>
-                        <button name='actualizar' value='{$fila['id_producto']}'>Actualizar</button>
-                    </form>
+    foreach($productos as $producto){
 
-                    <form method='GET' style='display:inline'>
-                        <button name='eliminar' value='{$fila['id_producto']}'>Eliminar</button>
-                    </form>
-                </td>
-            </tr>";
-        }
+        $mensaje .= "<tr>
+                    <td>{$producto['id_producto']}</td>
+                    <td>{$producto['nombre']}</td>
+                    <td>{$producto['descripcion']}</td>
+                    <td>{$producto['precio']}</td>
+                    <td>
+                        <form method='GET' style='display:inline'>
+                            <button name='actualizar' value='{$producto['id_producto']}'>Actualizar</button>
+                        </form>
 
-        $mensaje .= "</table>";
+                        <form method='GET' style='display:inline'>
+                            <button name='eliminar' value='{$producto['id_producto']}'>Eliminar</button>
+                        </form>
+                    </td>
+                </tr>";
 
-    } else {
-        $mensaje .= "No se encontraron productos";
     }
+
+    $mensaje .= "</table>";
+
 }
 
-$conexion->close();
+
+
+
 
 include "views/index_vista.php";
 

@@ -1,61 +1,53 @@
 <?php
 
-require_once "config/sesiones.php";
-require_once "config/db.php";
+session_start();
+require_once __DIR__ . "/config/sesiones.php";
+require_once __DIR__ . "/models/ProductosModel.php";
+
 
 
 $errores=[];
-$id="";
 $mensaje="";
-$consulta="";
 
-// Comprobar método y parámetro
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+//comprobar sesion de usuario
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
 
-    // Recoger ID desde GET
-    $id = htmlspecialchars(trim($_GET['id'] ?? ""));
 
-    if ($id === "") {
-        $errores[] = "Error: ID vacío.";
+
+//coger el id del get
+$id = htmlspecialchars(trim($_GET['id'] ?? ""));  //le podemos poner intval 
+
+
+//usamos el modelo para que nos de el producto
+$modelo= new ProductosModel();
+$producto = $modelo->obtenerPorId($id); //nos devuelve el producto con ese id
+
+
+//comprobamos que producto existe
+if(!$producto){
+    $errores['producto']="no existe el producto";
+
+}
+
+// 3) Cuando no hay errores
+if (empty($errores)) {
+    
+    if($modelo->eliminarProducto($id)){
+        $mensaje= "producto eliminado correctamanete";
+
+    }else{
+        $errores['eliminar']="no se ha eliminado el producto";
+
     }
 
-    if (empty($errores)) {
-
-        // Conexión
-        $conexion = new mysqli("localhost", "usuario_tienda", "1234", "tienda");
-
-        if ($conexion->connect_error) {
-            $errores[] = "Error en la conexión.";
-        } else {
-
-            // Comprobar si existe el producto
-            $producto = $conexion->query("SELECT * FROM productos WHERE id_producto='$id'");
-
-            if ($producto->num_rows > 0) {
-                $consulta = "DELETE FROM productos WHERE id_producto='$id'";
-            } else {
-                $errores[] = "Producto no encontrado.";
-            }
-
-            // Ejecutar eliminación
-            if ($consulta !== "") {
-
-                if ($conexion->query($consulta)) {
-                    $mensaje = "Producto eliminado correctamente.";
-                } else {
-                    $errores[] = "Error al eliminar el producto: " . $conexion->error;
-                }
-            }
-        }
-
-         $conexion->close();
-
-        // Redirigir para evitar reenvío del formulario
-        header("Location: tablaProductos.php");
-        exit();
-
-        }
+    header("Location: tablaProductos.php");
+    exit();
 }
+
+
 
 ?>
 

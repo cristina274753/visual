@@ -7,7 +7,14 @@
     <input type="password" name="password" placeholder="Contraseña">
     <button type="submit">Entrar</button>
 
-    <p style="color:red"><?= $errores ?></p>
+    <p style="color:red">
+        <?php if (!empty($errores)): ?>
+      
+        <?php foreach ($errores as $e): ?>
+          <?= htmlspecialchars($e) ?><br>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    
 </form>
 
 <?php include "layout/footer.php"; ?>

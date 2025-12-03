@@ -3,6 +3,7 @@ require_once "config/sesiones.php";
 require_once "models/LoginModel.php";
 // require_once "config/db.php";
 
+$errores=[];
 session_start();
 
 
@@ -11,7 +12,6 @@ if (isset($_SESSION['usuario'])) {
     exit();
 }
 
-$errores = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //comprobar que no vengan vacíos
 
     if ($usuario === "" || $password === "") {
-        $errores[]= "Por favor, rellena todos los campos.";
+        $errores['vacios']= "Por favor, rellena todos los campos.";
     } 
 
     //sio vacio cargar error y mostrarlo en la vista
@@ -30,7 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         //si no son vacíos
         $modelo = new LoginModel();
-        $resultado = $modelo->verificarUsuario($usuario, $password);
+        $resultado = $modelo->verificarUsuario($usuario, $password); //true o false
+
+        if($resultado==false){
+            
+            $errores['login']="error en la contraseña o en el usuario";  //TODO como diferenciar por error en la contraseña y error por usuario enexistente
+
+        }elseif($resultado==true){
+
+            //meter el usuario en sesion
+            $_SESSION['usuario']=$usuario;
+
+            header("Location: tablaProductos.php"); // Redirigir a la página principal
+            exit();
+        }
     }
     
 

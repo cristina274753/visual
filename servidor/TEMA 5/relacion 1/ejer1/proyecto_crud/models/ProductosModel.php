@@ -1,6 +1,7 @@
 <?php
 
-require_once APP_ROOT. 'config/Database.php';
+require_once __DIR__. '/../config/Database.php';
+
 
 class ProductosModel{
 
@@ -11,9 +12,15 @@ class ProductosModel{
 
     }
 
+    public function obtenerPorId($id) {   //esto da el producto con ese id
+        $sql = "SELECT * FROM productos WHERE id_producto = ?";
+        $result = $this->db->executeQuery($sql, [$id]);
+        return $result ? $result[0] : null; //si no existe null -- si existe= devolvemos la primera fila
+    }
+
     public function crearProducto($nombre, $descripcion, $precio){
 
-        $sql= "INSERT INTO productos (nombre, descripcion, precio, fecha_creacion) VALUES (?, ?, ?, NOW())";
+        $sql= "INSERT INTO productos (nombre, descripcion, precio) VALUES (?, ?, ?)";
 
         return $this->db->executeUpdate($sql, [$nombre, $descripcion, $precio]);
     }
@@ -24,11 +31,19 @@ class ProductosModel{
         return $this->db->executeQuery($sql);
     }
 
-    public function actualizarProducto($nombre, $descripcion, $precio){
+    public function actualizarProducto($id, $nombre, $descripcion, $precio){
 
         //$sql= "INSERT INTO productos (nombre, descripcion, precio, fecha_creacion) VALUES (?, ?, ?, NOW())";
+         $sql = "UPDATE productos 
+                SET nombre = ?, descripcion = ?, precio = ?
+                WHERE id_producto = ?";
 
-        return $this->db->executeUpdate($sql, [$nombre, $descripcion, $precio]);
+        return $this->db->executeUpdate($sql, [$nombre, $descripcion, $precio, $id]);
+    }
+
+    public function eliminarProducto($id) {
+        $sql = "DELETE FROM productos WHERE id_producto = ?";
+        return $this->db->executeUpdate($sql, [$id]);
     }
 
 }

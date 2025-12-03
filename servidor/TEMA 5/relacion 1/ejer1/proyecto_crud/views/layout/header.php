@@ -7,7 +7,7 @@
 </head>
 <body>
 
+
 <nav>
-    <a href="index.php">Productos</a>
     <a href="logout.php">Cerrar sesión</a>
 </nav>

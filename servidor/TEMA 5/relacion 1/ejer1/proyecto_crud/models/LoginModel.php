@@ -1,7 +1,8 @@
 <?php
 
+require_once __DIR__. '/../config/config.php';
 
-require_once APP_ROOT. 'config/Database.php';
+require_once APP_ROOT . '/config/Database.php'; 
 
 
 class LoginModel{
@@ -15,8 +16,26 @@ class LoginModel{
 
     public function verificarUsuario($usuario, $password){
 
-        $sql= "SELECT * FROM  WHERE usuario = $usuario";
-        echo "devuelve true/false verificar usuario";
+        $sql = "SELECT * FROM usuarios WHERE usuario = ? LIMIT 1";
+        $resultado = $this->db->executeQuery($sql, [$usuario]);
+
+        // Si no existe el usuario
+        if (empty($resultado)) {
+            return false;
+        }
+
+        $usuarioDB = $resultado[0];
+
+        // Comparar contraseña (si no usas password_hash)
+        if ($password === $usuarioDB["password"]) {
+            return true;
+        }else{
+            return false;
+        }
+
+        // O si usas password_hash:
+        // if (password_verify($password, $usuarioDB["password"])) { ... }
+
     }
 
     
