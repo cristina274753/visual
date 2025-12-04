@@ -1,5 +1,4 @@
 <?php
-require_once "config/sesiones.php";
 require_once "models/LoginModel.php";
 // require_once "config/db.php";
 

@@ -9,12 +9,24 @@
     </p>
 <?php endif; ?>
 
-<?php if (!empty($mensaje)): ?>  <!--tabla -->
-    <p class="notice"><?= $mensaje ?></p>
+<?php if (!empty($_SESSION['mensaje'])): ?>
+    <p class="notice">
+        HISTORIAL: <br> <?php 
+            foreach ($_SESSION['mensaje'] as $msg) {
+                echo htmlspecialchars($msg) . "<br>";
+            }
+            
+        ?>
+    </p>
 <?php endif; ?>
 
-<form method="GET">
-    <button name="anadir" value="1">Añadir producto</button>
+
+<?php if (!empty($tabla)): ?>  <!--tabla -->
+    <?= $tabla ?>
+<?php endif; ?>
+
+<form method="GET" action="insertar.php">
+    <button >Añadir producto</button>
 </form>
 
 <?php include "layout/footer.php"; ?>

@@ -1,14 +1,13 @@
 <?php
 
 session_start();
-require_once __DIR__ . "/config/sesiones.php";
 require_once __DIR__ . "/models/ProductosModel.php";
 
 $errores=[];
 $nombre="";
 $descripcion="";
 $precio="";
-$mensaje="";
+$mensaje=[];
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -16,6 +15,10 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+
+if (!isset($_SESSION['mensaje'])) {
+    $_SESSION['mensaje'] = [];
+}
 
 
 //añadir con formulario
@@ -50,14 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
         if(!$resultado){
 
-            $errores['crear']="error al crear el producto";
-        }
+            $_SESSION['mensaje'][]="error al crear el producto";
 
-        // 3) Cuando no hay errores
-        if (empty($errores)) {
+        }else{
+
+            $_SESSION['mensaje'][]="se ha insertado correctamente el producto";
             header("Location: tablaProductos.php");
             exit();
         }
+
+
 
         
 

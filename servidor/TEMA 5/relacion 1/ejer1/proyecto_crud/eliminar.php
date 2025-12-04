@@ -1,13 +1,12 @@
 <?php
 
 session_start();
-require_once __DIR__ . "/config/sesiones.php";
 require_once __DIR__ . "/models/ProductosModel.php";
 
 
 
 $errores=[];
-$mensaje="";
+$mensaje=[];
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -15,11 +14,15 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+if (!isset($_SESSION['mensaje'])) {
+    $_SESSION['mensaje'] = [];
+}
 
 
 //coger el id del get
 $id = htmlspecialchars(trim($_GET['id'] ?? ""));  //le podemos poner intval 
 
+//id es un valor correcto (un número o dígito) iscdigit_type
 
 //usamos el modelo para que nos de el producto
 $modelo= new ProductosModel();
@@ -36,10 +39,10 @@ if(!$producto){
 if (empty($errores)) {
     
     if($modelo->eliminarProducto($id)){
-        $mensaje= "producto eliminado correctamanete";
+        $_SESSION['mensaje'][]= "producto eliminado correctamanete";
 
     }else{
-        $errores['eliminar']="no se ha eliminado el producto";
+        $_SESSION['mensaje'][]="no se ha eliminado el producto";
 
     }
 

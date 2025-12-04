@@ -1,14 +1,13 @@
 <?php
 
 session_start();
-require_once __DIR__ . "/config/sesiones.php";
 require_once __DIR__ . "/models/ProductosModel.php";
 
 $errores = [];
 $nombre = "";
 $descripcion = "";
 $precio = "";
-$mensaje = "";
+$mensaje = [];
 $consulta = "";
 $id = "";
 
@@ -17,6 +16,10 @@ $id = "";
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit();
+}
+
+if (!isset($_SESSION['mensaje'])) {
+    $_SESSION['mensaje'] = [];
 }
 
 
@@ -45,8 +48,10 @@ if (empty($errores)) {
    
     // Si NO se ha enviado el formulario, rellenamos campos con valores actuales
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
       $nombre = $producto["nombre"];
-      $descripcion = $producto["descripcion"];
+      $descripcion = $producto["descripcion"] ?? "";
+      
       $precio = $producto["precio"];
   }
 
@@ -66,6 +71,9 @@ if (empty($errores)) {
         $errores[] = "El precio debe ser mayor que 0.";
     }
 
+    if($descripcion==""){
+        $descripcion=null;
+    }
 
     // Si no hay errores → actualizar
     if (empty($errores)) {
@@ -76,11 +84,13 @@ if (empty($errores)) {
 
         if(!$resultado){
 
-            $errores['actualizar']="error al actualizar el producto";
+            $_SESSION['mensaje'][]="error al actualizar el producto";
         }
 
         // 3) Cuando no hay errores
         if (empty($errores)) {
+
+            $_SESSION['mensaje'][]="producto actualizado correctamente";
             header("Location: tablaProductos.php");
             exit();
         }
@@ -93,7 +103,6 @@ if (empty($errores)) {
 }
 
 }
-
 
 include "views/modificar_vista.php";
 

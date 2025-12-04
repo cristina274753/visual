@@ -1,12 +1,10 @@
 <?php
 
 session_start();
-require_once __DIR__ . "/config/sesiones.php";
 require_once __DIR__ . "/models/ProductosModel.php";
 
 
-$errores = [];
-$mensaje = "";
+$mensaje = [];
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -14,40 +12,12 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+if (!isset($_SESSION['mensaje'])) {
+    $_SESSION['mensaje']=[];
 
-/* ---- PROCESAR ACCIONES (ANTES DE MOSTRAR NADA) ---- */
-
-if (isset($_GET['actualizar'])) {
-    $id = trim($_GET['actualizar']);
-
-
-    if ($id === "") {
-        $errores[] = "ID vacío";
-    } else {
-      
-        header("Location: actualizarProducto.php?id=$id");
-        exit();
-    }
 }
 
-if (isset($_GET['eliminar'])) {
-    $id = trim($_GET['eliminar']);
 
-
-    if ($id === "") {
-        $errores[] = "ID vacío";
-    } else {
-
-        header("Location: eliminar.php?id=$id");
-        exit();
-    }
-}
-
-if (isset($_GET['anadir'])) {
-
-    header("Location: insertar.php");
-    exit();
-}
 
 
 /* ---- MOSTRAR TABLA DE PRODUCTOS ---- */
@@ -56,14 +26,17 @@ $modelo= new ProductosModel();
 $productos = $modelo->obtenerTodos(); //nos devuelve un array con todos los productos 
 
 if(empty($productos)){
-    $mensaje="tabla vacia de productos";
+    $mensaje['tabla'][]="tabla vacia de productos";
+
+    $_SESSION['mensaje']=$mensaje;
+
 
 }else{
 
     //pintar tabla con array
-    $mensaje="<table>";
+    $tabla="<table>";
 
-    $mensaje .= "<thead>
+    $tabla .= "<thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
@@ -76,29 +49,24 @@ if(empty($productos)){
 
     foreach($productos as $producto){
 
-        $mensaje .= "<tr>
+        $tabla .= "<tr>
                     <td>{$producto['id_producto']}</td>
                     <td>{$producto['nombre']}</td>
                     <td>{$producto['descripcion']}</td>
                     <td>{$producto['precio']}</td>
                     <td>
-                        <form method='GET' style='display:inline'>
-                            <button name='actualizar' value='{$producto['id_producto']}'>Actualizar</button>
-                        </form>
+                        
+                        <a class='button' href='actualizarProducto.php?id={$producto['id_producto']}'>Actualizar</a>
 
-                        <form method='GET' style='display:inline'>
-                            <button name='eliminar' value='{$producto['id_producto']}'>Eliminar</button>
-                        </form>
+                        <a class='button' href='eliminar.php?id={$producto['id_producto']}'>Eliminar</a>
                     </td>
                 </tr>";
 
     }
 
-    $mensaje .= "</table>";
+    $tabla .= "</table>";
 
 }
-
-
 
 
 
