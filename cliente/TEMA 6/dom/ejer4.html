@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Alumnos</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 20px 0 0;
+      width: 200px;
+      border: 1px solid #ccc;
+      min-height: 150px;
+    }
+    li {
+      padding: 5px;
+      cursor: pointer;
+    }
+    li:hover {
+      background-color: #f0f0f0;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gestión de Alumnos</h1>
+
+  <div>
+    <label>
+      <input type="radio" name="estado" value="aprobado" checked>
+      Aprobado
+    </label>
+    <label>
+      <input type="radio" name="estado" value="suspenso">
+      Suspenso
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="list-container">
+      <h3>Alumnos</h3>
+      <ul id="listaAlumnos">
+        <li>Tomás Tuerzo</li>
+        <li>Aitor Tilla</li>
+        <li>Sara Mago</li>
+        <li>Pancho Colate</li>
+        <li>Ana Tema</li>
+        <li>Armando Bronca</li>
+        <li>Aitor Menta</li>
+      </ul>
+    </div>
+
+    <div class="list-container">
+      <h3>Aprobados</h3>
+      <ul id="listaAprobados"></ul>
+    </div>
+
+    <div class="list-container">
+      <h3>Suspensos</h3>
+      <ul id="listaSuspensos"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Referencias a listas
+    const listaAlumnos = document.getElementById('listaAlumnos');
+    const listaAprobados = document.getElementById('listaAprobados');
+    const listaSuspensos = document.getElementById('listaSuspensos');
+
+    // Función para obtener el valor del radio seleccionado
+    function obtenerEstado() {
+      return document.querySelector('input[name="estado"]:checked').value;
+    }
+
+    // Manejo de click en alumnos de la primera lista
+    listaAlumnos.addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        const alumno = e.target;
+        const estado = obtenerEstado();
+
+        if (estado === 'aprobado') {
+          // Mover a aprobados al final
+          listaAprobados.appendChild(alumno);
+        } else if (estado === 'suspenso') {
+          // Mover a suspensos al inicio
+          listaSuspensos.insertBefore(alumno, listaSuspensos.firstChild);
+        }
+      }
+    });
+
+    // Manejo de click en alumnos de la lista de suspensos para volver a alumnos
+    listaSuspensos.addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        const alumno = e.target;
+        listaAlumnos.appendChild(alumno);
+      }
+    });
+  </script>
+</body>
+</html>
