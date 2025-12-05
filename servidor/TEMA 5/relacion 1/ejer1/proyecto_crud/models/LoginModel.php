@@ -38,6 +38,25 @@ class LoginModel{
 
     }
 
+
+    public function obtenerRol ($usuario){
+
+        $sql = "SELECT rol FROM usuarios WHERE usuario = ? LIMIT 1";
+        $resultado = $this->db->executeQuery($sql, [$usuario]);
+
+        // Si no existe el usuario
+        if (empty($resultado)) {
+            return false;
+
+        }else{
+
+
+            return $resultado[0]['rol'];
+        }
+
+
+    }
+
     
 
 }

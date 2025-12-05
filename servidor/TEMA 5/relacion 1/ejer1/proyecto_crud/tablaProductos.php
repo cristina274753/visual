@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . "/models/ProductosModel.php";
 
 
-$mensaje = [];
+$mensaje = "";
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -12,8 +12,9 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-if (!isset($_SESSION['mensaje'])) {
-    $_SESSION['mensaje']=[];
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    unset($_SESSION['mensaje']);
 
 }
 
@@ -26,9 +27,8 @@ $modelo= new ProductosModel();
 $productos = $modelo->obtenerTodos(); //nos devuelve un array con todos los productos 
 
 if(empty($productos)){
-    $mensaje['tabla'][]="tabla vacia de productos";
+    $mensaje="tabla vacia de productos";
 
-    $_SESSION['mensaje']=$mensaje;
 
 
 }else{
@@ -41,9 +41,17 @@ if(empty($productos)){
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Precio</th>
-                                <th>Acciones</th>
-                            </tr>
+                                <th>Precio</th>";
+
+
+                                if($_SESSION['rol']=='admin'){
+
+                                    $tabla.="<th>Acciones</th>";
+                                } 
+
+
+
+                            $tabla.="</tr>
                         </thead>";
 
 
@@ -53,14 +61,21 @@ if(empty($productos)){
                     <td>{$producto['id_producto']}</td>
                     <td>{$producto['nombre']}</td>
                     <td>{$producto['descripcion']}</td>
-                    <td>{$producto['precio']}</td>
-                    <td>
+                    <td>{$producto['precio']}</td>";
+
+
+
+                    if($_SESSION['rol']=='admin'){
+
+                        $tabla.="<td>
                         
                         <a class='button' href='actualizarProducto.php?id={$producto['id_producto']}'>Actualizar</a>
 
                         <a class='button' href='eliminar.php?id={$producto['id_producto']}'>Eliminar</a>
-                    </td>
-                </tr>";
+                    </td>";
+                    }
+                    
+                $tabla.="</tr>";
 
     }
 

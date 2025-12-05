@@ -17,7 +17,7 @@ if (!isset($_SESSION['usuario'])) {
 
 
 if (!isset($_SESSION['mensaje'])) {
-    $_SESSION['mensaje'] = [];
+    $_SESSION['mensaje'] = "";
 }
 
 
@@ -53,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
         if(!$resultado){
 
-            $_SESSION['mensaje'][]="error al crear el producto";
+            $_SESSION['mensaje']="error al crear el producto";
 
         }else{
 
-            $_SESSION['mensaje'][]="se ha insertado correctamente el producto";
+            $_SESSION['mensaje']="se ha insertado correctamente el producto";
             header("Location: tablaProductos.php");
             exit();
         }
@@ -71,5 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
 include "views/insertar_vista.php";
 
+//TODO poner errores debajo de cada cuadro y recoradar valor anterior 
 ?>
+
 

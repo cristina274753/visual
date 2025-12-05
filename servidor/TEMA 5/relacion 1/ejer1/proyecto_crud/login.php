@@ -4,6 +4,7 @@ require_once "models/LoginModel.php";
 
 $errores=[];
 session_start();
+$rol="";
 
 
 if (isset($_SESSION['usuario'])) {
@@ -37,8 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         }elseif($resultado==true){
 
-            //meter el usuario en sesion
+            //buscar rol
+            $rol=$modelo->obtenerRol($usuario);
+
+            //meter el usuario y el rol en sesion
             $_SESSION['usuario']=$usuario;
+            $_SESSION['rol']=$rol;
 
             header("Location: tablaProductos.php"); // Redirigir a la página principal
             exit();

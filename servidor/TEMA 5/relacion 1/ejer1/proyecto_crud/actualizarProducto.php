@@ -19,7 +19,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 if (!isset($_SESSION['mensaje'])) {
-    $_SESSION['mensaje'] = [];
+    $_SESSION['mensaje'] = "";
 }
 
 
@@ -84,13 +84,13 @@ if (empty($errores)) {
 
         if(!$resultado){
 
-            $_SESSION['mensaje'][]="error al actualizar el producto";
+            $_SESSION['mensaje']="error al actualizar el producto";
         }
 
         // 3) Cuando no hay errores
         if (empty($errores)) {
 
-            $_SESSION['mensaje'][]="producto actualizado correctamente";
+            $_SESSION['mensaje']="producto actualizado correctamente";
             header("Location: tablaProductos.php");
             exit();
         }

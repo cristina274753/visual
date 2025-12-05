@@ -9,15 +9,8 @@
     </p>
 <?php endif; ?>
 
-<?php if (!empty($_SESSION['mensaje'])): ?>
-    <p class="notice">
-        HISTORIAL: <br> <?php 
-            foreach ($_SESSION['mensaje'] as $msg) {
-                echo htmlspecialchars($msg) . "<br>";
-            }
-            
-        ?>
-    </p>
+<?php if ($mensaje!=''): ?>
+    <p class="notice"><?=htmlspecialchars($mensaje) ?></p>
 <?php endif; ?>
 
 
@@ -25,8 +18,12 @@
     <?= $tabla ?>
 <?php endif; ?>
 
+
+
+<?php if($_SESSION['rol']=='admin'): ?>
 <form method="GET" action="insertar.php">
     <button >Añadir producto</button>
 </form>
+<?php endif;  ?>
 
 <?php include "layout/footer.php"; ?>

@@ -39,10 +39,10 @@ if(!$producto){
 if (empty($errores)) {
     
     if($modelo->eliminarProducto($id)){
-        $_SESSION['mensaje'][]= "producto eliminado correctamanete";
+        $_SESSION['mensaje']= "producto eliminado correctamanete";
 
     }else{
-        $_SESSION['mensaje'][]="no se ha eliminado el producto";
+        $_SESSION['mensaje']="no se ha eliminado el producto";
 
     }
 

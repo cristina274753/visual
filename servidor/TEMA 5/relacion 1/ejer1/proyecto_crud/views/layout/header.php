@@ -9,5 +9,5 @@
 
 
 <nav>
-    <a href="logout.php">Cerrar sesión</a>
+    <a class='button'  href="logout.php">Cerrar sesión</a>
 </nav>
