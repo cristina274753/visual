@@ -27,14 +27,14 @@ class LoginModel{
         $usuarioDB = $resultado[0];
 
         // Comparar contraseña (si no usas password_hash)
-        if ($password === $usuarioDB["password"]) {
+         if (password_verify($password, $usuarioDB["password"])){
             return true;
         }else{
             return false;
         }
 
         // O si usas password_hash:
-        // if (password_verify($password, $usuarioDB["password"])) { ... }
+        // if (password_verify($password, $usuarioDB["password"])) { ... }if ($password === $usuarioDB["password"])
 
     }
 
