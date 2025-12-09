@@ -5,12 +5,14 @@ require_once __DIR__ . "/models/ProductosModel.php";
 
 $errores=[];
 $nombre="";
-$descripcion="";
-$precio="";
+$nif="";
+$tlf="";
+$email="";
+$direccion="";
+
 $mensaje=[];
 $categorias=[];
-$categoria= "";
-$categoriaNueva="";
+
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -25,7 +27,7 @@ if (!isset($_SESSION['mensaje'])) {
 
 
  $modelo= new ProductosModel();
-        $categorias= $modelo->obtenerCategorias();
+        $categorias= $modelo->obtenerProveedores();
 
 
 
@@ -36,30 +38,35 @@ if (!isset($_SESSION['mensaje'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     
     /* recoger datos */
-    $precio = trim($_POST['precio'] ?? "");
+    $tlf = trim($_POST['tlf'] ?? "");
     $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ""));
-    $descripcion = htmlspecialchars(trim($_POST['descripcion'] ?? ""));
-    $categoria= htmlspecialchars(trim($_POST['categoria'] ?? ""));
+    $nif = htmlspecialchars(trim($_POST['nif'] ?? ""));
+    $email= htmlspecialchars(trim($_POST['email'] ?? ""));
+    $direccion = htmlspecialchars(trim($_POST['direccion'] ?? ""));
 
     // 2) Validación de datos
     // Verificamos si los campos están llenos
     if ($nombre === "") {
         $errores['nombre'] = "Por favor, rellena el nombre";
-    } elseif($precio<=0) {
-        $errores['precio'] = "Por favor, rellena el precio no puede ser menor o igual a 0";
+    } elseif($tlf==="") {
+        $errores['tlf'] = "Por favor, rellena el precio no puede ser menor o igual a 0";
 
-    }elseif($descripcion==""){
-        $descripcion=null;
+    }elseif($email==""){
+        $errores['email'] = "Por favor, rellena el nombre";
 
-    }elseif($categoria==""){
-        $errores['categoria'] = "Por favor, escoge una categoria";
+    }elseif($nif==""){
+        $errores['nif'] = "Por favor, escoge una categoria";
+
+    }elseif($direccion===""){
+
+        $errores['direccion'] = "Por favor, rellena el sku";
     }
 
     // 3)Cuando no hay errores
     if (empty($errores)) {
         
 
-        $resultado = $modelo->crearProducto($nombre, $descripcion, $precio, $categoria);
+        $resultado = $modelo->crearProveedor($nombre, $nif, $tlf, $email, $direccion);
 
 
         
@@ -73,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
         }else{
 
             $_SESSION['mensaje']="se ha insertado correctamente el producto";
-            header("Location: tablaProductos.php");
+            header("Location: index.php");
             exit();
         }
 
@@ -88,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
 
 
-include "views/insertar_vista.php";
+include "views/crearProveedor_vista.php";
 
 ?>
 

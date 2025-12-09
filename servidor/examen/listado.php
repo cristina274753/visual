@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['enviar'])) {
     $libros = CargarLibros();
 
     if ($genero != "Todos") {
-        $libros = array_values(array_filter($libros, function($libro) {
+        $libros = array_values(array_filter($libros, function($libro) {  
             global $genero;
             return filtrarPorGenero($libro, $genero);
         }));

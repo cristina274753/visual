@@ -1,10 +1,13 @@
-<?php
+<?php 
+
+
 
 session_start();
 require_once __DIR__ . "/models/ProductosModel.php";
 
 
 $mensaje = "";
+
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -18,23 +21,18 @@ if (isset($_SESSION['mensaje'])) {
 
 }
 
+$modelo=new ProductosModel();
 
 
-
-/* ---- MOSTRAR TABLA DE PRODUCTOS ---- */
-
-$modelo= new ProductosModel();
-$productos = $modelo->obtenerTodos(); //nos devuelve un array con todos los productos 
+$productos = $modelo->obtenerProductos(); //nos devuelve un array con todos los productos 
 $categorias=$modelo->obtenerCategorias();
 
 if(empty($productos)){
     $mensaje="tabla vacia de productos";
 
 
-
 }else{
 
-    //pintar tabla con array
     $tabla="<table>";
 
     $tabla .= "<thead>
@@ -43,14 +41,8 @@ if(empty($productos)){
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Precio</th>
-                                <th>Categoria</th>";
-
-
-                                if($_SESSION['rol']=='admin'){
-
-                                    $tabla.="<th>Acciones</th>";
-                                } 
-
+                                <th>Categoria</th>
+                                <th>Acciones</th>";
 
 
                             $tabla.="</tr>
@@ -76,31 +68,25 @@ if(empty($productos)){
                         }
                     }
                      
-                    $tabla.="</td>";
-
-
-
-                    if($_SESSION['rol']=='admin'){
-
-                        $tabla.="<td>
+                    $tabla.="</td>
+                    
+                    <td>
                         
                         <a class='button' href='actualizarProducto.php?id={$producto['id_producto']}'>Actualizar</a>
 
                         <a class='button' href='eliminar.php?id={$producto['id_producto']}'>Eliminar</a>
                     </td>";
-                    }
-                    
+
+
                 $tabla.="</tr>";
 
     }
 
-    $tabla .= "</table>";
 
+    $tabla.="</table>";
 }
 
 
-
-include "views/index_vista.php";
+include "views/listadoProductos_vista.php";
 
 ?>
-

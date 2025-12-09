@@ -103,7 +103,7 @@ if (empty($errores)) {
         if (empty($errores)) {
 
             $_SESSION['mensaje']="producto actualizado correctamente";
-            header("Location: tablaProductos.php");
+            header("Location: listadoProductos.php");
             exit();
         }
         

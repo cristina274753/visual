@@ -11,6 +11,7 @@ $mensaje=[];
 $categorias=[];
 $categoria= "";
 $categoriaNueva="";
+$sku="";
 
 //comprobar sesion de usuario
 if (!isset($_SESSION['usuario'])) {
@@ -36,30 +37,27 @@ if (!isset($_SESSION['mensaje'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     
     /* recoger datos */
-    $precio = trim($_POST['precio'] ?? "");
     $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ""));
     $descripcion = htmlspecialchars(trim($_POST['descripcion'] ?? ""));
-    $categoria= htmlspecialchars(trim($_POST['categoria'] ?? ""));
+    $padre= htmlspecialchars(trim($_POST['padre'] ?? ""));
 
     // 2) Validación de datos
     // Verificamos si los campos están llenos
     if ($nombre === "") {
         $errores['nombre'] = "Por favor, rellena el nombre";
-    } elseif($precio<=0) {
-        $errores['precio'] = "Por favor, rellena el precio no puede ser menor o igual a 0";
-
     }elseif($descripcion==""){
         $descripcion=null;
 
-    }elseif($categoria==""){
-        $errores['categoria'] = "Por favor, escoge una categoria";
+    }elseif($padre==""){
+        $padre=null;
+
     }
 
     // 3)Cuando no hay errores
     if (empty($errores)) {
         
 
-        $resultado = $modelo->crearProducto($nombre, $descripcion, $precio, $categoria);
+        $resultado = $modelo->crearCategoria($nombre, $padre, $descripcion);
 
 
         
@@ -73,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
         }else{
 
             $_SESSION['mensaje']="se ha insertado correctamente el producto";
-            header("Location: tablaProductos.php");
+            header("Location: index.php");
             exit();
         }
 
@@ -88,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
 
 
 
-include "views/insertar_vista.php";
+include "views/crearCategoria_vista.php";
 
 ?>
 

@@ -1,7 +1,7 @@
 <?php include "layout/header.php"; ?>
 
     
-    <h1>Añadir producto</h1>
+    <h1>Añadir categoria</h1>
     <form name="myForm" action="" method="post">
 
       <!-- Campos de texto -->
@@ -26,31 +26,19 @@
         
 
 
-        <div class="col">
-          <label for="precio">precio</label>
-          <input id="precio" name="precio" type="number" placeholder="Ingresa el precio" value="<?= htmlspecialchars($precio ?? '') ?>" >
-        </div>
-        <span class="error">
-                            <?php
-                            if (!empty($errores['precio'])): ?>
-                                <?= htmlspecialchars($errores['precio']) ?>
-                    </p>
-                  <?php endif; ?>
-        </span>
-     
-
-
       <div><!--categorias coger id para tabla productos  -->
 
-          <label for="categoria">categoria</label>
+          <label for="padre">categoria</label>
           
-            <select id="categoria" name="categoria">
+            <select id="padre" name="padre">
 
             <option value="">-- Selecciona una categoría --</option>
 
               <?php foreach($categorias as $ctg):  ?>
 
-              <option value="<?php echo $ctg['id_categoria'] ?>" <?php echo ($ctg['id_categoria']==$categoria) ? "selected" : ""  ?> >      <?php echo $ctg['nombre'] ?></option>
+                <?php if($ctg['padre_id']==null): ?>
+                    <option value="<?php echo $ctg['id_categoria'] ?>" <?php echo ($ctg['id_categoria']==$categoria) ? "selected" : ""  ?> >      <?php echo $ctg['nombre'] ?></option>
+                <?php  endif; ?>
               
               <?php endforeach;  ?>
             </select>
@@ -63,6 +51,8 @@
                     </p>
                   <?php endif; ?>
         </span>
+
+
 
 
  </div>

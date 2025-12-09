@@ -65,6 +65,19 @@
         </span>
 
 
+
+        <div class="col">
+          <label for="sku">SKU</label>
+          <input id="sku" name="sku" type="text" placeholder="Ingresa el sku unico" value="<?= htmlspecialchars($sku ?? '') ?>" >
+        </div>
+        <span class="error">
+                            <?php
+                            if (!empty($errores['sku'])): ?>
+                                <?= htmlspecialchars($errores['sku']) ?>
+                    </p>
+                  <?php endif; ?>
+        </span>
+
  </div>
 
       <!-- Acciones -->
