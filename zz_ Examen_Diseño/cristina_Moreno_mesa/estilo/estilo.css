@@ -1,0 +1,360 @@
+
+
+:root {
+  --resaltar: #DC143C;
+  --rosaFuerte: #F75270;
+  --rosaClaro: #F7CAC9;
+  --azul: #92A8D1;
+  --negro: #181818;
+  --blanco: #efefff  ;
+
+}
+
+
+
+@font-face {
+    
+    font-family: fuente1;
+    src: url('../fuentes/fuente_externa.ttf');
+
+
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///BODY
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+body {
+  display: grid; 
+  grid-template-columns: 60% 40%;
+
+  grid-template-areas:
+    "header menu"
+    "contenido aside";
+  background-color: var(--negro);
+  color: var(--blanco);
+
+  border: 3px solid green;
+  
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///HEADER -NOMBRE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+header{
+  grid-area: header;
+  display: flex;  
+  align-items: center;
+  color: var(--rosaClaro);
+  border: 3px solid green;
+  margin: 10px;
+}
+
+
+
+header h1 {
+text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-family: fuente1; 
+  color: var(--resaltar);
+  text-shadow: 2px 2px var(--azul);
+  
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///NAV - MENU
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+nav{ 
+  grid-area: menu;
+  position: sticky; 
+  top: 0;
+
+  z-index: 100;
+  margin: 10px;
+
+  display: flex;             
+  align-items: center;      
+  justify-content:space-around;
+  border: 3px solid green;
+
+}
+
+a {
+  text-decoration: none;
+  color: var(--blanco); 
+}
+
+nav ul{
+    display: flex;
+
+}
+
+nav li{
+
+  font-size: 30px;
+  list-style-type: none;
+  padding: .5em 1em;
+
+}
+
+#promocion{
+    color: var(--resaltar);
+}
+
+
+nav li a:hover {  /*pasar por encima cambia color*/
+  color: var(--azul);
+
+  padding: 10%;
+  border-radius: 40%;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///MAIN 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+main{
+    grid-area: contenido;
+    border: 3px solid green;
+    margin: 10px;
+}
+
+main h2{
+    text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+///1 bloque - PRODUCTO EN PROMOCION
+/////////////////////////////////////////////////////////////////////////*/
+
+.destacados{
+  padding-top: 60px;
+
+  border: 3px solid green;
+margin: 10px;
+
+}
+
+
+#fotos{
+    display: flex;
+    width: auto;
+  height: 300px;
+}
+
+#fotos img{
+    width: 100%;
+  height: 100%;
+}
+
+
+
+.destacados #fotoDerecha{
+
+    margin-left: 1%;
+  
+
+}
+
+
+.destacados #fotoizquierda{
+
+  margin-left: 40%;
+
+  
+  border-radius: 100%;
+  border: 3px solid rgb(248, 7, 7);
+}
+
+
+
+.destacados #esp{
+    column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid rgb(238, 238, 238); 
+  font-size: 17px;
+}
+
+.destacados #ingles{
+    text-transform: uppercase;  /*mayusculas*/
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////
+//FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+.formulario {
+    
+    color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+fieldset {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-style: dotted; /*punteado*/
+}
+
+legend {
+    font-weight: bold;
+    color: var(--rosaFuerte);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+.actions{
+
+    display: flex;
+}
+
+.actions input{
+    margin: 5px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--azul);
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+//VALIDACION DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+/* Campos válidos */
+.formulario input:valid,
+.formulario select:valid,
+.formulario textarea:valid {
+  border: 4px solid green;
+  background-color: #e6ffe6;
+  
+}
+
+/* Campos no validos */
+.formulario input:invalid,
+.formulario select:invalid,
+.formulario textarea:invalid {
+  border: 4px solid red;
+  background-color: #ffe6e6;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////
+//BOTONES DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+
+.actions input{
+  background-color: var(--azul);
+}
+
+.actions input:hover,
+.actions input:focus {
+    background-color: var(--rosaFuerte);
+    outline: none;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///ASIDE - MEDIDAS SOSTENIBLES 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+aside {
+  grid-area: aside;
+
+  padding: 20px;
+  margin: 30px;
+  
+
+  border: 3px solid green;
+    margin: 10px;
+}
+
+aside h2 {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///FOOTER
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+footer{
+  grid-area: footer;
+  background-color: var(--rosaFuerte);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px ;
+
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///RESPONSIVE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+@media screen and (max-width: 710px) {
+
+
+    body {
+        display: grid; 
+
+        grid-template-areas:
+            "header"
+            "menu"
+            "contenido" 
+            "aside";
+        background-color: var(--negro);
+        color: var(--blanco);
+
+        border: 3px solid green;
+    
+    }
+
+  .destacados #esp{
+    column-count: 1;
+    height: fit-content;
+    font-size: 12px;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #ing{
+        display: none;
+    }
+}

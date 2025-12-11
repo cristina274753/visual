@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tema 3</title>
+    <link rel="stylesheet" href="estilo/estilo.css">
+    
+</head>
+<body id="inicio">
+    
+  
+    <header>
+        
+        <h1>Cristina Moreno Mesa</h1> <!-- centrado -->
+            
+    </header>
+
+    <nav id="mainNav"> 
+        <ul>
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c">Compras</a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="v">Ventas</a></li>
+            <li><a id="promocion" href="accesibilidad.html" accesskey="p">Promocion</a></li>
+        </ul>
+    </nav>
+
+    
+        
+
+
+    <main>
+
+      
+
+
+        <h2>PRODUCTOS DESTACADOS</h2>
+
+
+        <section class="destacados" id="fotos"> 
+            
+               <img id="fotoDerecha" src="img/figura.jpeg" alt="figura"> <!-- derecha -->
+            
+            <img id="fotoizquierda" src="img/figura.jpeg" alt="figura">  <!-- pseudoclase, izquierda --> 
+            
+            
+        </section>
+
+        <div id="textos">
+            <section class="destacados"> 
+                        
+                        <div id="esp">Los teléfonos móviles han transformado nuestra vida diaria, facilitando la comunicación instantánea y el acceso a información en cualquier momento. Sin embargo, su uso excesivo también plantea desafíos en términos de distracción y dependencia tecnológica. En la actualidad, equilibrar la conveniencia y la conciencia de su impacto se ha vuelto crucial.</div> <!-- texto españolk, dos columnas, separador -->
+
+                    </section>
+
+                    <section class="destacados" id="ing"> 
+                        
+                        <div lang="en" id="ingles">Mobile phones have transformed our daily lives, enabling instant communication and access to information at any time. However, their excessive use also poses challenges in terms of distraction and technological dependency. Striking a balance between convenience and awareness of their impact has become crucial in today's world.</div> <!-- mayusculas -->
+                        
+                    </section>
+        </div>
+        
+
+
+        
+    </main> 
+
+
+    <aside>
+        <div class="formulario">
+          <h2>FORMULARIO</h2>
+          <form name="myForm" action="" method="post">
+        
+            <!-- datos -->
+            <fieldset>
+              <legend>Datos de contacto</legend>
+              <div class="row">
+                <div class="col">
+                  <label for="nombre">Nombre: </label>
+                  <input id="nombre" name="nombre" type="text" maxlength="30" placeholder="Nombre (max 30 caracteres)" required>
+                </div>
+                <div class="col">
+                  <label for="fecha">fecha: </label>
+                  <input id="fecha" name="fecha" type="date" required>
+                </div>
+                <!-- Textarea -->
+                <div>
+                    <label for="observaciones">observaciones</label>
+                    <textarea id="observaciones" name="observaciones" placeholder="¿Cual es el motivo de la consulta?"></textarea>
+                </div>
+            </div>
+            </fieldset>
+        
+        
+            <!-- botones -->
+            <div class="actions">
+              <input type="submit" name="enviar" value="Enviar" title="Enviar formulario">
+              <input type="reset" name="reset" value="cancelar" title="Borrar formulario">
+            </div>
+        
+          </form>
+        </div>
+    </aside>
+
+
+    
+
+    
+</body>
+</html>
