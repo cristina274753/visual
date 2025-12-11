@@ -1,0 +1,8 @@
+<?php
+echo '1234<br>';
+echo password_hash("1234", PASSWORD_DEFAULT);
+echo '<br>2747<br>';
+echo password_hash("2747", PASSWORD_DEFAULT);
+echo '<br>4321<br>';
+echo password_hash("4321", PASSWORD_DEFAULT);
+
