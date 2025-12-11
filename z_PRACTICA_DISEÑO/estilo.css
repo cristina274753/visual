@@ -1,0 +1,316 @@
+/*fuentes externas*/
+
+
+    /*online*/
+        @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Luckiest+Guy&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+    /*local*/
+        @font-face {
+    
+            font-family: fuente1;
+            src: url('fuentes/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
+
+
+        }
+
+/*variables colores*/
+:root {
+  --principal: red;  /*background-color: var(--principal);*/
+}
+
+
+
+/*grid*/
+
+body {                              /*nav{ grid-area: menu; }*/
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu menu"
+    "aside content"
+    "footer footer";
+}
+
+
+/*flex*/
+
+footer{
+  grid-area: footer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px ;
+
+}
+
+
+/*color fondo*/
+background-color:DodgerBlue;
+
+/*color texto*/
+color:red;
+
+/*borde*/
+border:2px solid Tomato;
+
+
+/*fondo*/
+
+    /*color*/
+    background-color: lightblue;
+    opacity: 0.3;
+
+    /*imagen*/
+    background-image: url("paper.gif");
+    background-repeat: repeat-x; /*repite la imagen horizontalmente*/
+
+    /*imagen fija o se desplazara*/
+    background-attachment: fixed;
+    background-attachment: scroll;
+
+
+
+/*bordes*/
+
+    /*estilo*/
+    border-style: dotted; /*punteado*/
+                    dashed /*discontinuo*/
+                    solid /*solido*/
+                    double /*borde doble*/
+                    none /*sin borde*/
+                    hidden /*borde oculto*/
+
+    /*ancho*/
+    border-width: 5px;
+
+    /*color*/
+    border-color: red;
+
+    /*lados*/
+    border-right-style: solid;
+
+    /*abreviado*/
+    border: 5px solid red; 
+
+    /*redondeado*/
+    border-radius: 5px;
+
+
+/*margenes*/
+
+    /*tipos*/
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+
+
+/*padding */
+
+    /*tipo*/
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+
+
+/*alto y ancho*/
+
+    /*valores height y width*/
+    auto;
+    px
+    %
+
+    /*max y min*/
+    max-width: 500px;
+
+
+/*modelo de caja*/
+
+    contenido
+    padding
+    border
+    margin
+
+    /*ej*/
+    div {
+        width: 300px;
+        border: 15px solid green;
+        padding: 50px;
+        margin: 20px;
+    }
+
+
+/*texto*/
+
+    /*color*/
+    color: blue;
+    background-color: lightgrey;
+
+    /*alineacion*/
+    text-align: center; /*alineacion horizojntal*/
+    vertical-align: baseline; /*alineacion vertical*/
+
+    /*decoracion*/
+    text-decoration: overline; /*raya encima del texto*/
+    text-decoration: line-through; /*linea tachando el texto*/
+    text-decoration: underline; /*raya abajo del texto*/
+
+    text-decoration-color: green;
+
+    /*transformacion*/
+    text-transform: uppercase;
+    text-transform: lowercase;
+
+    /*espaciado*/
+    letter-spacing: 5px;
+
+    /*sombra*/
+    text-shadow: 2px 2px red;
+
+
+/*fuentes*/
+
+    font-family: "Times New Roman", Times, serif;
+
+    /*tamaño*/
+    font-size: 1em; /* 1 * 16 = 16px */
+
+
+/*enlaces*/
+
+    /*estados*/
+    :link /*un enlace normal, no visitado*/
+    :visited /*un enlace que el usuario ha visitado*/
+    :hover /*un enlace cuando el usuario pasa el ratón sobre él*/
+    :active /*un enlace en el momento en que se hace clic*/
+
+    /*boton*/
+    a:link, a:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+
+/*listas*/
+
+    /*estilo*/
+    ul.a {list-style-type: circle;}
+    ul.b {list-style-type: disc;}
+    ul.c {list-style-type: square;}
+
+    ol.d {list-style-type: upper-roman;}
+    ol.e {list-style-type: lower-roman;}
+    ol.f {list-style-type: lower-alpha;}
+    ol.g {list-style-type: decimal;}
+
+
+/*tablas*/
+
+    /*borde*/
+    table, th, td {
+        border: 1px solid green;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    /*alineacion*/
+    td {
+        text-align: center;
+        vertical-align: bottom;
+    }
+
+    /*estilo*/
+    tr:hover {background-color: coral;}
+    tr:nth-child(even) {background-color: #f2f2f2;} /*rayas cebra*/
+
+ 
+/*visualizacion*/
+
+    p.ex1 {display: none;}
+    p.ex2 {display: inline;}
+    p.ex3 {display: block;}
+    p.ex4 {display: inline-block;}
+    p.ex5 {display: flex;}
+    p.ex6 {display: grid;}
+
+
+/*posicion*/
+
+    static- Este es el valor predeterminado
+    relative
+    fixed
+    absolute
+    sticky
+
+
+/*menu de navegacion horizontal*/
+
+    .nav {
+        background-color: lightgray;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav li {
+        display: inline-block;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+
+/*alineacion*/
+
+    /*bloque*/
+    .center {
+        margin: auto;
+        width: 50%;
+        border: 3px solid green;
+        padding: 10px;
+    }
+
+    /*texto*/
+    text-align: center;
+
+    /*imagen*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+
+    /*con flex box*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green;
+
+
+
+/*pseudoclases*/
+
+    :link- Estilos de enlaces no visitados
+    :visited- Estilos de enlaces visitados
+    :hover- Aplica estilo a un enlace al pasar el mouse sobre él
+    :active- Estiliza un enlace activado
+
+
+
+/*filtros*/
+
+    filter: drop-shadow(10px 10px 10px rgb(255, 255, 255));
+
+
+/*gap*/
+
+    /*espaion entre columnas*/
+    gap: 20px;
