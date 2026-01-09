@@ -1,7 +1,7 @@
 <?php
 
-use enrutador\app\controllers\HomeController;
-use enrutador\lib\Route;
+use cristina\app\controllers\HomeController;
+use cristina\lib\Route;
 
 //registramos todas las rutas posibles
 Route::get("/", function () {

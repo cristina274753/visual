@@ -1,7 +1,6 @@
 <?php
 
-namespace enrutador\app\controllers;
-use enrutador\App\controller;  //TODO ns si esta bien
+namespace cristina\app\controllers;
 
 class HomeController extends controller
 {

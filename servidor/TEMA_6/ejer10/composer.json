@@ -1,0 +1,17 @@
+{
+    "name": "cristina/ejer10",
+    "description": "ejemplo de enrutador",
+    "autoload": {
+        "psr-4": {
+            "enrutador\\app\\": "app/",
+            "enrutador\\lib\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "cristina274753",
+            "email": "paratodo2747@gmail.com"
+        }
+    ],
+    "require": {}
+}
