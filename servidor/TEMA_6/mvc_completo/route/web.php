@@ -29,7 +29,4 @@ Route::post("/login", function () {
 Route::get("/inicio", [HomeController::class, 'index']);
 Route::get("/personal", [PersonalController::class, 'index']);
 
-
-
-
  Route::handleRoute();
