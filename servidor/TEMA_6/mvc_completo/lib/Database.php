@@ -1,12 +1,12 @@
 <?php
 
-namespace cristina\lib;
+namespace Cristina\Lib;
 
 
 
 
 define('BD_HOST', 'localhost'); 
-define('BD_NAME', 'personal_dwes'); //nombre base de datos
+define('BD_NAME', 'examen_dwes_3'); //nombre base de datos
 define('BD_USER', 'dwes25');   // usuario BD
 define('BD_PASS', 'dwes');  //contraseña del usuario
 

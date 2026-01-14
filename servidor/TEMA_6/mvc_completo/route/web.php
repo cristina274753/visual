@@ -1,12 +1,14 @@
 <?php
 
-use cristina\lib\Route;
-use cristina\app\controllers\HomeController;
-use cristina\app\controllers\PersonalController;
 
 // Ruta principal
+
+use Cristina\App\controllers\IncidenciaController;
+use Cristina\App\controllers\LoginController;
+use Cristina\Lib\Route;
+
 Route::get("/", function () {
-    require __DIR__ . "/../app/views/index_vista.php";
+    require __DIR__ . "/../app/views/index_view.php";
 });
 
 // Rutas con parámetros
@@ -20,13 +22,24 @@ Route::get("/pepe", function () {
 });
 
 // Rutas POST
-Route::post("/login", function () {
+/*Route::post("/login", function () {
     $user = $_POST['user'] ?? '';
     echo "Hola página de login POST. Usuario: " . htmlspecialchars($user);
-});
+});*/
 
 // Rutas con controladores
-Route::get("/inicio", [HomeController::class, 'index']);
-Route::get("/personal", [PersonalController::class, 'index']);
+// Route::get("/inicio", [HomeController::class, 'index']);
+
+
+
+Route::get("/login", [LoginController::class, 'index']);
+Route::post("/login", [LoginController::class, 'verificar']);
+
+Route::get("/index", [IncidenciaController::class, 'index']);
+Route::post("/index", [IncidenciaController::class, 'verificar']);
+
+Route::get("eliminar", [IncidenciaController::class, 'borrar']); //TODO no funciona porque la url pone el id tambien
+
+
 
  Route::handleRoute();

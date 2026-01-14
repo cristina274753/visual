@@ -1,11 +1,11 @@
 <?php
 
-namespace cristina\app\controllers;
+namespace Cristina\App\controllers;
 
 class Controller
 {
     // Método común para cargar vistas
-    protected function view(string $vista, array $datos = []): void
+    protected static function view(string $vista, array $datos = []): void
     {
 // Convertimos el array en variables
         extract($datos);

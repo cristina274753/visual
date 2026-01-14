@@ -3,8 +3,8 @@
     "description": "ejemplo simple",
     "autoload": {
         "psr-4": {
-            "cristina\\app\\": "app/",
-            "cristina\\lib\\": "lib/"
+            "Cristina\\App\\": "app/",
+            "Cristina\\Lib\\": "lib/"
         }
     },
     "authors": [
