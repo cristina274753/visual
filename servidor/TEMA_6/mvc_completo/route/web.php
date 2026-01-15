@@ -38,7 +38,13 @@ Route::post("/login", [LoginController::class, 'verificar']);
 Route::get("/index", [IncidenciaController::class, 'index']);
 Route::post("/index", [IncidenciaController::class, 'verificar']);
 
-Route::get("eliminar", [IncidenciaController::class, 'borrar']); //TODO no funciona porque la url pone el id tambien
+//Route::get("eliminar", [IncidenciaController::class, 'borrar']); //TODO no funciona porque la url pone el id tambien
+Route::get("eliminar/{id}", [IncidenciaController::class, 'borrar']);
+
+Route::get("modificar/{id}", [IncidenciaController::class, 'modificar']);
+
+
+Route::get("alta", [IncidenciaController::class, 'alta']);
 
 
 

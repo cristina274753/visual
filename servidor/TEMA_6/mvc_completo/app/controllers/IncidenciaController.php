@@ -93,11 +93,12 @@ class IncidenciaController extends Controller
 
                                 $tabla.="<td>
                                 
-                                <a class='btn-toggle-status' href='actualizarProducto.php?id={$incidencia['id']}' title='Cambiar Estado'>🔄</a>
+                                <a class='btn-toggle-status' href='/php/TEMA_6/mvc_completo/public/modificar/{$incidencia['id']}' title='Cambiar Estado'>🔄</a>
 
                                 
 
-                                <a class='button' href='eliminar.php?id={$incidencia['id']}'  title='Eliminar'>🗑️</a>
+                                <a class='button' href='/php/TEMA_6/mvc_completo/public/eliminar/{$incidencia['id']}'>🗑️</a>
+
                             </td>";
                             }
                             
@@ -130,7 +131,7 @@ class IncidenciaController extends Controller
 
 
 
-    public function borrar(){
+    public function borrar($id){ //TODO preguntar por el id ahi
 
 
         session_start();
@@ -151,7 +152,7 @@ class IncidenciaController extends Controller
 
 
         //coger el id del get
-        $id = htmlspecialchars(trim($_GET['id'] ?? "")); 
+       // $id = htmlspecialchars(trim($_GET['id'] ?? "")); 
 
         //id es un valor correcto (un número o dígito) iscdigit_type
 
@@ -185,12 +186,89 @@ class IncidenciaController extends Controller
 
     }
 
-    public function alta(){
+    
+
+    public function modificar($id){
+
+
+        session_start();
+
+        $errores = [];
+        //$id = "";
+
+        $nuevoEstado="";
+
+
+        //comprobar sesion de usuario
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: login.php");
+            exit();
+        }
+
+        if (!isset($_SESSION['mensaje'])) {
+            $_SESSION['mensaje'] = "";
+        }
+
+
+
+        /* ======================
+            1. RECIBIR ID
+        ====================== */
+
+       // $id = trim($_GET['id'] ?? "");
+
+        if ($id === "") {
+            $errores['id']=("Error: no se recibió un ID válido.");
+        }
+
+
+        //usamos el modelo para que nos de el producto
+        $modelo= new IncidenciaModel();
+        $producto = $modelo->obtenerPorId($id); //nos devuelve el producto con ese id
+
+
+        if($producto['estado']=='Pendiente'){
+
+            $nuevoEstado="En curso";
+
+        }elseif($producto['estado']=='En curso'){
+
+            $nuevoEstado="Resuelta";
+
+        }elseif($producto['estado']=='Resuelta'){
+
+            $nuevoEstado="Pendiente";
+
+        }else{
+
+            $errores['estado']="el estado es incorrecto";
+        }
+
+        // 3) Cuando no hay errores
+        if (empty($errores)) {
+            
+            $resultado = $modelo->actualizarProducto($id, $nuevoEstado);
+
+
+            if(!$resultado){
+
+                    $_SESSION['mensaje']="error al actualizar la incidencia";
+                }
+
+                // 3) Cuando no hay errores
+                if (empty($errores)) {
+
+                    $_SESSION['mensaje']="incidencia actualizada correctamente";
+                    header("Location: /php/TEMA_6/mvc_completo/public/index");
+                    exit();
+                }
+        }
 
 
     }
-
-    public function modificar(){
+    
+    
+    public function alta(){
 
 
     }
