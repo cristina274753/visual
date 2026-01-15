@@ -7,6 +7,7 @@ use Cristina\Lib\Database;
 
 
 
+
 class IncidenciaModel{
 
     private $db;

@@ -22,8 +22,8 @@
             </div>
 
             <nav class="nav-menu">
-                <a href="index.php">📋 Dashboard</a>
-                <a href="logout.php" class="salir">🚪 Salir</a>
+                <a href="index">📋 Dashboard</a>
+                <a href="logout" class="salir">🚪 Salir</a>
             </nav>
         </div>
     </header>
@@ -68,19 +68,68 @@
                 <div class="table-controls">
                     <h2 class="table-title">Listado de Incidencias</h2>
                     <!-- Enlace para ir al formulario de alta -->
-                    <a href="alta.php" class="btn btn-add">
+                    <a href="alta" class="btn btn-add">
                         ➕ Nueva Incidencia
                     </a>
                 </div>
 
                 <div class="table-wrapper">
                     <!-- tabla que contiene las incidencias -->
-                    <?php if (!empty($tabla)): ?>  <!--tabla -->
-                        <?= $tabla ?>
+
+
+                    <?php if (empty($incidencias)): ?>
+                        <p>No hay incidencias registradas actualmente.</p>
+                    <?php else: ?>
+                        <table class="crud-table">
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Tipo</th>
+                                    <th>Asunto</th>
+                                    <th>Horas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($incidencias as $incidencia): ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($incidencia['estado'] === 'Pendiente'): ?>
+                                            <span class="status-pendiente">Pendiente</span>
+                                        <?php elseif ($incidencia['estado'] === 'En curso'): ?>
+                                            <span class="status-encurso">En curso</span>
+                                        <?php else: ?>
+                                            <span class="status-resuelta">Resuelta</span>
+                                        <?php endif; ?>
+                                    </td>
+
+                                    <td><?= htmlspecialchars($incidencia['tipo_incidencia']) ?></td>
+                                    <td style="font-weight:600;">
+                                        <?= htmlspecialchars($incidencia['asunto']) ?>
+                                    </td>
+                                    <td style="font-weight:700; color: var(--color-primary);">
+                                        <?= $incidencia['horas_estimadas'] ?>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn-toggle-status" href="<?= BASE_URL ?>/modificar/<?= $incidencia['id'] ?>" title="Cambiar Estado">🔄</a>
+
+                                        <a class="button" href="<?= BASE_URL ?>/eliminar/<?= $incidencia['id'] ?>" title='Eliminar'>🗑️</a>
+
+
+                        
+
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     <?php endif; ?>
-                </div>
-            </section>
-        </div>
+
+
+                    </div>
+                </section>
+            </div>
 
         
     </main>

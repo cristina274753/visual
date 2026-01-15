@@ -7,20 +7,6 @@ use Cristina\App\controllers\IncidenciaController;
 use Cristina\App\controllers\LoginController;
 use Cristina\Lib\Route;
 
-Route::get("/", function () {
-    require __DIR__ . "/../app/views/index_view.php";
-});
-
-// Rutas con parámetros
-Route::get("/producto/{id}", function ($id) {
-    echo "Detalles del producto: $id";
-});
-
-// Rutas simples
-Route::get("/pepe", function () {
-    echo "Hola PEPE";
-});
-
 // Rutas POST
 /*Route::post("/login", function () {
     $user = $_POST['user'] ?? '';
@@ -32,19 +18,28 @@ Route::get("/pepe", function () {
 
 
 
+//login
 Route::get("/login", [LoginController::class, 'index']);
 Route::post("/login", [LoginController::class, 'verificar']);
 
+//indice
+Route::get("/", [IncidenciaController::class, 'index']);
 Route::get("/index", [IncidenciaController::class, 'index']);
 Route::post("/index", [IncidenciaController::class, 'verificar']);
 
+//borrar
 //Route::get("eliminar", [IncidenciaController::class, 'borrar']); //TODO no funciona porque la url pone el id tambien
-Route::get("eliminar/{id}", [IncidenciaController::class, 'borrar']);
+Route::get("/eliminar/{id}", [IncidenciaController::class, 'borrar']);
 
-Route::get("modificar/{id}", [IncidenciaController::class, 'modificar']);
+//modificar
+Route::get("/modificar/{id}", [IncidenciaController::class, 'modificar']);
 
+//alta
+Route::get("/alta", [IncidenciaController::class, 'alta']);
+Route::post("/alta", [IncidenciaController::class, 'alta_verificar']);
 
-Route::get("alta", [IncidenciaController::class, 'alta']);
+//salir
+Route::get("/logout", [IncidenciaController::class, 'logout']);
 
 
 

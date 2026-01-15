@@ -24,8 +24,8 @@
             </div>
 
             <nav class="nav-menu">
-                <a href="index.php">📋 Dashboard</a>
-                <a href="logout.php" class="salir">🚪 Salir</a>
+                <a href="index">📋 Dashboard</a>
+                <a href="logout" class="salir">🚪 Salir</a>
             </nav>
         </div>
     </header>
@@ -36,7 +36,7 @@
             <h1 class="title">Alta de Nueva Incidencia</h1>
             <section class="card">
                 <!-- FORMULARIO DE ALTA-->
-                <form action="index.php" method="POST">
+                <form action="alta" method="POST">
                     <h2 class="table-title form-section-title">Detalles del incidencia</h2>
                     <!-- Campo asunto -->
                     <div class="form-group">
