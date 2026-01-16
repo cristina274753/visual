@@ -24,11 +24,8 @@ class IncidenciaController extends Controller
         
         $mensaje = "";
         $contIncidencias=0;
-        $sumaHoras=0;
         $mediaHoras=0;
-        $noTabla="";
-        $tabla="";
-
+        
         //comprobar sesion de usuario
         $this->comprobarSesion();
 
