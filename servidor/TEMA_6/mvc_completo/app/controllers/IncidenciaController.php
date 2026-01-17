@@ -24,11 +24,12 @@ class IncidenciaController extends Controller
         
         $mensaje = "";
         $contIncidencias=0;
-        $sumaHoras=0;
         $mediaHoras=0;
-        $noTabla="";
-        $tabla="";
-
+        $EnCurso=0;
+        $pendientes=0;
+        $resueltas=0;
+        
+        
         //comprobar sesion de usuario
         $this->comprobarSesion();
 
@@ -54,6 +55,24 @@ class IncidenciaController extends Controller
             $mediaHoras = 0;
         }
 
+        $mediaHoras = $contIncidencias ? round($sumaHoras / $contIncidencias, 2) : 0;
+
+
+        foreach ($incidencias as $incidencia) {
+
+            if ($incidencia['estado'] === "En curso") {
+
+                $EnCurso++;
+
+            } elseif ($incidencia['estado'] === "Pendiente") {
+
+                $pendientes++;
+
+            } elseif ($incidencia['estado'] === "Resuelta") {
+
+                $resueltas++;
+            }
+        }
             
 
 
@@ -65,7 +84,10 @@ class IncidenciaController extends Controller
             'incidencias'=>$incidencias,
             'contIncidencias'=>$contIncidencias,
             'sumaHoras'=>$sumaHoras,
-            'mediaHoras'=>$mediaHoras
+            'mediaHoras'=>$mediaHoras,
+            'EnCurso'=>$EnCurso,
+            'pendientes'=>$pendientes,
+            'resueltas'=>$resueltas
         ]);
     }
 
@@ -299,6 +321,75 @@ class IncidenciaController extends Controller
         session_destroy();
          header("Location:".BASE_URL."/login");
         exit();
+
+    }
+
+
+     public function triaje(){
+
+        $puntos=0;
+
+        $id_puntos=[
+            'id'=>"",
+            'puntos'=>0,
+            'clasificacion'=> ""
+        ];
+
+        $clasificacion="";
+
+        //comprobar sesion de usuario
+        $this->comprobarSesion();
+
+
+        $modelo= new IncidenciaModel();
+        $incidencias = $modelo->obtenerIncidencias();
+
+
+        //INCIDENCIAS
+        foreach ($incidencias as $incidencia) {
+
+            //tipo
+            if($incidencia['tipo_incidencia']=='Red'){
+                $puntos+=10;
+
+            }elseif($incidencia['tipo_incidencia']=='Hardware'){
+                $puntos+=5;
+
+            }
+
+            //horas
+            $puntos+=$incidencia['horas_estimadas']*2;
+
+            //palaba clave  
+            if(str_contains(strtolower($incidencia['asunto']),'error') || str_contains(strtolower($incidencia['asunto']),'grave') || str_contains(strtolower($incidencia['asunto']),'no funciona')){
+                $puntos+=15;
+
+            }
+
+            //clasificacion
+            if($puntos>30){
+                $clasificacion="critica";
+
+            }elseif($puntos<=30 && $puntos>=15){
+                $clasificacion="urgente";
+
+            }else{
+                $clasificacion="normal";
+
+            }
+
+            //array con id y puntos
+            $id_puntos['id']==$incidencia['id'];
+            $id_puntos['puntos']==$puntos;
+            $id_puntos['clasificacion']==$clasificacion;
+
+
+
+        }
+
+
+        self::view('alta_view');
+
 
     }
 }

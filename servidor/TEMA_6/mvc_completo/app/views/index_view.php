@@ -51,6 +51,25 @@
                             <?php echo $mediaHoras;  ?> h</p>
                     </div>
                 </div>
+                <div class="card stat-card average">
+                    <span class="stat-icon">INCIDENCIAS</span>
+                    <div>
+                        <p class="stat-label">Resueltas</p>
+                        <p class="stat-value">
+                            <?php echo $resueltas;  ?> </p>
+                    </div>
+                    <div>
+                        <p class="stat-label">En curso</p>
+                        <p class="stat-value">
+                            <?php echo $EnCurso;  ?> </p>
+                    </div>
+                    <div>
+                        <p class="stat-label">pendiente</p>
+                        <p class="stat-value">
+                            <?php echo $pendientes;  ?> </p>
+                    </div>
+                </div>
+                
             </section>
             <!-- MENSAJES FLASH -->
 
