@@ -39,15 +39,21 @@ class IncidenciaController extends Controller
 
         }
 
-        /* ---- MOSTRAR TABLA DE PRODUCTOS ---- */
 
         $modelo= new IncidenciaModel();
         $incidencias = $modelo->obtenerIncidencias();
 
         
         $contIncidencias = count($incidencias);
+
         $sumaHoras = array_sum(array_column($incidencias, 'horas_estimadas'));
-        $mediaHoras = $contIncidencias ? round($sumaHoras / $contIncidencias, 2) : 0;
+        
+        if ($contIncidencias) {
+            $mediaHoras = round($sumaHoras / $contIncidencias, 2);
+        } else {
+            $mediaHoras = 0;
+        }
+
             
 
 
