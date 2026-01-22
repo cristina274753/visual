@@ -18,20 +18,20 @@ class LogisticaModel{
     }
 
     public function obtenerPorId($id) {   //esto da el producto con ese id
-        $sql = "SELECT * FROM incidencias WHERE id = ?";
+        $sql = "SELECT * FROM vehiculos WHERE id = ?";
         $result = $this->db->executeQuery($sql, [$id]);
         return $result ? $result[0] : null; //si no existe null -- si existe= devolvemos la primera fila
     }
 
     public function crearProducto($asunto, $tipo_incidencia, $horas_estimadas){
 
-        $sql= "INSERT INTO incidencias (asunto, tipo_incidencia, horas_estimadas) VALUES (?, ?, ?)";
+        $sql= "INSERT INTO vehiculos (asunto, tipo_incidencia, horas_estimadas) VALUES (?, ?, ?)";
 
         return $this->db->executeUpdate($sql, [$asunto, $tipo_incidencia, $horas_estimadas]);
     }
 
     public function obtenerIncidencias(){
-        $sql= "SELECT * FROM incidencias";
+        $sql= "SELECT * FROM vehiculos";
 
         return $this->db->executeQuery($sql);
     }
@@ -39,7 +39,7 @@ class LogisticaModel{
     public function actualizarProducto($id, $estado){
 
         //$sql= "INSERT INTO productos (nombre, descripcion, precio, fecha_creacion) VALUES (?, ?, ?, NOW())";
-         $sql = "UPDATE incidencias 
+         $sql = "UPDATE vehiculos 
                 SET estado = ?
                 WHERE id = ?";
 
@@ -47,7 +47,7 @@ class LogisticaModel{
     }
 
     public function eliminarProducto($id) {
-        $sql = "DELETE FROM incidencias WHERE id = ?";
+        $sql = "DELETE FROM vehiculos WHERE id = ?";
         return $this->db->executeUpdate($sql, [$id]);
     }
 
