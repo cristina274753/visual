@@ -105,7 +105,7 @@
                                 <span class="spec-icon">🛣️</span>
                                 <div class="spec-content">
                                     <span class="spec-label">Kilometraje:</span>
-                                    <span class="spec-value"><?= htmlspecialchars($vehiculo['km']) ?> km</span> <!-- 220.400 km -->
+                                    <span class="spec-value"><?= number_format($vehiculo['km'], 0, ',', '.') ?> km</span> <!-- formato: 220.400 km -->
                                     
                                 </div>
                             </div>
