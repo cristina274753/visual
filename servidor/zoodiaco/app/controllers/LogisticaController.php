@@ -20,6 +20,9 @@ class LogisticaController extends Controller
     //método estático
      public function index(){
 
+     //comprobar sesion de usuario
+        $this->comprobarSesion();
+
         $mensaje="";
 
         if (isset($_SESSION['mensaje'])) {
@@ -28,29 +31,213 @@ class LogisticaController extends Controller
 
         }
         
+
+        // Cargar la vista con errores y datos previos
+        self::view('index');
+    }
+
+
+    public function zodiaco(){
+
+        
+        
         //comprobar sesion de usuario
         $this->comprobarSesion();
+
+
+        $mensaje="";
+
+        if (isset($_SESSION['mensaje'])) {
+            $mensaje = $_SESSION['mensaje']; 
+            unset($_SESSION['mensaje']);
+
+        }
 
         $modelo= new LogisticaModel();
         $vehiculos = $modelo->obtenerVehiculos();
         
         
-            
-
-
-
-
         // Cargar la vista con errores y datos previos
-        self::view('index_view', [
+        self::view('zodiaco', [
             'vehiculos'=>$vehiculos,
             'mensaje'=> $mensaje
         ]);
     }
 
-    
 
 
 
+
+    public function comparativa1(){
+
+
+    //comprobar sesion de usuario
+            $this->comprobarSesion();
+
+        $mensaje="";
+
+        if (isset($_SESSION['mensaje'])) {
+            $mensaje = $_SESSION['mensaje']; 
+            unset($_SESSION['mensaje']);
+
+        }
+        
+        $s1 = $_GET['s1'] ?? null;
+        $s2 = $_GET['s2'] ?? null;
+
+        //$id = htmlspecialchars(trim($_GET['id'] ?? "")); 
+
+        if ($s1 === "") {
+            $errores['id']=("Error: no se recibió un ID válido.");
+        }
+
+        $modelo= new LogisticaModel();
+        $signo1= $modelo->obtenerPorId($s1);
+        $signo2= $modelo->obtenerPorId($s2);
+        $signos= $modelo->obtenerVehiculos();
+
+        $comparativa= ($s2) ? $modelo->getComparativa($s1, $s2) : null;
+        
+        
+
+        // Cargar la vista con errores y datos previos
+        self::view('comparativa1', [
+            'signos'=>$signos,
+            'mensaje'=> $mensaje,
+            'signo1'=> $signo1,
+            'signo2'=> $signo2,
+            'comparativa'=> $comparativa,
+            's1'=> $s1,
+            's2'=> $s2,
+
+        ]);
+    }
+
+
+    //public function comparativa2($s1, $s2){
+    public function comparativa2(){
+
+
+    //comprobar sesion de usuario
+            $this->comprobarSesion();
+
+        $mensaje="";
+
+        if (isset($_SESSION['mensaje'])) {
+            $mensaje = $_SESSION['mensaje']; 
+            unset($_SESSION['mensaje']);
+
+        }
+        
+        $s1 = $_GET['s1'] ?? null;
+        $s2 = $_GET['s2'] ?? null;
+
+        //$id = htmlspecialchars(trim($_GET['id'] ?? "")); 
+
+        if ($s1 === "") {
+            $errores['id']=("Error: no se recibió un ID válido.");
+        }
+
+        $modelo= new LogisticaModel();
+        $signo1= $modelo->obtenerPorId($s1);
+        $signo2= $modelo->obtenerPorId($s2);
+        $signos= $modelo->obtenerVehiculos();
+
+        $comparativa= ($s2) ? $modelo->getComparativa($s1, $s2) : null;
+
+        if (!$comparativa) {
+            $comparativa = [
+                'compatibilidad_amorosa' => 0,
+                'compatibilidad_emocional' => 0,
+                'compatibilidad_laboral' => 0,
+                'compatibilidad_social' => 0
+        ];
+}
+        
+        
+ 
+        // Cargar la vista con errores y datos previos
+        self::view('comparativa2', [
+            'signos'=>$signos,
+            'mensaje'=> $mensaje,
+            'signo1'=> $signo1,
+            'signo2'=> $signo2,
+            'comparativa'=> $comparativa,
+            's1'=> $s1,
+            's2'=> $s2,
+
+        ]);
+    }
+
+
+    public function comparativa3(){
+
+
+    //comprobar sesion de usuario
+            $this->comprobarSesion();
+
+        $mensaje="";
+
+        if (isset($_SESSION['mensaje'])) {
+            $mensaje = $_SESSION['mensaje']; 
+            unset($_SESSION['mensaje']);
+
+        }
+        
+        $s1 = $_GET['s1'] ?? null;
+        $s2 = $_GET['s2'] ?? null;
+
+        //$id = htmlspecialchars(trim($_GET['id'] ?? "")); 
+
+        if ($s1 === "") {
+            $errores['id']=("Error: no se recibió un ID válido.");
+        }
+
+        $modelo= new LogisticaModel();
+        $signo1= $modelo->obtenerPorId($s1);
+        $signo2= $modelo->obtenerPorId($s2);
+        $signos= $modelo->obtenerVehiculos();
+
+        $comparativa= ($s2) ? $modelo->getComparativa($s1, $s2) : null;
+        
+        
+
+        // Cargar la vista con errores y datos previos
+        self::view('comparativa3', [
+            'signos'=>$signos,
+            'mensaje'=> $mensaje,
+            'signo1'=> $signo1,
+            'signo2'=> $signo2,
+            'comparativa'=> $comparativa,
+            's1'=> $s1,
+            's2'=> $s2,
+
+        ]);
+    }
+
+    public function editar(): void {
+        self::view('comparativa2');
+    }
+
+
+     public function guardar(): void {
+
+        $s1 = $_POST['s1'] ?? null;
+        $s2 = $_POST['s2'] ?? null;
+
+        $datos = [
+            'amorosa' => $_POST['amorosa'] ?? 0,
+            'emocional' => $_POST['emocional'] ?? 0,
+            'laboral' => $_POST['laboral'] ?? 0,
+            'social' => $_POST['social'] ?? 0
+        ];
+        $modelo = new LogisticaModel();
+        $modelo->actualizarProducto($s1, $s2, $datos);
+
+
+        header("Location: " . BASE_URL . "/comparativa2?s1=".$_POST['s1']."&s2=".$_POST['s2']);
+        exit;
+    }
 
      
 

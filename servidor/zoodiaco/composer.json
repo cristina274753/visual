@@ -1,0 +1,17 @@
+{
+    "name": "cristina/mvc_simple",
+    "description": "ejemplo simple",
+    "autoload": {
+        "psr-4": {
+            "Cristina\\App\\": "app/",
+            "Cristina\\Lib\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "cristina274753",
+            "email": "paratodo2747@gmail.com"
+        }
+    ],
+    "require": {}
+}

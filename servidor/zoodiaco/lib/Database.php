@@ -2,7 +2,14 @@
 
 namespace Cristina\Lib;
 
-require_once __DIR__ . '/db_credentials.php';
+
+
+
+define('BD_HOST', 'localhost'); 
+define('BD_NAME', 'zodiaco'); //nombre base de datos
+define('BD_USER', 'dwes25');   // usuario BD
+define('BD_PASS', 'dwes');  //contraseña del usuario
+
 class Database{
 
     private $conn;  //conexion

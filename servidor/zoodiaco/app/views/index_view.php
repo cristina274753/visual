@@ -113,10 +113,7 @@
                     </div>
                     <!-- acciones del vehículo -->
                     <div class="vehicle-actions">
-                        <form action="ficha" method="POST">
-                            <input type="hidden" name="id_vehiculo" value="<?= $vehiculo['id'] ?>">  <!-- lo añadi yo -->
-                            
-
+                        <form action="#" method="POST">
                             <button type="submit" class="btn btn-primary btn-block">
                                 📋 -- Ficha Técnica --
                             </button>
