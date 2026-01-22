@@ -17,15 +17,16 @@
             </div>
             <!-- Actualizar los enlaces del menú -->
             <nav class="main-nav">
-                <a href="#" class="nav-link active">Vehículos</a>
-                <a href="#" class="nav-link">-- sustituir enlace --</a>
+                <a href="index" class="nav-link active">Vehículos</a>
+                <a href="carga" class="nav-link">Gestión de Carga</a>
             </nav>
             <!-- información del usuario -->
             <div class="header-user">
-                <div>
-                    <span>-- sustituir información --</span>
+                <div class="user-info">
+                    <span class="user-name">👤 <?= $_SESSION['nombre'] ?> <?= $_SESSION['apellidos'] ?></span>
+                    <span class="user-role">(<?= $_SESSION['rol'] ?>)</span>
                 </div>
-                <a href="#" class="btn-logout">🚪 Salir</a>
+                <a href="logout" class="btn-logout">🚪 Salir</a>
             </div>
         </div>
     </header>
@@ -34,167 +35,105 @@
     <main class="main-content">
         <div class="content-container">
             <!-- Mensaje Flash -->
-            <div class="flash-message flash-success">
-                Mensaje flash de ejemplo (sólo se muestra si hay un mensaje que mostrar)
-            </div>
+
+            <?php if ($mensaje!=''): ?>
+
+                <div class="flash-message flash-success">
+                    <?=htmlspecialchars($mensaje) ?>
+                </div>
+
+            <?php endif; ?>
+            
+            
 
             <section class="page-header">
-                <h2>-- Vehículos: sustituir título --</h2>
-                <p class="page-description">-- sustituir texto --</p>
+                <h2>Gestión de Vehículos</h2>
+                <p class="page-description">Seleccione un vehículo disponible para asignar la carga</p>           
             </section>
 
             <!-- Grid de Vehículos -->
             <section class="vehicles-grid">
                 <!-- Mostrar cuando no hay vehículos -->
-                <!-- <h1>No hay vehículos disponibles</h1> -->
+                <!--  <h1>No hay vehículos disponibles</h1> --> 
+
+                <?php if (empty($vehiculos)): ?>
+                        <h1>No hay vehículos disponibles</h1>
+                <?php else: ?>
 
                 <!-- Card Vehículo 1 -->
+                 <?php foreach ($vehiculos as $vehiculo): ?>
+
                 <article class="vehicle-card">
                     <div class="vehicle-image">
-                        <img src="./img/vehiculos/vehiculo_generico.png" alt="nombre del vehículo">
-                        <span class="vehicle-status status-available">Disponible</span>
+                        <img src="./img/vehiculos/<?= htmlspecialchars($vehiculo['imagen']) ?>" alt="nombre del vehículo">
+
+                        <?php if ($vehiculo['estado'] === 'Disponible'): ?>
+                                            <span class="vehicle-status status-available">Disponible</span>
+                        <?php elseif ($vehiculo['estado'] === 'En Ruta'): ?>
+                                            <span class="vehicle-status status-busy">En Ruta</span>
+                        <?php else: ?>
+                                            <span class="vehicle-status status-maintenance">Mantenimiento</span>
+                        <?php endif; ?>
+
                     </div>
                     <div class="vehicle-info">
-                        <h3 class="vehicle-name">Nombre del vehículo</h3>
-                        <p class="vehicle-plate">🚗 Matrícula: <strong>XXX-9999</strong></p>
+                        <h3 class="vehicle-name"><?= htmlspecialchars($vehiculo['nombre']) ?></h3>
+                        <p class="vehicle-plate">🚗 Matrícula: <strong><?= htmlspecialchars($vehiculo['matricula']) ?></strong></p>
                         <div class="vehicle-specs">
                             <div class="spec-item">
                                 <span class="spec-icon">⚖️</span>
                                 <div class="spec-content">
                                     <span class="spec-label">Carga Máx:</span>
-                                    <span class="spec-value">1500 kg</span>
+                                    <span class="spec-value"><?= htmlspecialchars($vehiculo['carga_maxima']) ?> kg</span>
                                 </div>
                             </div>
                             <div class="spec-item">
                                 <span class="spec-icon">📦</span>
                                 <div class="spec-content">
                                     <span class="spec-label">Volumen Máx:</span>
-                                    <span class="spec-value">12 m³</span>
+                                    <span class="spec-value"><?= htmlspecialchars($vehiculo['volumen_maximo']) ?> m³</span>
                                 </div>
                             </div>
                             <div class="spec-item">
                                 <span class="spec-icon">⛽</span>
                                 <div class="spec-content">
                                     <span class="spec-label">Combustible:</span>
-                                    <span class="spec-value">Diesel</span>
+                                    <span class="spec-value"><?= htmlspecialchars($vehiculo['combustible']) ?></span>
                                 </div>
                             </div>
                             <div class="spec-item">
                                 <span class="spec-icon">🛣️</span>
                                 <div class="spec-content">
                                     <span class="spec-label">Kilometraje:</span>
-                                    <span class="spec-value">124.500 km</span>
+                                    <span class="spec-value"><?= number_format($vehiculo['km'], 0, ',', '.') ?> km</span> <!-- formato: 220.400 km -->
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- acciones del vehículo -->
+
+
+                    <?php if ($vehiculo['estado']=='Disponible'): ?>
+
+
+
                     <div class="vehicle-actions">
-                        <form action="#" method="POST">
+                        <form action="carga" method="GET">
+                            
+                            
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($vehiculo['id']) ?>">
                             <button type="submit" class="btn btn-primary btn-block">
-                                📋 -- Ficha Técnica --
+                                📋 Asignar Carga
                             </button>
                         </form>
                     </div>
+
+                    <?php endif; ?>
                 </article>
-                <!-- Card Vehículo 2 -->
-                <article class="vehicle-card">
-                    <div class="vehicle-image">
-                        <img src="./img/vehiculos/vehiculo_generico.png" alt="nombre del vehículo">
-                        <span class="vehicle-status status-busy">En Ruta</span>
-                    </div>
-                    <div class="vehicle-info">
-                        <h3 class="vehicle-name">Nombre del vehículo</h3>
-                        <p class="vehicle-plate">🚗 Matrícula: <strong>XXX-9999</strong></p>
-                        <div class="vehicle-specs">
-                            <div class="spec-item">
-                                <span class="spec-icon">⚖️</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Carga Máx:</span>
-                                    <span class="spec-value">1500 kg</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">📦</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Volumen Máx:</span>
-                                    <span class="spec-value">12 m³</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">⛽</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Combustible:</span>
-                                    <span class="spec-value">Diesel</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">🛣️</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Kilometraje:</span>
-                                    <span class="spec-value">64.800 km</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- acciones del vehículo -->
-                    <div class="vehicle-actions">
-                        <form action="#" method="POST">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                📋 -- Ficha Técnica --
-                            </button>
-                        </form>
-                    </div>
-                </article>
-                <!-- Card Vehículo 3 -->
-                <article class="vehicle-card">
-                    <div class="vehicle-image">
-                        <img src="./img/vehiculos/vehiculo_generico.png" alt="nombre del vehículo">
-                        <span class="vehicle-status status-maintenance">Mantenimiento</span>
-                    </div>
-                    <div class="vehicle-info">
-                        <h3 class="vehicle-name">Nombre del vehículo</h3>
-                        <p class="vehicle-plate">🚗 Matrícula: <strong>XXX-9999</strong></p>
-                        <div class="vehicle-specs">
-                            <div class="spec-item">
-                                <span class="spec-icon">⚖️</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Carga Máx:</span>
-                                    <span class="spec-value">1500 kg</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">📦</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Volumen Máx:</span>
-                                    <span class="spec-value">12 m³</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">⛽</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Combustible:</span>
-                                    <span class="spec-value">Gasolina</span>
-                                </div>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">🛣️</span>
-                                <div class="spec-content">
-                                    <span class="spec-label">Kilometraje:</span>
-                                    <span class="spec-value">220.400 km</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- acciones del vehículo -->
-                    <div class="vehicle-actions">
-                        <form action="#" method="POST">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                📋 -- Ficha Técnica --
-                            </button>
-                        </form>
-                    </div>
-                </article>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                
 
             </section>
         </div>

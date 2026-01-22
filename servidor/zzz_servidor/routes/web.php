@@ -28,20 +28,19 @@ Route::get("/", [LogisticaController::class, 'index']);
 Route::get("/index", [LogisticaController::class, 'index']);
 Route::post("/index", [LogisticaController::class, 'verificar']);
 
-//borrar
-//Route::get("eliminar", [IncidenciaController::class, 'borrar']); //TODO no funciona porque la url pone el id tambien
-Route::get("/eliminar/{id}", [LogisticaController::class, 'borrar']);
+Route::get("/carga", [LogisticaController::class, 'carga']);
 
-//modificar
-Route::get("/modificar/{id}", [LogisticaController::class, 'modificar']);
+Route::post("/calcular-carga", [LogisticaController::class, 'calcularCarga']);
 
-//alta
-Route::get("/alta", [LogisticaController::class, 'alta']);
-Route::post("/alta", [LogisticaController::class, 'alta_verificar']);
+Route::post("/confirmarEnvio", [LogisticaController::class, 'confirmarEnvio']);
+
+
+
+//salir
+Route::get("/salir", [LogisticaController::class, "logout"]);
 
 //salir
 Route::get("/logout", [LogisticaController::class, 'logout']);
-
 
 
  Route::handleRoute();

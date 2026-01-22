@@ -2,14 +2,7 @@
 
 namespace Cristina\Lib;
 
-
-
-
-define('BD_HOST', 'localhost'); 
-define('BD_NAME', 'monroy_delivery'); //nombre base de datos
-define('BD_USER', 'dwes25');   // usuario BD
-define('BD_PASS', 'dwes');  //contraseña del usuario
-
+require_once __DIR__ . '/db_credentials.php';
 class Database{
 
     private $conn;  //conexion

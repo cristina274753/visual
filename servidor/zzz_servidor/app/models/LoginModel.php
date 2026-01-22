@@ -51,7 +51,7 @@ class LoginModel{
 
     public function obtenerRol ($usuario){
 
-        $sql = "SELECT rol FROM usuarios WHERE usuario = ? LIMIT 1";
+        $sql = "SELECT rol FROM empleados WHERE id_empleado = ? LIMIT 1";
         $resultado = $this->db->executeQuery($sql, [$usuario]);
 
         // Si no existe el usuario
@@ -62,6 +62,42 @@ class LoginModel{
 
 
             return $resultado[0]['rol'];
+        }
+
+
+    }
+
+    public function obtenerNombre ($usuario){
+
+        $sql = "SELECT nombre FROM empleados WHERE id_empleado = ? LIMIT 1";
+        $resultado = $this->db->executeQuery($sql, [$usuario]);
+
+        // Si no existe el usuario
+        if (empty($resultado)) {
+            return false;
+
+        }else{
+
+
+            return $resultado[0]['nombre'];
+        }
+
+
+    }
+
+    public function obtenerApellidos ($usuario){
+
+        $sql = "SELECT apellidos FROM empleados WHERE id_empleado = ? LIMIT 1";
+        $resultado = $this->db->executeQuery($sql, [$usuario]);
+
+        // Si no existe el usuario
+        if (empty($resultado)) {
+            return false;
+
+        }else{
+
+
+            return $resultado[0]['apellidos'];
         }
 
 

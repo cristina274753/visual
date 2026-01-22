@@ -27,35 +27,44 @@ class LoginController extends Controller
         $usuario  = trim($_POST['credencial'] ?? "");
 
         if ($usuario === "") {
-            $errores['usuario'] = "Por favor, rellena el campo del codigo de acceso";
-        } 
+            $errores['usuario'] = "Por favor, rellena el campo del código de acceso";
+        } else {
+            // Validar formato CODIGO-PIN
+            if (!str_contains($usuario, '-')) {
+                $errores['usuario'] = "El formato debe ser CODIGO-PIN (separado por un guion)";
+            } else {
+                $partes = explode('-', $usuario);
 
-        // 3) Cuando no hay errores
-        if (empty($errores)) {
-            // Separar ID y PIN
-            $partes = explode('-', $usuario);
+                // Deben existir exactamente 2 partes
+                if (count($partes) !== 2) {
+                    $errores['usuario'] = "Formato inválido, debe ser CODIGO-PIN";
+                } else {
+                    $nombre  = trim($partes[0]);
+                    $numeros = trim($partes[1]);
 
-            //separar el nombre y los numeros 
-            $nombre=trim($partes[0]);
-            $numeros= trim($partes[1]);
+                    if ($nombre === "" || $numeros === "") {
+                        $errores['usuario'] = "Tanto el código como el PIN son obligatorios";
+                    }
+                }
+            }
         }
-        
 
         
-        
-
-
-
-
         if (empty($errores)) {
             $modelo = new LoginModel();
             $resultado = $modelo->verificarUsuario($nombre, $numeros);
+            $rol= $modelo->obtenerRol($nombre);
+            $UsuarioNombre= $modelo->obtenerNombre($nombre);
+            $apellidos= $modelo->obtenerApellidos($nombre);
 
             if (!$resultado) {
                 $errores['login'] = "codigo de acceso incorrecto";
 
             } else {
-                $_SESSION['usuario'] = $usuario;
+                $_SESSION['usuario'] = $nombre;
+                $_SESSION['nombre'] = $UsuarioNombre;
+                $_SESSION['apellidos'] = $apellidos;
+                $_SESSION['rol'] = $rol;
                 // Redirige al índice
                 header("Location: " . BASE_URL . "/index");
 

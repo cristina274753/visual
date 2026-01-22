@@ -30,7 +30,7 @@ class LogisticaModel{
         return $this->db->executeUpdate($sql, [$asunto, $tipo_incidencia, $horas_estimadas]);
     }
 
-    public function obtenerIncidencias(){
+    public function obtenerVehiculos(){
         $sql= "SELECT * FROM vehiculos";
 
         return $this->db->executeQuery($sql);
@@ -49,6 +49,12 @@ class LogisticaModel{
     public function eliminarProducto($id) {
         $sql = "DELETE FROM vehiculos WHERE id = ?";
         return $this->db->executeUpdate($sql, [$id]);
+    }
+
+    public function listadosPaquetes() {   //esto da el producto con ese id
+        $sql = "SELECT * FROM paquetes WHERE Estado ='Pendiente' ORDER BY prioridad ASC, peso DESC";
+        $result = $this->db->executeQuery($sql);
+        return $result ? $result : null; //si no existe null -- si existe= devolvemos la primera fila
     }
 
     
