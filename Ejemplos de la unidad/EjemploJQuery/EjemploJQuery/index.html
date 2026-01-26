@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo jQuery</title>
+    <link rel="stylesheet" href="./css/tarea_06.css">
+    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+   <!-- Contenedor principal de la página -->
+   <div class="menu">
+        
+        <div class="botones">
+            <p class="panel_opciones">Accesibilidad</p>
+            <button id="T_mas" type="button"> T+</button>  
+            <button id="T_menos" type="button"> T-</button>  
+            <button id="oscuro" type="button"> Oscuro</button>  
+            <button id="breve" type="breve"> Simplificada</button>  
+            
+            <div class="seleccion_fuente">
+                <label for="s_fuente">Fuente:</label>
+                <select id="s_fuente">
+                    <option value="1">Verdana</option>
+                    <option value="2">Fuente Local</option>
+                    <option value="3">Fuente internet</option>
+                </select>
+            </div>
+            <button id="ultima" type="reset"> Última hora</button>  
+
+            <button id="reset" type="reset"> Reset</button>  
+            <button id="estado" type="estado">Ocultar</button>  
+
+        </div>
+        <div class="barra_fuentes">
+            <p class="tamano_fuente">Tamaño fuente: 14px</p>
+            <p>Mínimo 14px - Máximo 20px</p>
+        </div>
+
+    </div>
+   <div class="contenedor">
+        
+        
+        <!-- Definimos la cabecera donde estará nuestra información personal-->
+        <header class="cabecera">
+            <h1 class="encabezado">Foto - Nombre y Apellidos</h1>
+        </header>    
+        <nav class="navegacion">
+            <ul>
+                <li><a href="#noticia_1">Noticia 1</a></li>
+                <li><a href="#noticia_2">Noticia 2</a></li>                
+                <li><a href="#noticia_3">Noticia 3</a></li>
+            </ul>
+        </nav>    
+ 
+        <div class="noticias">
+            <div id="noticia_1" class="noticia">
+                <h2 class="titulo_noticia">Noticia 1</h2>
+                <div class="cuerpo_noticia">
+                    <p class="texto">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+                    <img class="img_collage" id="img1" src="img/img1.jpeg" alt="Descirpción">                    
+    
+                </div>
+            </div>
+            <div id="noticia_2" class="noticia">
+                <h2 class="titulo_noticia">Noticia 2</h2>
+                <div class="cuerpo_noticia">
+                    <p class="texto">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+                    <img class="img_collage" id="img1" src="img/img2.jpeg" alt="Descirpción">                    
+    
+                </div>
+            </div>
+            <div id="noticia_3" class="noticia">
+                <h2 class="titulo_noticia">Noticia 3</h2>
+                <div class="cuerpo_noticia">
+                    <p class="texto">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+                    <img class="img_collage" id="img1" src="img/img3.jpeg" alt="Descirpción">                    
+    
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <!-- Zona de pie -->
+        <div class="pie">
+            <h2>Zona de pie</h2>
+            <div class="historico"></div>
+            <p class="texto licencia">Licencia - Fondo: https://pixabay.com/es/photos/ladrillos-pared-piedras-estructura-459299/</p>
+        </div>
+    <div>
+    <script src="./js/tarea_06.js"></script>
+    <script src="./js/canvas.js"></script>
+</body>
+
+</html>

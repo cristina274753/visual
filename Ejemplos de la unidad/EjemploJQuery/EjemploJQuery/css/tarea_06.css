@@ -1,0 +1,192 @@
+* {
+        box-sizing: border-box;
+        margin:0px;
+        padding:0px;
+}
+
+a{
+        text-decoration: none;
+        color:blue;
+}
+
+
+/* Definimos la estructura de la maqueta con grid*/    
+.contenedor{
+    display:grid;
+    grid-template-areas:"cabecera"
+        "navegacion"
+        "noticias"
+        "pie";
+        
+    grid-template-columns: 80%;
+    grid-template-rows: auto auto  1fr auto;
+    grid-gap: 5px;
+    justify-content: center;
+}
+
+/* Asignamos cada una de las zonas de la maqueta*/
+.cabecera{
+    grid-area:cabecera;
+}
+       
+.encabezado {
+    color:seagreen;
+    text-align:center;
+    border: 3px solid green;
+    padding: 20px 20px;
+    margin: 10px auto;   
+}
+
+/* Definimos los estilos de la zona de navegación */
+.panel_opciones{
+    margin:auto 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.navegacion{
+    grid-area:navegacion;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid green;
+}
+
+.navegacion ul{
+    margin: 5px 5px;
+}
+
+.navegacion li{
+    display: inline;
+    text-align:center;
+    border: 3px solid olive;
+    padding: 0px 40px;
+}
+        
+/* Definimos la parte relacionada con el menú */
+.menu{
+    height: 100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 3px solid black;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    background-color: blanchedalmond;
+}    
+.botones, .barra_fuentes{
+    display:flex;
+    flex-direction: row;
+    
+}
+.barra_fuentes p{
+    margin: 0px 40px;
+}
+        /* Botones implementados con etiquetas p, le asignamos estilos simples */
+        
+button, .seleccion_fuente{
+    border: 2px solid blue;
+    padding:10px;
+    margin:5px;
+}
+
+/* Definimos la zona de efectos. La definimos como una zona flex*/
+/* los objetos dentro del flex se posicionan en columnas unos dejajo de otros */
+/* centramos vertical y horizontalmente */
+.noticias{
+    grid-area:noticias;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    
+}
+
+.noticia{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    border: 3px solid blue;
+    margin:5px 0px;
+    width:100%;
+}
+
+.titulo_noticia{
+    font-family:"verdana"
+
+}
+.cuerpo_noticia{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    margin:5px 10px;
+    font-family:"verdana"
+}
+
+/* Definimos estilos de cada título y las descripción del mismo */
+
+        
+        /* Definimos el estilo de cada uno de los paneles de la zona de efectos*/
+        /* Definimos el título de cada una de las opciones de los diferentes efectos */
+        input {margin: 0px 6px;}              
+
+        label{font-size: 12px;
+              margin:0 5px;}
+
+
+        
+        
+        /* Asingamos las imágenes a las zonas del grid, aqunque puedes cambiarlas y personalizarlas como quieras */
+        .img_collage{
+            width:10rem;
+            height:auto;
+            margin-left: 5px;
+        }
+
+        #cambios_aplicados>span{font-size:10px;}
+
+        /* Definimos el contenedor de los botones que tendrán los controles del video*/
+        /* Botones realizados con canvas */
+
+
+        /* pie de página*/
+        .pie{
+            grid-area:pie;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            font-weight: bold;
+        }
+        .licencia{
+            font-size:10px;
+        }
+
+
+/*font-family: 'Delicious Handrawn', cursive;*/
+
+@font-face {
+    font-family: "mi-fuente";
+    src: url("../fuentes/fuente.ttf");
+}
+  
+
+/* estilos de la última noticia */
+.ultima_noticia {
+    font-size:20px;
+    color:red;
+}
+
+
+.titulo_ultima_noticia,.texto_ultima_noticia{
+    color:red;
+}
+
+/*body{
+        background-image: url("../img/fondo3.jpg");
+        background-position: center;
+        background-size: cover;
+}*/
