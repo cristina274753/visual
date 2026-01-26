@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Animaciones</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+     <header>
+
+      
+        <!-- <div class="logo">
+            <a href="index.html"><img src="img/Burgernautas.png" alt="logo"></a> 
+        </div>
+        <div class="nombreEmpresa">
+            <h1>Burgernautas</h1>
+        </div>  -->
+
+        
+        
+
+
+        <!-- logo con imagen svg -->
+         <div  class="logo">
+          <img src="img/08_logo.svg" alt="Logo de la empresa" class="logo">
+         </div>
+           
+
+
+        
+        
+    
+    </header>
+
+  <nav id="mainNav"> 
+        <ul class="menu">
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c"><span>Carta</span></a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="r"><span>Reserva</span></a></li>
+            <li><a href="https://www.lacalleburger.com/restaurantes2" accesskey="u"><span>Ubicación</span></a></li>
+            <li><a href="accesibilidad.html" accesskey="a"><span>Accesibilidad</span></a></li>
+            <li><a href="https://www.loccoburger.es/contacto/" accesskey="o"><span>Contacto</span></a></li>
+            <li><a href="animaciones.html" accesskey="o"><span>Animaciones</span></a></li>
+        </ul>
+    </nav>
+
+  <main class="animaciones">
+
+    <section id="slider">
+      <h2>Slider CSS</h2>
+      <!--  <div class="slider">
+        <div class="slides">
+          <img src="img/hamburguesa1.png" alt="">
+          <img src="img/hamburguesa2.png" alt="">
+          <img src="img/hamburguesa3.png" alt="">
+          <img src="img/hamburguesa4.png" alt="">
+        </div>
+      </div> -->
+
+      <div class="slider">
+        <div class="slides">
+            <img src="img/hamburguesa1.png" alt="">
+          <img src="img/hamburguesa2.png" alt="">
+          <img src="img/hamburguesa3.png" alt="">
+          <img src="img/hamburguesa4.png" alt="">
+        </div>
+        </div>
+      
+     
+    </section>
+
+    <section id="canvasLikes">
+      <h2>Likes con Canvas</h2>
+      <canvas id="likesCanvas" width="400" height="50"></canvas>
+      <p>Likes: <span id="likes">0</span></p>
+      <button id="likeBtn">👍 Me gusta</button>
+    </section>
+
+    <section id="svgAnim">
+      <h2>Animación SVG</h2>
+      <svg width="400" height="200">
+        <path id="ruta" d="M20 100 Q200 10 380 100" fill="none" stroke="black"/>
+        <image href="img/instagram.png" width="40" height="40">
+          <animateMotion dur="5s" repeatCount="indefinite">
+            <mpath href="#ruta"/>
+          </animateMotion>
+        </image>
+        <image href="img/tiktok.png" width="40" height="40">
+          <animateMotion dur="5s" begin="0.5s" repeatCount="indefinite">
+            <mpath href="#ruta"/>
+          </animateMotion>
+        </image>
+      </svg>
+    </section>
+
+  </main>
+
+
+
+
+
+
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+  const canvas = document.getElementById("likesCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let likes = 0;
+  const maxLikes = 200;
+
+  function dibujarBarra() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    /* Fondo de la barra */
+    ctx.fillStyle = "#ccc";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    /* Barra de progreso */
+    ctx.fillStyle = "#F75270";
+    ctx.fillRect(0, 0, (likes / maxLikes) * canvas.width, canvas.height);
+  }
+
+  $("#likeBtn").click(function () {
+    if (likes < maxLikes) {
+      likes += 10;
+      $("#likes").text(likes);
+      dibujarBarra();
+    }
+  });
+
+  /* Dibujo inicial */
+  dibujarBarra();
+});
+  </script>
+</body>
+</html>

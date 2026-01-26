@@ -1,0 +1,800 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Luckiest+Guy&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --resaltar: #DC143C;
+  --rosaFuerte: #F75270;
+  --rosaClaro: #F7CAC9;
+  --azul: #92A8D1;
+  --negro: #181818;
+  --blanco: #efefff  ;
+
+}
+
+
+
+@font-face {
+    
+    font-family: fuente1;
+    src: url('fuentes/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
+
+
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///BODY
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+body {
+  display: grid; 
+  grid-template-columns: 20% 80%;
+
+  grid-template-areas:
+    "header header"
+    "menu menu"
+    "aside content"
+    "footer footer";
+  background-color: var(--negro);
+  color: var(--blanco);
+  
+}
+
+h2{
+  font-family: fuente1;
+  font-size: 2rem;
+
+
+}
+
+/* botones de saltar contenido*/
+.saltar {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.salto{
+  background-color: var(--rosaFuerte); 
+  color: var(--rosaClaro);    
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///HEADER - LOGO-NOMBRE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+header{
+  grid-area: header;
+  display: flex;  
+  align-items: center;
+  color: var(--rosaClaro);
+  height: 130px;
+}
+
+.logo img{
+  width: auto;
+  height: 150px;
+}
+
+.nombreEmpresa {
+  font-size: 2rem;
+  font-family: "Caprasimo";
+}
+
+/* BOTÓN FIJO PARA VOLVER ARRIBA */
+.volverArriba {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--resaltar);
+    color: white;
+    padding: 12px 15px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 0 10px black;
+    z-index: 999;
+}
+
+.volverArriba:hover {
+    background-color: var(--rosaFuerte);
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///NAV - MENU
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+nav{ 
+  grid-area: menu;
+  position: sticky; 
+  top: 0;
+
+  background-color: var(--rosaFuerte);
+  z-index: 100;
+  border-radius: 30px;
+  height: 50px;
+
+  display: flex;             
+  align-items: center;      
+  justify-content: center;
+
+}
+
+a {
+  text-decoration: none;
+  color: var(--blanco); 
+}
+
+/*manu de cortina*/
+
+/* Contenedor del menú */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cada opción */
+.menu li {
+  width: 150px;
+}
+
+/* Enlace */
+.menu a {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #111;      /* fondo negro */
+  color: white;
+  text-decoration: none;
+  overflow: hidden;
+  font-weight: bold;
+  z-index: 1; /* CONTEXTO */
+}
+
+.menu a span {
+  position: relative;
+  z-index: 3;      /* TEXTO POR ENCIMA DE TODO */
+}
+
+/* BORDE SUPERIOR DE COLOR */
+.menu a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: yellow; /* color del borde */
+  z-index: 2;
+}
+
+/* CORTINA */
+.menu a::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:blue;
+  transition: top 0.4s ease;
+  z-index: 1;
+}
+
+/* Hover */
+.menu a:hover::before {
+  top: 0;
+}
+
+/*los colores diferentes
+
+.menu li:nth-child(1) a::before,
+.menu li:nth-child(1) a::after { background-color: #1e90ff; }
+
+.menu li:nth-child(2) a::before,
+.menu li:nth-child(2) a::after { background-color: #f1c40f; }
+
+.menu li:nth-child(3) a::before,
+.menu li:nth-child(3) a::after { background-color: #e74c3c; }
+
+.menu li:nth-child(4) a::before,
+.menu li:nth-child(4) a::after { background-color: #2ecc71; }
+*/
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///MAIN 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+main{
+    grid-area: content;
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+///1 bloque - PRODUCTO EN PROMOCION
+/////////////////////////////////////////////////////////////////////////*/
+
+.promocion{
+  position: relative;
+  background-color: var(--rosaFuerte);
+
+  border-radius: 10%;  
+  height:65vh;
+  padding-top: 60px;
+  margin-top: 2%;
+}
+
+
+.promocion h2{
+  margin-top: 0;
+  margin-left: 50px;
+  font-size: 2rem;
+}
+
+.promocion h2:hover{
+  color: var(--negro); /*cambiar color al psasar*/
+}
+
+.promocion img{
+  display: block;
+
+  margin-top: 5%;
+  margin-left: 25%;
+
+  width: auto;
+  height: 70%;
+
+}
+
+/*transformacion y transicion*/
+/* TRANSICIÓN IMAGEN PROMOCIÓN */
+.promocion img {
+  transition: transform 0.4s ease;
+}
+
+/* EFECTO AL PASAR EL RATÓN */
+.promocion img:hover {
+  transform: scale(1.15);
+}
+
+
+
+
+.promocion p{ 
+  position: absolute;
+  opacity: 0; /* para que se muestre oculto*/
+
+  color: var(--resaltar);
+  top: 15%;
+  left: 40%;
+  font-size: 3rem;
+  background-color: var(--rosaClaro); 
+  padding: 1%;
+  border-radius: 40%;
+}
+
+/*activar informacion al hacer click*/
+.promocion:active p{
+  opacity: 1;
+
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////
+///2 bloque - PRODUCTO DESTACADOS
+/////////////////////////////////////////////////////////////////////////*/
+
+
+
+.cartas{ 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  justify-content: center;
+  gap: 20px;
+  color: black;
+
+}
+
+.carta {
+  background-color: var(--rosaClaro);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+
+
+.cartas img{
+  width: auto;
+  height: 200px;
+
+  border-radius: 15px;
+  margin-left:15%;
+}
+
+.carta h3{
+  text-align: center;
+  color: var(--rosaFuerte);
+  font-size: 30px;
+}
+
+.carta p{
+  background-color: var(--azul);
+  color: var(--blanco);
+  
+  padding: 5%;
+  border-radius: 12px;
+}
+
+/*filtro a las cartas*/
+.carta:hover{
+  filter: drop-shadow(10px 10px 10px rgb(255, 255, 255));
+}
+
+/*sombra pares y impares*/
+.carta:nth-child(odd){   
+  box-shadow:   6px 10px var(--resaltar);
+}
+
+.carta:nth-child(even){
+  box-shadow:  6px 10px var(--azul);
+
+}
+
+
+
+
+
+/* TRANSICIÓN CARTAS DESTACADAS */
+.carta {
+  transition: transform 0.3s ease;
+}
+
+/* EFECTO AL PASAR EL RATÓN */
+.carta:hover {
+  transform: translateY(-15px);
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////
+//FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+.formulario {
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+fieldset {
+    border: 1px solid var(--rosaClaro);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--rosaFuerte);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--azul);
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+//VALIDACION DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+/* Campos válidos */
+.formulario input:valid,
+.formulario select:valid,
+.formulario textarea:valid {
+  border: 2px solid green;
+  background-color: #e6ffe6;
+  
+}
+
+/* Campos no validos */
+.formulario input:invalid,
+.formulario select:invalid,
+.formulario textarea:invalid {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+/* Mensajes de error en el formulario */
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////
+//BOTONES DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////*/
+
+.actions input{
+  background-color: var(--azul);
+}
+
+.actions input:hover,
+.actions input:focus {
+    background-color: var(--rosaFuerte);
+    outline: none;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///ASIDE - MEDIDAS SOSTENIBLES 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+aside {
+  grid-area: aside;
+
+  background-color: grey;
+  padding: 20px;
+  margin: 30px;
+  border-radius: 20px;
+  height: fit-content;
+}
+
+aside h2 {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+aside div {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid rgb(0, 0, 0); 
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///FOOTER
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+footer{
+  grid-area: footer;
+  background-color: var(--rosaFuerte);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px ;
+
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+///1 bloque - REDES SOCIALES 
+/////////////////////////////////////////////////////////////////////////*/
+
+.redes{
+  display: flex;
+  gap: 20px; 
+} 
+
+.redes img {
+  width: 100px;
+  height: auto;
+}
+
+/*//////////////////////////////////////////////////////////////////////////
+///2 bloque - ACCESIBILIDAD
+/////////////////////////////////////////////////////////////////////////*/
+
+.accesibilidad, .accesibilidad a{
+  color: var(--rosaClaro);
+} 
+
+.accesibilidad img{
+
+  width: 100px;
+  height: auto;
+  margin-left: 10px;
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////
+///3 bloque - DERECHOS DE AUTOR 
+/////////////////////////////////////////////////////////////////////////*/
+
+.derechosAutor{
+  color: var(--negro);
+}
+
+
+
+
+
+/*menu hamburguesa que no se muestre*/
+.menuHamburguesa {
+  display: none;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///animaciones
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*
+.slider {
+ width: 400px;
+ height: 250px;
+ overflow: hidden;
+ position: relative;
+}
+
+.slider img {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ opacity: 0;
+ animation: slider 10s infinite;
+}
+
+.slider img:nth-child(1) { animation-delay: 0s; }
+.slider img:nth-child(2) { animation-delay: 3.33s; }
+.slider img:nth-child(3) { animation-delay: 6.66s; }
+
+@keyframes slider {
+ 0% { opacity: 0; }
+ 10% { opacity: 1; }
+ 30% { opacity: 1; }
+ 40% { opacity: 0; }
+ 100% { opacity: 0; }
+ 
+}*/
+
+
+
+.slider {
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.slides {
+  width: 1200px; /* 3 imágenes x 400px */
+  display: flex;
+  animation: slider 10s infinite;
+}
+
+.slides img {
+  width: 400px;
+  height: 250px;
+}
+
+@keyframes slider {
+  0% { transform: translateX(0); }
+  33% { transform: translateX(-400px); }
+  66% { transform: translateX(-800px); }
+  100% { transform: translateX(0); }
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///accesibilidad nuevo
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* ===== BARRA DE ACCESIBILIDAD ===== */
+.accesibilidad-barra {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.9);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.btnAcc{
+  border: none;
+  background: #f75270;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btnAcc:hover{
+  background: #dc143c;
+}
+
+.infoTamano{
+  font-weight: bold;
+  color: #333;
+}
+
+
+
+
+
+/* MODO OSCURO */
+body.modo-oscuro {
+  background-color: black;
+  color: white;
+}
+
+body.modo-oscuro h2,
+body.modo-oscuro h3 {
+  color: green;
+}
+
+body.modo-oscuro p {
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///RESPONSIVE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+@media screen and (max-width: 576px) {
+
+   /* Botón hamburguesa */
+  .menuHamburguesa {
+    display: block;
+
+    background-color: var(--rosaFuerte);
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+    
+    font-size: 1.8em;
+    padding: 4px 10px;
+    margin-left: 10px;
+  }
+
+  nav {
+    display: none;
+  }
+
+
+  nav.activo {
+    display: flex;
+    
+    background-color: var(--azul);
+
+    position: absolute;
+    top: 100px; 
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 8px;
+    z-index: 100;
+  }
+
+  nav.activo ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav.activo li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///HEADER
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+  .logo img {
+    width: 60px;
+    height: auto;
+  }
+
+  .nombreEmpresa h1 {
+    font-size: 1.2em;
+  }
+
+  .promocion{
+    height:40vh;
+    padding-top: 20px;
+  }
+
+    .promocion img {
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+
+  .cartas {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .tabla {
+    display: none;
+  }
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///ASIDE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+  aside {
+    margin: 5px;
+    padding: 5px;
+    width: auto;
+  }
+
+
+  aside h2 {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+
+  aside div{
+    column-count: 1;
+    height: fit-content;
+    font-size: 12px;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

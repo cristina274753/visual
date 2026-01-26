@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tema 3</title>
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <!-- font awesone -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <!-- FAVICON -->
+
+        <link rel="icon" type="image/png" href="img/Burgernautas.png">
+    
+</head>
+<body id="inicio">
+    
+  
+    <header>
+
+      
+        <!-- <div class="logo">
+            <a href="index.html"><img src="img/Burgernautas.png" alt="logo"></a> 
+        </div>
+        <div class="nombreEmpresa">
+            <h1>Burgernautas</h1>
+        </div>  -->
+
+        
+        
+
+
+        <!-- logo con imagen svg -->
+         <div  class="logo">
+          <img src="img/08_logo.svg" alt="Logo de la empresa" class="logo">
+         </div>
+           
+
+
+        
+        
+    
+    </header>
+
+    <nav id="mainNav"> 
+        <ul class="menu">
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c"><span>Carta</span></a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="r"><span>Reserva</span></a></li>
+            <li><a href="https://www.lacalleburger.com/restaurantes2" accesskey="u"><span>Ubicación</span></a></li>
+            <li><a href="accesibilidad.html" accesskey="a"><span>Accesibilidad</span></a></li>
+            <li><a href="https://www.loccoburger.es/contacto/" accesskey="o"><span>Contacto</span></a></li>
+            <li><a href="animaciones.html" accesskey="o"><span>Animaciones</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- boton para ir hacia arriba --> 
+        <a href="#inicio" class="volverArriba" aria-label="Volver al inicio">⬆</a>
+        
+
+        
+
+
+    <main>
+
+      <div class="saltar">
+        <a href="#mainProductos" class="salto">Saltar a los productos</a>
+        <a href="#mainNav" class="salto">Saltar navegación</a>
+      </div>
+
+        <section class="promocion"> 
+            <h2>Hamburguesa Combo Interestelar !!</h2>
+            <img src="img/hamburguesa1.png" alt="">
+            <p id="precioPromocion">Por tan solo: 5€</p>
+
+
+            <!-- imagen respondiva -->
+             <picture>
+                <source srcset="img/06_composicion_mejorada_dim_500.png" media="(max-width: 575px)">
+                <source srcset="img/07_composicion_mejorada_dim_500.png" media="(min-width: 576px)">
+                <img src="img/05_composicion.png" alt="Producto en promoción">
+              </picture>
+            
+        </section>
+
+
+        <section class="destacados" id="mainProductos">
+            <h2>Producto destacados</h2>
+            <div class="cartas"> 
+
+                <article class="carta"> 
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa mágica">
+                    <h3>La Órbita de Bacon</h3>
+                    <p>Gira alrededor de tu paladar con bacon crujiente y queso fundido en pan estelar.</p>
+                    <p>Calorías: 500 • Sabor: intenso y ahumado • Precio: 4.5€</p>
+                    <!-- icono -->
+                    
+                    <p><i class="fa-solid fa-leaf"></i> Producto sostenible</p>
+                </article>
+                
+
+                 <article class="carta">
+                    <img src="img/hamburguesa3.png" alt="Hamburguesa mágica">
+                    <h3>La Vacuna Galáctica</h3>
+                    <p>Inmuniza tu hambre con carne jugosa, cheddar interestelar y salsa secreta de otro planeta.</p>
+                    <p>Calorías: 500 • Sabor: especiado y cremoso • Precio: 4.5€</p>
+
+                     <p><i class="fa-solid fa-truck"></i> Envío rápido</p>
+                 </article>
+
+                <article class="carta">
+                    <img src="img/hamburguesa4.png" alt="Hamburguesa especial 2">
+                    <h3>La Meteorito Crujiente</h3>
+                    <p>Impacto directo de sabor con salsa secreta y textura explosiva.</p>
+                    <p>Calorías: 530 • Sabor: crujiente y salado • Precio: 5.5€</p>
+
+                     <p><i class="fa-solid fa-star"></i> Calidad premium</p>
+                </article>
+
+                <article class="carta">
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 2">
+                    <h3>La Alien Veggie</h3>
+                    <p>Verde, misteriosa y deliciosa: una veggie de otro sistema solar.</p>
+                    <p>Calorías: 510 • Sabor: fresco y herbal • Precio: 4.8€</p>
+                </article>
+
+                <article class="carta">
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa especial 3">
+                    <h3>La NASA Deluxe</h3>
+                    <p>Diseñada para astronautas del sabor: doble carne, doble queso, doble felicidad.</p>
+                    <p>Calorías: 600 • Sabor: potente y cremoso • Precio: 6€</p>
+                </article>
+
+                <article class="carta">
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 3">
+                    <h3>La Gravedad Cero</h3>
+                    <p>Flota en tu boca con pan brioche, mostaza cósmica y carne ligera.</p>
+                    <p>Calorías: 520 • Sabor: suave y equilibrado • Precio: 4.9€</p>
+                </article>
+
+                <article class="carta">
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa especial 4">
+                    <h3>La Nebulosa</h3>
+                    <p>Una nube de sabor con ingredientes frescos y especias estelares.</p>
+                    <p>Calorías: 560 • Sabor: cremoso y aromático • Precio: 5.2€</p>
+                </article>
+
+                <article class="carta">     
+                    <img src="img/hamburguesa2.png" alt="Hamburguesa mágica 4">
+                    <h3>La Satélite con Jalapeños</h3>
+                    <p>Receta clásica orbitando con jalapeños picantes y queso fundido.</p>
+                    <p>Calorías: 540 • Sabor: picante y tostado • Precio: 5€</p>
+                </article>
+            </div>
+                
+
+
+            <section class="formulario">
+              <h3>Vídeo promocional</h3>
+
+              <video id="videoPromo" width="400" controls poster="img/05_composicion.png" muted>
+                <source src="img/01_video.mp4" type="video/mp4">
+                <source src="img/02_video.webm" type="video/webm">
+                Tu navegador no soporta vídeo HTML5.
+              </video>
+
+              <div class="controles-video">
+                <button id="play">▶</button>
+                <button id="pause">⏸</button>
+                <button id="volUp">🔊 +</button>
+                <button id="volDown">🔉 −</button>
+
+              </div>
+            </section>
+        </section>
+    </main> 
+
+
+    <aside>
+      <h3>Audio promocional</h3>
+      <audio controls>
+        <source src="img/01_audio_original.mp3" type="audio/mpeg">
+        <source src="img/02_audio.ogg" type="audio/ogg">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+  </aside>
+
+
+    <footer>
+      <div class="redes">
+          <img src="img/instagram.png" alt="Instagram">
+          <img src="img/tiktok.png" alt="TikTok">
+          <img src="img/facebook.png" alt="Facebook">
+      </div>
+
+      <div class="accesibilidad">
+          <a href="accesibilidad.html">Declaración de Accesibilidad</a>
+          <img src="img/wcag2.2AA.png" alt="Nivel de conformidad WCAG 2.2">  
+      </div>
+
+      <div class="derechosAutor">
+          <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
+      </div>
+
+      
+
+  </footer>
+
+  <!-- carga jquery -->
+  
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        const menuButton = document.createElement('button');
+        menuButton.setAttribute("aria-label", "Abrir o cerrar menú");
+        menuButton.className = 'menuHamburguesa';
+        menuButton.textContent = '☰';
+        document.querySelector('header').appendChild(menuButton);
+
+        const nav = document.querySelector('nav');
+        menuButton.addEventListener('click', () => {
+            nav.classList.toggle('activo');
+        });
+
+
+
+
+    </script>
+
+<!-- jquery -->
+
+
+    <script>
+  $(document).ready(function () {
+
+    const video = $("#videoPromo").get(0);
+
+    $("#play").click(function () {
+      video.play();
+    });
+
+    $("#pause").click(function () {
+      video.pause();
+    });
+
+    $("#volUp").click(function () {
+      if (video.volume < 1) {
+        video.volume = Math.min(1, video.volume + 0.1);
+      }
+    });
+
+    $("#volDown").click(function () {
+      if (video.volume > 0) {
+        video.volume = Math.max(0, video.volume - 0.1);
+      }
+    });
+
+  });
+</script>
+
+   
+</body>
+</html>

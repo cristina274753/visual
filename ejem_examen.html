@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Examen Práctico DI 2º DAW</title>
+
+<style>
+/* ===========================
+   EJERCICIO 3 – TRANSFORM + TRANSITION
+   =========================== */
+.box {
+  width: 100px;
+  height: 100px;
+  background: red;
+  margin: 40px auto;
+  transition: transform 1.5s ease;
+}
+.box:hover {
+  transform: rotate(45deg) scale(2);
+}
+
+/* ===========================
+   EJERCICIO 4 – ANIMACIÓN CSS
+   =========================== */
+.circulo {
+  width: 80px;
+  height: 80px;
+  background: orange;
+  border-radius: 50%;
+  position: relative;
+  animation: mover 4s infinite;
+}
+@keyframes mover {
+  0% { left: 0; }
+  50% { left: 300px; }
+  100% { left: 0; }
+}
+
+/* ===========================
+   EJERCICIO 6 – MENÚ LATERAL
+   =========================== */
+#menu {
+  width: 200px;
+  height: 100%;
+  background: #333;
+  position: fixed;
+  left: -200px;
+  top: 0;
+  color: white;
+  padding: 20px;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<h1>EXAMEN PRÁCTICO DI – CÓDIGO COMPLETO</h1>
+
+<!-- ===========================
+     EJERCICIO 1 – AUDIO + PAUSA
+     =========================== -->
+<h2>1. Audio con botón pausa</h2>
+<audio id="musica" autoplay muted controls>
+  <source src="tema.mp3" type="audio/mpeg">
+  <source src="tema.ogg" type="audio/ogg">
+</audio>
+<button id="pausar">Pausar audio</button>
+
+<script>
+$("#pausar").click(function(){
+  $("#musica")[0].pause();
+});
+</script>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 2 – VIDEO + AVANZAR
+     =========================== -->
+<h2>2. Vídeo + avanzar 15s</h2>
+<video id="vid" controls muted poster="portada.jpg" width="400">
+  <source src="intro.mp4" type="video/mp4">
+</video>
+<button id="avanzar">Avanzar 15s</button>
+
+<script>
+$("#avanzar").click(function(){
+  const v = $("#vid")[0];
+  v.currentTime += 15;
+});
+</script>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 3 – TRANSFORM + TRANSITION
+     =========================== -->
+<h2>3. Transform + Transition</h2>
+<div class="box"></div>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 4 – ANIMACIÓN CSS
+     =========================== -->
+<h2>4. Animación CSS</h2>
+<div class="circulo"></div>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 5 – PANEL SLIDE + ANIMATE
+     =========================== -->
+<h2>5. Panel con slide + animate</h2>
+<div id="panel" style="display:none; width:200px; height:100px; background:gray;"></div>
+<button id="mostrar">Mostrar panel</button>
+
+<script>
+$("#mostrar").click(function(){
+  $("#panel").slideDown(400, function(){
+    $(this).css("background","blue")
+           .animate({ opacity: 0.4 }, 600);
+  });
+});
+</script>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 6 – MENÚ LATERAL
+     =========================== -->
+
+     <!-- <h2>6. Menú lateral animado</h2>
+<div id="menu">MENÚ LATERAL</div>
+<button id="abrir">Abrir menú</button>
+<button id="cerrar">Cerrar menú</button>
+
+<script>
+$("#abrir").click(function(){
+  $("#menu").animate({ left: "0px" }, 500);
+});
+$("#cerrar").click(function(){
+  $("#menu").animate({ left: "-200px" }, 500);
+});
+</script>
+
+<hr> -->
+     
+
+
+<!-- ===========================
+     EJERCICIO 7 – CANVAS BÁSICO
+     =========================== -->
+<h2>7. Canvas básico</h2>
+<canvas id="cv" width="400" height="300" style="border:1px solid black;"></canvas>
+
+<script>
+const c = document.getElementById("cv");
+const ctx = c.getContext("2d");
+
+ctx.fillStyle = "green";
+ctx.fillRect(20, 20, 200, 100);
+
+ctx.beginPath();
+ctx.arc(120, 70, 40, 0, Math.PI*2);
+ctx.fillStyle = "red";
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo(400,300);
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.font = "30px Arial";
+ctx.fillText("DISEÑO", 20, 180);
+</script>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 8 – CANVAS ANIMADO
+     =========================== -->
+<h2>8. Canvas animado (rebote)</h2>
+<canvas id="cv2" width="500" height="200" style="border:1px solid black;"></canvas>
+
+<script>
+const cv2 = document.getElementById("cv2");
+const ctx2 = cv2.getContext("2d");
+
+let x = 0;
+let vel = 3;
+
+function animar(){
+  ctx2.clearRect(0,0,500,200);
+
+  ctx2.fillStyle = "blue";
+  ctx2.fillRect(x, 80, 40, 40);
+
+  x += vel;
+
+  if(x > 460 || x < 0){
+    vel *= -1;
+  }
+
+  requestAnimationFrame(animar);
+}
+
+animar();
+</script>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 9 – SVG COMPLETO
+     =========================== -->
+<h2>9. SVG con degradado + path + animación</h2>
+
+<svg width="300" height="200">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="lightblue"/>
+      <stop offset="100%" stop-color="blue"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="10" y="10" width="200" height="100" fill="url(#grad)" />
+
+  <circle id="c" cx="110" cy="60" r="30" fill="yellow">
+    <animate attributeName="r" from="20" to="40" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <path d="M10 150 Q150 50 290 150" stroke="black" fill="transparent"/>
+</svg>
+
+<hr>
+
+<!-- ===========================
+     EJERCICIO 10 – ICONO SVG
+     =========================== -->
+<h2>10. Icono SVG</h2>
+
+<svg width="200" height="200" viewBox="0 0 200 200">
+  <polygon points="50,150 100,20 150,150" fill="orange"/>
+  <line x1="20" y1="180" x2="180" y2="180" stroke="black" stroke-width="3"/>
+  <text x="100" y="195" font-size="20" text-anchor="middle">ICONO</text>
+</svg>
+
+</body>
+</html>

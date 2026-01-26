@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Examen Práctico Avanzado DI 2º DAW</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 20px;
+}
+
+/* ===========================
+   EJERCICIO 3 – TRANSFORMACIONES COMPLEJAS
+   =========================== */
+#cajaTransform {
+  width: 120px;
+  height: 120px;
+  background: purple;
+  margin: 40px auto;
+  transition: all 2s ease;
+}
+#cajaTransform:hover {
+  transform: rotate(360deg) translateX(200px) scale(1.5) skew(20deg);
+}
+
+/* ===========================
+   EJERCICIO 4 – ANIMACIÓN ZIGZAG
+   =========================== */
+#zigzag {
+  width: 80px;
+  height: 80px;
+  background: red;
+  position: relative;
+  animation: zig 4s infinite alternate;
+  animation-delay: 1s;
+}
+@keyframes zig {
+  0%   { left: 0; top: 0; background: red; transform: scale(1); }
+  25%  { left: 200px; top: 50px; background: blue; transform: scale(1.2); }
+  50%  { left: 0; top: 100px; background: green; transform: scale(0.8); }
+  75%  { left: 200px; top: 150px; background: orange; transform: scale(1.4); }
+  100% { left: 0; top: 200px; background: purple; transform: scale(1); }
+}
+
+/* ===========================
+   EJERCICIO 6 – MENÚ LATERAL
+   =========================== */
+#menuLateral {
+  width: 250px;
+  height: 100%;
+  background: #222;
+  color: white;
+  position: fixed;
+  left: -250px;
+  top: 0;
+  padding: 20px;
+}
+.submenu {
+  display: none;
+  margin-left: 20px;
+  background: #444;
+  padding: 10px;
+}
+
+/* ===========================
+   EJERCICIO 2 – CONTROLES DE VIDEO
+   =========================== */
+#videoContainer {
+  width: 500px;
+  margin: 20px 0;
+}
+#barraVideo {
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  cursor: pointer;
+}
+#progresoVideo {
+  height: 10px;
+  width: 0;
+  background: red;
+}
+
+/* ===========================
+   EJERCICIO 1 – AUDIO
+   =========================== */
+#barraAudio {
+  width: 300px;
+  height: 10px;
+  background: #ccc;
+  cursor: pointer;
+}
+#progresoAudio {
+  height: 10px;
+  width: 0;
+  background: green;
+}
+
+/* ===========================
+   EJERCICIO 10 – PANEL FINAL
+   =========================== */
+#panelFinal {
+  width: 100%;
+  height: 100px;
+  background: #eee;
+  margin-top: 20px;
+  transition: background 1s;
+}
+#panelFinal:hover {
+  background: #ddd;
+}
+</style>
+</head>
+<body>
+
+<h1>EXAMEN PRÁCTICO AVANZADO – CÓDIGO COMPLETO</h1>
+
+<!-- ============================================================
+     EJERCICIO 1 – AUDIO AVANZADO
+     ============================================================ -->
+<h2>1. Reproductor de audio avanzado</h2>
+
+<audio id="audio1">
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<button id="playA">Play</button>
+<button id="pauseA">Pausa</button>
+<button id="resetA">Reiniciar</button>
+
+<div id="barraAudio">
+  <div id="progresoAudio"></div>
+</div>
+
+<p>Tiempo: <span id="tiempoAudio">0.00</span>s</p>
+
+<script>
+const audio = $("#audio1")[0];
+
+$("#playA").click(()=> audio.play());
+$("#pauseA").click(()=> audio.pause());
+$("#resetA").click(()=> audio.currentTime = 0);
+
+setInterval(()=>{
+  $("#tiempoAudio").text(audio.currentTime.toFixed(2));
+  $("#progresoAudio").css("width", (audio.currentTime / audio.duration * 100) + "%");
+}, 200);
+
+$("#barraAudio").click(function(e){
+  const x = e.offsetX;
+  const ancho = $(this).width();
+  audio.currentTime = (x / ancho) * audio.duration;
+});
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 2 – VIDEO CONTROLES PERSONALIZADOS
+     ============================================================ -->
+<h2>2. Vídeo con controles personalizados</h2>
+
+<div id="videoContainer">
+  <video id="video1" width="500">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <button id="playV">Play/Pause</button>
+  <button id="muteV">Mute</button>
+  <button id="velV">x2</button>
+  <button id="fullV">Full</button>
+
+  <div id="barraVideo">
+    <div id="progresoVideo"></div>
+  </div>
+
+  <p><span id="tiempoV">0</span> / <span id="duracionV">0</span></p>
+</div>
+
+<script>
+const vid = $("#video1")[0];
+
+$("#playV").click(()=> vid.paused ? vid.play() : vid.pause());
+$("#muteV").click(()=> vid.muted = !vid.muted);
+$("#velV").click(()=> vid.playbackRate = 2);
+$("#fullV").click(()=> vid.requestFullscreen());
+
+vid.onloadedmetadata = ()=>{
+  $("#duracionV").text(vid.duration.toFixed(2));
+};
+
+setInterval(()=>{
+  $("#tiempoV").text(vid.currentTime.toFixed(2));
+  $("#progresoVideo").css("width", (vid.currentTime / vid.duration * 100) + "%");
+}, 200);
+
+$("#barraVideo").click(function(e){
+  const x = e.offsetX;
+  const ancho = $(this).width();
+  vid.currentTime = (x / ancho) * vid.duration;
+});
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 3 – TRANSFORMACIONES COMPLEJAS
+     ============================================================ -->
+<h2>3. Transformaciones complejas</h2>
+<div id="cajaTransform"></div>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 4 – ANIMACIÓN ZIGZAG
+     ============================================================ -->
+<h2>4. Animación zigzag</h2>
+<div id="zigzag"></div>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 5 – EFECTOS ENCADENADOS
+     ============================================================ -->
+<h2>5. Panel con efectos encadenados</h2>
+
+<div id="panelEfectos" style="width:200px; height:100px; background:gray; display:none;"></div>
+<button id="btnEfectos">Ejecutar efectos</button>
+
+<script>
+$("#btnEfectos").click(function(){
+  $("#panelEfectos")
+    .fadeIn(500)
+    .slideDown(500)
+    .animate({ left: "300px" }, 800)
+    .css("background", "red")
+    .animate({ left: "0px" }, 800);
+});
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 6 – MENÚ LATERAL CON SUBMENÚS
+     ============================================================ -->
+
+     <!-- <h2>6. Menú lateral avanzado</h2>
+
+<button id="abrirMenu">Abrir menú</button>
+<button id="cerrarMenu">Cerrar menú</button>
+
+<div id="menuLateral">
+  <h3 class="sec">Sección 1</h3>
+  <div class="submenu">Contenido 1</div>
+
+  <h3 class="sec">Sección 2</h3>
+  <div class="submenu">Contenido 2</div>
+
+  <h3 class="sec">Sección 3</h3>
+  <div class="submenu">Contenido 3</div>
+</div>
+
+<script>
+$("#abrirMenu").click(()=> $("#menuLateral").animate({ left: "0px" }, 500));
+$("#cerrarMenu").click(()=> $("#menuLateral").animate({ left: "-250px" }, 500));
+
+$(".sec").click(function(){
+  $(".submenu").not($(this).next()).slideUp();
+  $(this).next().slideToggle();
+});
+</script>
+
+<hr> -->
+     
+
+
+<!-- ============================================================
+     EJERCICIO 7 – CANVAS PAISAJE
+     ============================================================ -->
+<h2>7. Canvas paisaje</h2>
+
+<canvas id="cvPaisaje" width="500" height="300" style="border:1px solid black;"></canvas>
+
+<script>
+const cv = document.getElementById("cvPaisaje");
+const ctx = cv.getContext("2d");
+
+// Cielo
+let grad = ctx.createLinearGradient(0,0,0,300);
+grad.addColorStop(0,"lightblue");
+grad.addColorStop(1,"white");
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,500,300);
+
+// Sol
+ctx.beginPath();
+ctx.arc(400,80,40,0,Math.PI*2);
+ctx.fillStyle="yellow";
+ctx.fill();
+
+// Montañas
+ctx.fillStyle="gray";
+ctx.beginPath();
+ctx.moveTo(50,250);
+ctx.lineTo(150,100);
+ctx.lineTo(250,250);
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(200,250);
+ctx.lineTo(300,120);
+ctx.lineTo(400,250);
+ctx.fill();
+
+// Árbol
+ctx.fillStyle="brown";
+ctx.fillRect(80,200,20,50);
+
+ctx.beginPath();
+ctx.arc(90,180,30,0,Math.PI*2);
+ctx.fillStyle="green";
+ctx.fill();
+
+// Texto
+ctx.font="30px Arial";
+ctx.fillStyle="black";
+ctx.fillText("Paisaje DI", 20, 40);
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 8 – CANVAS ANIMACIÓN AVANZADA
+     ============================================================ -->
+<h2>8. Canvas animación avanzada</h2>
+
+<canvas id="cvBall" width="500" height="200" style="border:1px solid black;"></canvas>
+
+<script>
+const cvB = document.getElementById("cvBall");
+const ctxB = cvB.getContext("2d");
+
+let bx = 50, by = 50;
+let vx = 3, vy = 2;
+let maxVel = 10;
+let color = "red";
+
+function animBall(){
+  ctxB.clearRect(0,0,500,200);
+
+  ctxB.fillStyle = color;
+  ctxB.beginPath();
+  ctxB.arc(bx,by,20,0,Math.PI*2);
+  ctxB.fill();
+
+  bx += vx;
+  by += vy;
+
+  vx = Math.min(maxVel, vx * 1.01);
+  vy = Math.min(maxVel, vy * 1.01);
+
+  if(bx > 480 || bx < 20){ vx *= -1; color = "#"+Math.floor(Math.random()*16777215).toString(16); }
+  if(by > 180 || by < 20){ vy *= -1; color = "#"+Math.floor(Math.random()*16777215).toString(16); }
+
+  requestAnimationFrame(animBall);
+}
+animBall();
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 9 – SVG INTERACTIVO
+     ============================================================ -->
+<h2>9. SVG interactivo</h2>
+
+<svg id="svg1" width="400" height="200" style="border:1px solid black;">
+  <defs>
+    <linearGradient id="gradSVG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="lightblue"/>
+      <stop offset="100%" stop-color="blue"/>
+    </linearGradient>
+  </defs>
+
+  <rect id="rectSVG" x="10" y="10" width="200" height="100" fill="url(#gradSVG)"/>
+
+  <circle id="circleSVG" cx="300" cy="60" r="30" fill="yellow">
+    <animate attributeName="r" from="20" to="40" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <path d="M10 150 Q200 20 390 150" stroke="black" fill="transparent"/>
+
+  <text id="textSVG" x="200" y="190" font-size="20" text-anchor="middle">Texto SVG</text>
+</svg>
+
+<script>
+$("#circleSVG").click(function(){
+  $(this).attr("fill","orange");
+});
+
+$("#rectSVG").mouseenter(function(){
+  $("#gradSVG stop:first").attr("stop-color","pink");
+  $("#gradSVG stop:last").attr("stop-color","purple");
+});
+
+$("#rectSVG").mouseleave(function(){
+  $("#gradSVG stop:first").attr("stop-color","lightblue");
+  $("#gradSVG stop:last").attr("stop-color","blue");
+});
+
+$("#textSVG").click(function(){
+  $(this).animate({ svgX: 300 }, {
+    step: function(now){ $(this).attr("x", now); },
+    duration: 1000
+  });
+});
+</script>
+
+<hr>
+
+<!-- ============================================================
+     EJERCICIO 10 – PROYECTO FINAL
+     ============================================================ -->
+<h2>10. Proyecto final multimedia</h2>
+
+<div id="panelFinal">
+  <p>Panel interactivo con animaciones, audio, vídeo, canvas y SVG.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+<body>
+
+    <!-- BARRA DE ACCESIBILIDAD -->
+<div id="accesibilidadBarra" class="accesibilidad-barra">
+    <button id="btnAumentar" class="btnAcc" title="Aumentar fuente">🔍+</button>
+    <button id="btnReducir" class="btnAcc" title="Reducir fuente">🔍-</button>
+    <button id="btnOscuro" class="btnAcc" title="Modo oscuro">🌙</button>
+    <button id="btnSimplificada" class="btnAcc" title="Vista simplificada">📄</button>
+    <button id="btnNovedades" class="btnAcc" title="Novedades">📰</button>
+    <button id="btnReset" class="btnAcc" title="Reset">🔄</button>
+
+
+    <span id="infoTamano" class="infoTamano">Tamaño actual: 18px</span>
+</div>
+    
+     <header>
+
+      
+        <!-- <div class="logo">
+            <a href="index.html"><img src="img/Burgernautas.png" alt="logo"></a> 
+        </div>
+        <div class="nombreEmpresa">
+            <h1>Burgernautas</h1>
+        </div>  -->
+
+        
+        
+
+
+        <!-- logo con imagen svg -->
+         <div  class="logo">
+          <img src="img/08_logo.svg" alt="Logo de la empresa" class="logo">
+         </div>
+           
+
+
+        
+        
+    
+    </header>
+
+    <nav id="mainNav"> 
+        <ul class="menu">
+            <li><a href="https://www.lacalleburger.com/carta" accesskey="c"><span>Carta</span></a></li>
+            <li><a href="https://www.covermanager.com/reserve/module_restaurant/Street-Food-Burger-Sevilla-Este/" accesskey="r"><span>Reserva</span></a></li>
+            <li><a href="https://www.lacalleburger.com/restaurantes2" accesskey="u"><span>Ubicación</span></a></li>
+            <li><a href="accesibilidad.html" accesskey="a"><span>Accesibilidad</span></a></li>
+            <li><a href="https://www.loccoburger.es/contacto/" accesskey="o"><span>Contacto</span></a></li>
+            <li><a href="animaciones.html" accesskey="o"><span>Animaciones</span></a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!--apartado a-->
+        <section>
+            <h2>A) Nivel de conformidad alcanzado</h2>
+            <p>
+                El sitio web Burgernautas cumple con el nivel de conformidad 
+                WCAG 2.2 – Nivel AA
+            </p>
+        </section>
+
+        <!--apartado b-->
+        <section>
+            <h2>B) Accesibilidad en la navegación</h2>
+            <p>A continuación se indican tres medidas aplicadas en la navegación del sitio:</p>
+
+            <ul>
+                <li>Inclusión de enlaces de salto al contenido principal y a la zona de navegación (saltar a los productos, saltar navegación).   
+                </li>
+                <li>Implementación de un botón fijo que permite volver al inicio de la página en cualquier momento.
+                </li>
+                <li>Menú de navegación estructurado en una lista dentro de la etiqueta semántica nav, con atajos de teclado (accesskey) para acceder rápidamente a las opciones.
+                </li>
+            </ul>
+        </section>
+
+        <!--apartado d-->
+        <section>
+            <h2>D) Criterios de conformidad o éxito</h2>
+            <p>Las siguientes son las decisiones más importantes tomadas para cumplir la accesibilidad:</p>
+
+            <p>Se ha utilizado HTML semántico para estructurar el contenido (criterio de conformidad: estructura semántica, técnica: uso de etiquetas header, main, aside, footer).</p>
+            <p>Los formularios incluyen etiquetas asociadas a cada campo (criterio de conformidad: formularios accesibles, técnica: uso de label for).</p>
+        </section>
+
+        <!--apartado e-->
+        <section>
+            <h2>E) Principios de Jakob Nielsen</h2>
+            <article>
+                <h3>Prevención de errores</h3>
+                <p>El formulario incluye restricciones en los campos (maxlength, pattern, required) que evitan que el usuario introduzca datos inválidos. Por ejemplo, el campo teléfono solo acepta 9 dígitos gracias al atributo pattern</p>
+                <pre><code>
+                    label for="telefono" Teléfono:/label
+                    input id="telefono" name="telefono" type="tel" pattern="[0-9]{9}" required
+                </code></pre>
+            </article>
+            <article>
+                <h3>Consistencia y estándares</h3>
+                <p>Se emplean etiquetas estándar y convenciones comunes en formularios.</p>
+                <pre><code>label for="nombre"Nombre:/label</code></pre>
+            </article>
+            <article>
+                <h3>Control y libertad del usuario</h3>
+                <p>El formulario incluye un botón de reset que permite cancelar y borrar datos.</p>
+                <pre><code>input type="reset" value="cancelar"</code></pre>
+            </article>
+        </section>
+    </main>
+
+
+    <aside>
+        <h2>Medidas de sostenibilidad</h2>
+
+        <div>En Burgernautas creemos que disfrutar de una buena hamburguesa no debe estar reñido con cuidar el planeta.
+Por eso, trabajamos cada día para reducir nuestro impacto ambiental y promover un modelo de negocio responsable.
+
+Utilizamos ingredientes locales y de temporada, apoyando a productores sostenibles y reduciendo las emisiones por transporte.
+Nuestros envases son biodegradables y reciclables, eliminando el uso de plásticos de un solo uso.
+Además, aplicamos medidas de ahorro energético y de agua en nuestros locales, y fomentamos la separación y reciclaje de residuos en cada etapa de producción.
+
+En Burgernautas, cada hamburguesa forma parte de un compromiso: ofrecer sabor del espacio con un impacto terrenal cada vez más verde.</div>
+
+        <div lang="en">At Burgernautas, we believe that enjoying a delicious burger should not come at the expense of taking care of the planet. 
+        That is why we work every day to reduce our environmental impact and promote a responsible business model. 
+        We use local and seasonal ingredients, supporting sustainable producers and reducing transportation emissions. 
+        Our packaging is biodegradable and recyclable, eliminating single-use plastics. 
+        Additionally, we implement energy and water-saving measures in our locations and encourage waste separation and recycling at every stage of production. 
+        At Burgernautas, every burger is part of a commitment: delivering cosmic flavor with an increasingly green earthly impact.</div>
+    </aside>
+
+
+    <footer>
+      <div class="redes">
+          <img src="img/instagram.png" alt="Instagram">
+          <img src="img/tiktok.png" alt="TikTok">
+          <img src="img/facebook.png" alt="Facebook">
+      </div>
+
+      <div class="accesibilidad">
+          <a href="accesibilidad.html">Declaración de Accesibilidad</a>
+          <img src="img/wcag2.2AA.png" alt="Nivel de conformidad WCAG 2.2"> 
+      </div>
+
+      <div class="derechosAutor">
+          <p>&copy; 2025 Burgernautas. Todos los derechos reservados.</p>
+      </div>
+  </footer>
+
+    <script>
+        const menuButton = document.createElement('button');
+        menuButton.className = 'menuHamburguesa';
+        menuButton.textContent = '☰';
+        document.querySelector('header').appendChild(menuButton);
+
+        const nav = document.querySelector('nav');
+        menuButton.addEventListener('click', () => {
+            nav.classList.toggle('activo');
+        });
+    </script>
+
+
+
+
+<script>
+$(document).ready(function () {
+
+  const MAX_FUENTE = 28;
+  const MIN_FUENTE = 12;
+  const PASO = 3;
+
+  let tamañoActual = 18;
+  let novedadesInsertadas = false;
+  let simplificada = false;
+
+  const contenidoOriginal = $('main').html();
+
+  function actualizarInfo() {
+    $('#infoTamano').text(`Tamaño actual: ${tamañoActual}px`);
+  }
+
+  // Aumentar tamaño
+  $('#btnAumentar').click(function () {
+    tamañoActual += PASO;
+    if (tamañoActual > MAX_FUENTE) tamañoActual = MAX_FUENTE;
+
+    $('p, h2, h3, li').css('font-size', tamañoActual + 'px');
+    actualizarInfo();
+  });
+
+  // Reducir tamaño
+  $('#btnReducir').click(function () {
+    tamañoActual -= PASO;
+    if (tamañoActual < MIN_FUENTE) tamañoActual = MIN_FUENTE;
+
+    $('p, h2, h3, li').css('font-size', tamañoActual + 'px');
+    actualizarInfo();
+  });
+
+  // Modo oscuro
+  $('#btnOscuro').click(function () {
+    $('body').toggleClass('modo-oscuro');
+  });
+
+  // Vista simplificada
+  $('#btnSimplificada').click(function () {
+    if (!simplificada) {
+      $('section p, article p, aside div').hide(500);
+      simplificada = true;
+    } else {
+      $('section p, article p, aside div').show(500);
+      simplificada = false;
+    }
+  });
+
+  // Mostrar texto al hacer click en encabezados
+  $('h2, h3').click(function () {
+    $(this).next('p').toggle(500);
+  });
+
+  // Novedades
+  $('#btnNovedades').click(function () {
+    if (novedadesInsertadas) return;
+
+    const nuevo = `
+      <section>
+        <h2>Novedades en accesibilidad</h2>
+        <p>Se ha añadido un nuevo apartado con mejoras de accesibilidad, incluyendo un modo oscuro y control de tamaño de fuente.</p>
+      </section>
+    `;
+
+    $('main').prepend(nuevo);
+    novedadesInsertadas = true;
+    $(this).hide();
+  });
+
+  // Reset
+  $('#btnReset').click(function () {
+    $('main').html(contenidoOriginal);
+    tamañoActual = 18;
+    $('p, h2, h3, li').css('font-size', '');
+    $('body').removeClass('modo-oscuro');
+    $('#btnNovedades').show();
+    novedadesInsertadas = false;
+    simplificada = false;
+    actualizarInfo();
+  });
+
+  actualizarInfo();
+});
+</script>
+</body>
+</html>
